@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SealForge — Self-hosted code signing on your own PKCS#11 token</title>
+<meta name="description" content="SealForge is an open-source, self-hosted code signing platform. Sign and verify artifacts with your own PKCS#11 token, smart card or HSM — private keys never leave the device.">
+<meta name="theme-color" content="#0b0d12">
+<meta property="og:title" content="SealForge — Self-hosted code signing">
+<meta property="og:description" content="Sign and verify artifacts with your own PKCS#11 token. Keys stay on the device, every signature is authorized and audited.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/og.png">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="SealForge home">
+      <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
+        <polygon points="21.1,12 16.55,19.9 7.45,19.9 2.9,12 7.45,4.1 16.55,4.1"/>
+        <path d="M8.6 12.25 L11.05 14.7 L15.85 9.3"/>
+      </svg>
+      <span class="brand__name">SealForge</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#why">Why</a>
+      <a href="#how">How it works</a>
+      <a href="#product">Product</a>
+      <a href="#security">Security</a>
+      <a href="#api">API</a>
+      <a href="#deploy">Deploy</a>
+    </nav>
+    <span class="pill pill--beta">v1.0.0-beta.6</span>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="wrap hero__inner">
+      <p class="eyebrow">Self-hosted code signing · PKCS#11</p>
+      <h1>Sign your software without handing over your keys.</h1>
+      <p class="lead">
+        SealForge is an open-source signing platform that runs on your own infrastructure.
+        It drives the token, smart card or HSM you already own, signs and verifies your
+        artifacts, and records every action — without ever exporting a private key.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#how">See how it works</a>
+        <a class="btn" href="#api">Read the API</a>
+      </div>
+      <ul class="meta">
+        <li>Apache-2.0</li>
+        <li>Linux · Docker</li>
+        <li>PKCS#11</li>
+        <li>.NET 10 · Jsign</li>
+      </ul>
+
+      <figure class="frame frame--hero">
+        <div class="frame__bar" aria-hidden="true">
+          <span class="frame__dots"><i></i><i></i><i></i></span>
+          <span class="frame__url">sealforge.internal/dashboard</span>
+        </div>
+        <img src="assets/img/screenshots/dashboard.webp" width="1920" height="1200"
+             alt="SealForge dashboard showing four completed signing jobs, signing activity counters and the detected hardware token.">
+        <figcaption>Live instance: four artifacts signed and verified with a SoftHSM token.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="strip" aria-label="Compatibility">
+    <div class="wrap strip__inner">
+      <span class="strip__label">Works with any PKCS#11 provider</span>
+      <ul class="strip__items">
+        <li>USB security tokens</li>
+        <li>Smart cards</li>
+        <li>Network HSMs</li>
+        <li>OpenSC</li>
+        <li>SoftHSM</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="wrap">
+      <header class="section__head">
+        <h2>Signing infrastructure you actually control.</h2>
+        <p>
+          A hosted signing service means your artifacts and your authorization decisions
+          live somewhere else. SealForge runs where your keys already are.
+        </p>
+      </header>
+      <div class="grid grid--3">
+        <article class="card">
+          <h3>Keys stay in hardware</h3>
+          <p>
+            Private keys are generated and used inside your token or HSM. SealForge asks
+            the PKCS#11 provider for a signature; it never imports, wraps or exports key
+            material.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Nothing leaves your network</h3>
+          <p>
+            Artifacts, the job queue and the audit trail live in your PostgreSQL database
+            and your filesystem. No vendor account, no upload to a third party.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Every signature is accounted for</h3>
+          <p>
+            Submission, authorization, token selection, signing, timestamping, verification
+            and download are recorded as job events and audit records.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="how">
+    <div class="wrap">
+      <header class="section__head">
+        <h2>How a signature is made</h2>
+        <p>
+          The web application and the signing worker share a queue and a database, but only
+          the worker can reach the token. Nothing else in the stack touches key material.
+        </p>
+      </header>
+
+      <ol class="flow">
+        <li class="flow__step">
+          <span class="flow__num">01</span>
+          <h3>Submit</h3>
+          <p>Upload in the web UI or post multipart to <code>/api/v1/signing-jobs</code>.</p>
+        </li>
+        <li class="flow__step">
+          <span class="flow__num">02</span>
+          <h3>Authorize</h3>
+          <p>A signing permission binds the principal, the token and the exact certificate.</p>
+        </li>
+        <li class="flow__step">
+          <span class="flow__num">03</span>
+          <h3>Sign &amp; verify</h3>
+          <p>The isolated worker signs through PKCS#11, timestamps the result and verifies the chain.</p>
+        </li>
+        <li class="flow__step">
+          <span class="flow__num">04</span>
+          <h3>Retrieve</h3>
+          <p>The verified artifact is released for download and the whole path is audited.</p>
+        </li>
+      </ol>
+
+      <div class="topology" role="img" aria-label="Topology: client submits to the web application, jobs are queued in PostgreSQL, the worker signs through the PKCS#11 token, and the verified artifact is downloaded.">
+        <div class="topology__row">
+          <div class="node">
+            <span class="node__title">Web UI / CI</span>
+            <span class="node__sub">submit · status</span>
+          </div>
+          <span class="arrow" aria-hidden="true">→</span>
+          <div class="node node--accent">
+            <span class="node__title">sealforge-web</span>
+            <span class="node__sub">auth · authz · audit</span>
+          </div>
+          <span class="arrow" aria-hidden="true">→</span>
+          <div class="node">
+            <span class="node__title">PostgreSQL</span>
+            <span class="node__sub">queue · state</span>
+          </div>
+          <span class="arrow" aria-hidden="true">→</span>
+          <div class="node node--accent">
+            <span class="node__title">signing worker</span>
+            <span class="node__sub">Jsign · PKCS#11</span>
+          </div>
+          <span class="arrow" aria-hidden="true">→</span>
+          <div class="node">
+            <span class="node__title">Token / HSM</span>
+            <span class="node__sub">private key stays here</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="product">
+    <div class="wrap">
+      <header class="section__head">
+        <h2>Inside the product</h2>
+        <p>Administration, signing and audit in one place — no separate tooling to keep in sync.</p>
+      </header>
+
+      <figure class="shot">
+        <img src="assets/img/screenshots/jobs.webp" width="1600" height="1000" loading="lazy"
+             alt="Signing job requests table listing four artifacts with ReadyForDownload status.">
+        <figcaption>
+          <strong>Signing jobs</strong>
+          Every submission carries its artifact type, status and timestamps; failures keep their reason and error code.
+        </figcaption>
+      </figure>
+
+      <div class="shot-row">
+        <figure class="shot">
+          <img src="assets/img/screenshots/tokens.webp" width="1600" height="1000" loading="lazy"
+               alt="Admin tokens page showing the configured SoftHSM token with PIN provisioned and key access healthy.">
+          <figcaption>
+            <strong>Token state</strong>
+            The selected certificate, PIN provisioning and key-access health, in one row.
+          </figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/img/screenshots/audit.webp" width="1600" height="1000" loading="lazy"
+               alt="Audit trail table with security-relevant events, actor, outcome and source address.">
+          <figcaption>
+            <strong>Audit trail</strong>
+            Security-relevant events with actor, outcome and request context.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="security">
+    <div class="wrap">
+      <header class="section__head">
+        <h2>Security model</h2>
+        <p>Built for the assumption that the web tier is the least trusted part of the system.</p>
+      </header>
+      <div class="grid grid--2">
+        <article class="card card--tight">
+          <h3>Private keys never leave the device</h3>
+          <p>Signing is delegated to the PKCS#11 provider. The web application has no path to key material.</p>
+        </article>
+        <article class="card card--tight">
+          <h3>The PIN is encrypted in the browser</h3>
+          <p>WebCrypto encrypts it to the worker's RSA key. The worker materializes a short-lived, owner-only lease and deletes it after use.</p>
+        </article>
+        <article class="card card--tight">
+          <h3>Fail-closed authorization</h3>
+          <p>A job is bound to a permission, a principal, a token and a certificate. Missing, stale or ambiguous selections are rejected, never defaulted.</p>
+        </article>
+        <article class="card card--tight">
+          <h3>Fresh MFA for dangerous actions</h3>
+          <p>Re-enabling a token, removing it or re-provisioning the PIN requires a TOTP re-verification, even inside an authenticated admin session.</p>
+        </article>
+        <article class="card card--tight">
+          <h3>A failed token access soft-locks the key</h3>
+          <p>The PIN is zeroized, pending jobs are held for administrator review, and the key is not retried until it is explicitly re-enabled.</p>
+        </article>
+        <article class="card card--tight">
+          <h3>The worker is a separate, hardened service</h3>
+          <p>Read-only root filesystem, all capabilities dropped, no public port, one job at a time — and the only service allowed near the token.</p>
+        </article>
+      </div>
+      <p class="section__note">
+        Full threat model and deployment requirements are documented in the repository:
+        <span class="mono">docs/security-model.md</span>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="api">
+    <div class="wrap">
+      <header class="section__head">
+        <h2>Built for pipelines</h2>
+        <p>A small REST surface for CI: submit, poll, download. Interactive and API clients share the same authorization rules.</p>
+      </header>
+      <div class="api-layout">
+        <pre class="code"><code><span class="c"># submit an artifact</span>
+curl -X POST https://sealforge.internal/api/v1/signing-jobs \
+  -H "Authorization: Bearer $SEALFORGE_API_KEY" \
+  -F "artifact=@Northwind.Desktop.exe" \
+  -F "clientCorrelationId=build-1042"
+
+<span class="c"># poll the job, then download the verified artifact</span>
+curl -H "Authorization: Bearer $SEALFORGE_API_KEY" \
+  https://sealforge.internal/api/v1/signing-jobs/$JOB_ID
+
+curl -H "Authorization: Bearer $SEALFORGE_API_KEY" \
+  -o signed.exe \
+  https://sealforge.internal/api/v1/signing-jobs/$JOB_ID/download</code></pre>
+        <ul class="checklist">
+          <li>Bearer API keys, hashed at rest, scoped to submit / status / download</li>
+          <li>Artifact type detected from content — <span class="mono">.exe</span>, <span class="mono">.dll</span>, <span class="mono">.msi</span>, <span class="mono">.nupkg</span></li>
+          <li>Asynchronous by design: no synchronous signing endpoint</li>
+          <li>Download gated by owner and permission, not by knowing the job ID</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="deploy">
+    <div class="wrap">
+      <header class="section__head">
+        <h2>Runs on one Linux host</h2>
+        <p>Docker Compose brings up the reverse proxy, web application, signing worker, queue and database.</p>
+      </header>
+      <div class="deploy-layout">
+        <div>
+          <h3 class="subhead">Requirements</h3>
+          <ul class="checklist">
+            <li>Linux with Docker Engine and Compose (x86_64 or arm64)</li>
+            <li>A PKCS#11 provider — the worker ships OpenSC; vendor modules are mounted as <span class="mono">.so</span></li>
+            <li>A signing token, smart card or HSM, plus its PIN at provisioning time</li>
+            <li>PostgreSQL 16, provided by the stack</li>
+          </ul>
+          <p class="section__note">
+            The repository is private during the beta. Releases are published as signed bundles:
+            the installer verifies a minisign-signed manifest and every file hash before it
+            extracts anything.
+          </p>
+        </div>
+        <div>
+          <h3 class="subhead">Install</h3>
+          <pre class="code"><code><span class="c"># verify and install the latest signed release</span>
+curl -fsSL https://github.com/semihkiroglu/SealForge/releases/latest/download/install.sh | bash
+
+<span class="c"># then open the UI and retrieve the one-time setup code</span>
+docker logs sealforge-web 2&gt;&amp;1 | grep "setup code"</code></pre>
+          <p class="section__note">
+            No manual secrets: the internal API secret and the encryption key are generated
+            on first start. The PIN is entered in the browser and encrypted before it is sent.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer__brand">
+      <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
+        <polygon points="21.1,12 16.55,19.9 7.45,19.9 2.9,12 7.45,4.1 16.55,4.1"/>
+        <path d="M8.6 12.25 L11.05 14.7 L15.85 9.3"/>
+      </svg>
+      <div>
+        <span class="brand__name">SealForge</span>
+        <span class="footer__tag">Self-hosted code signing</span>
+      </div>
+    </div>
+    <nav class="footer__links" aria-label="Footer">
+      <a href="#how">Architecture</a>
+      <a href="#security">Security model</a>
+      <a href="#api">API</a>
+      <a href="#deploy">Deployment</a>
+    </nav>
+    <p class="footer__legal">Apache-2.0 · © 2026 SealForge</p>
+  </div>
+</footer>
+</body>
+</html>

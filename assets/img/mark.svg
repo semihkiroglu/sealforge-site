@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" role="img" aria-label="SealForge">
+  <polygon points="21.1,12 16.55,19.9 7.45,19.9 2.9,12 7.45,4.1 16.55,4.1"
+           stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" />
+  <path d="M8.6 12.25 L11.05 14.7 L15.85 9.3"
+        stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
