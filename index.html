@@ -106,7 +106,7 @@
         <article class="card">
           <h3>Keys stay in hardware</h3>
           <p>
-            Private keys are generated and used inside your token or HSM. SealForge asks
+            Private keys are held and used inside your token or HSM. SealForge asks
             the PKCS#11 provider for a signature; it never imports, wraps or exports key
             material.
           </p>
@@ -114,8 +114,8 @@
         <article class="card">
           <h3>Nothing leaves your network</h3>
           <p>
-            Artifacts, the job queue and the audit trail live in your PostgreSQL database
-            and your filesystem. No vendor account, no upload to a third party.
+            Artifacts stay on your filesystem; the job queue and the audit trail live in your
+            PostgreSQL database. No vendor account, no upload to a third party.
           </p>
         </article>
         <article class="card">
