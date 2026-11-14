@@ -37,5 +37,6 @@ uygulamadaki `--sf-accent` (#4f46e5) ailesinin açık zemin varyantı (#8b7dff).
 ## Özel alan adı
 
 Alan adı bağlandığında depo köküne `CNAME` dosyası eklenir ve DNS'te
-`A`/`CNAME` kayıtları GitHub Pages hedefine yönlendirilir. O zamana kadar
-`og:image` göreli yoldur; mutlak URL'ye çevrilmesi gerekir.
+`A`/`CNAME` kayıtları GitHub Pages hedefine yönlendirilir. `og:image`,
+`og:url` ve `twitter:image` şu an `https://semihkiroglu.github.io/sealforge-site/`
+adresini gösterir; özel alan adına geçince bu üç değer güncellenmelidir.

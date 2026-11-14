@@ -256,7 +256,7 @@ code, pre, .mono { font-family: var(--mono); }
 .code {
   margin: 0; padding: 20px;
   background: #080a0f; border: 1px solid var(--line); border-radius: var(--radius);
-  overflow-x: auto; font-size: 0.82rem; line-height: 1.75; color: #cfd5e3;
+  overflow-x: auto; font-size: 0.86rem; line-height: 1.75; color: #cfd5e3;
 }
 .code .c { color: #6b7486; }
 
