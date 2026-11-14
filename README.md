@@ -9,6 +9,9 @@ index.html                 # sayfanın tamamı
 assets/css/style.css       # tema (uygulamanın indigo token'larıyla uyumlu)
 assets/img/mark.svg        # logo işareti (currentColor)
 assets/img/favicon.svg     # favicon (koyu zemin, indigo işaret)
+assets/img/favicon-32.png  # 32 px PNG favicon
+assets/img/apple-touch-icon.png
+assets/img/icon-512.png    # uygulama/mağaza ikonu
 assets/img/og.png          # 1200×630 sosyal kart
 assets/img/screenshots/    # gerçek SealForge UI görüntüleri (WebP)
 ```
