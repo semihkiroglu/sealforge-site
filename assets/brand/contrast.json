@@ -1,0 +1,229 @@
+{
+  "method": "WCAG sRGB relative luminance; sampled token pairs, not whole-application certification",
+  "pairs": [
+    {
+      "mode": "light",
+      "pair": "Body / page",
+      "foreground": "#203033",
+      "background": "#f7f8f5",
+      "ratio": 12.8592,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "pair": "Secondary / page",
+      "foreground": "#56666a",
+      "background": "#f7f8f5",
+      "ratio": 5.6217,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "pair": "Link / page",
+      "foreground": "#316b73",
+      "background": "#f7f8f5",
+      "ratio": 5.659,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "pair": "Copper / page",
+      "foreground": "#9f542e",
+      "background": "#f7f8f5",
+      "ratio": 5.2093,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "pair": "Body / card",
+      "foreground": "#203033",
+      "background": "#ffffff",
+      "ratio": 13.7076,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "pair": "Secondary / card",
+      "foreground": "#56666a",
+      "background": "#ffffff",
+      "ratio": 5.9925,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "pair": "Primary label",
+      "foreground": "#ffffff",
+      "background": "#316b73",
+      "ratio": 6.0323,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "pair": "Primary hover label",
+      "foreground": "#ffffff",
+      "background": "#28626a",
+      "ratio": 6.8956,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "pair": "Input / card",
+      "foreground": "#7a8a8c",
+      "background": "#ffffff",
+      "ratio": 3.5949,
+      "required": 3
+    },
+    {
+      "mode": "light",
+      "pair": "Input / page",
+      "foreground": "#7a8a8c",
+      "background": "#f7f8f5",
+      "ratio": 3.3724,
+      "required": 3
+    },
+    {
+      "mode": "light",
+      "pair": "success filled label",
+      "foreground": "#ffffff",
+      "background": "#236a45",
+      "ratio": 6.5237,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "pair": "error filled label",
+      "foreground": "#ffffff",
+      "background": "#a42c37",
+      "ratio": 7.0142,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "pair": "warning filled label",
+      "foreground": "#ffffff",
+      "background": "#865111",
+      "ratio": 6.5651,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "pair": "info filled label",
+      "foreground": "#ffffff",
+      "background": "#2b638a",
+      "ratio": 6.4527,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "pair": "Body / page",
+      "foreground": "#eef5f3",
+      "background": "#151b1d",
+      "ratio": 15.7415,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "pair": "Secondary / page",
+      "foreground": "#a7bcbb",
+      "background": "#151b1d",
+      "ratio": 8.7483,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "pair": "Link / page",
+      "foreground": "#87c2c6",
+      "background": "#151b1d",
+      "ratio": 8.7552,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "pair": "Copper / page",
+      "foreground": "#e5ad7d",
+      "background": "#151b1d",
+      "ratio": 8.7907,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "pair": "Body / card",
+      "foreground": "#eef5f3",
+      "background": "#1c2426",
+      "ratio": 14.2817,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "pair": "Secondary / card",
+      "foreground": "#a7bcbb",
+      "background": "#1c2426",
+      "ratio": 7.937,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "pair": "Primary label",
+      "foreground": "#151b1d",
+      "background": "#87c2c6",
+      "ratio": 8.7552,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "pair": "Primary hover label",
+      "foreground": "#151b1d",
+      "background": "#a6d5d6",
+      "ratio": 10.8671,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "pair": "Input / card",
+      "foreground": "#7e8f94",
+      "background": "#1c2426",
+      "ratio": 4.6955,
+      "required": 3
+    },
+    {
+      "mode": "dark",
+      "pair": "Input / page",
+      "foreground": "#7e8f94",
+      "background": "#151b1d",
+      "ratio": 5.1755,
+      "required": 3
+    },
+    {
+      "mode": "dark",
+      "pair": "success filled label",
+      "foreground": "#151b1d",
+      "background": "#91d2aa",
+      "ratio": 9.9495,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "pair": "error filled label",
+      "foreground": "#151b1d",
+      "background": "#f29ca5",
+      "ratio": 8.3506,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "pair": "warning filled label",
+      "foreground": "#151b1d",
+      "background": "#e2bc74",
+      "ratio": 9.6811,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "pair": "info filled label",
+      "foreground": "#151b1d",
+      "background": "#9dc6e3",
+      "ratio": 9.6323,
+      "required": 4.5
+    }
+  ]
+}

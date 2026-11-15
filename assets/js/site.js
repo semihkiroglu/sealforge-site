@@ -28,7 +28,7 @@
   const toggle = document.getElementById('theme-toggle');
   const applyTheme = (theme) => {
     root.dataset.theme = theme;
-    document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#f8f9fb' : '#0f1117';
+    document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#f7f8f5' : '#151b1d';
     store.set(THEME_KEY, theme);
     toggle.setAttribute('aria-label', `Switch to ${theme === 'light' ? 'dark' : 'light'} theme`);
     toggle.setAttribute('aria-pressed', String(theme === 'light'));

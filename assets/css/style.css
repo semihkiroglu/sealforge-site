@@ -1,10 +1,10 @@
-/* SealForge: the app's indigo / graphite palette; no framework or build step. */
+/* SealForge: the app's Coast & Copper palette; no framework or build step. */
 @font-face { font-family: Inter; src: url('../fonts/inter-latin.woff2') format('woff2'); font-style: normal; font-weight: 100 900; font-display: swap; }
 :root {
   color-scheme: dark;
-  --bg: #0f1117; --alt: #14171c; --surface: #1a1d23; --surface-2: #21252e;
-  --line: #2a2d35; --text: #f3f4f6; --muted: #9ca3af;
-  --accent: #818cf8; --button: #818cf8; --button-text: #0f1117; --hover: #a5b4fc;
+  --bg: #151b1d; --alt: #1c2426; --surface: #1c2426; --surface-2: #243033;
+  --line: #33454a; --text: #eef5f3; --muted: #a7bcbb;
+  --accent: #87c2c6; --button: #87c2c6; --button-text: #151b1d; --hover: #a6d5d6;
   --shadow: 0 18px 50px -28px #00000080;
   --radius: 12px; --wrap: 1180px;
   --font: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -12,10 +12,10 @@
 }
 html[data-theme='light'] {
   color-scheme: light;
-  --bg: #f8f9fb; --alt: #f1f3f5; --surface: #ffffff; --surface-2: #f1f3f5;
-  --line: #dfe3eb; --text: #1a1d23; --muted: #596273;
-  --accent: #4f46e5; --button: #4f46e5; --button-text: #ffffff; --hover: #4338ca;
-  --shadow: 0 18px 50px -30px #1a1d232f;
+  --bg: #f7f8f5; --alt: #ebf2ef; --surface: #ffffff; --surface-2: #ebf2ef;
+  --line: #d8e1de; --text: #203033; --muted: #56666a;
+  --accent: #316b73; --button: #316b73; --button-text: #ffffff; --hover: #28626a;
+  --shadow: 0 18px 50px -30px #2030332f;
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -36,7 +36,7 @@ code, pre, .mono { font-family: var(--mono); }
 section[id] { scroll-margin-top: 96px; }
 .site-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: var(--bg); }
 .header-inner { display: flex; align-items: center; gap: 32px; min-height: 76px; }
-.brand { display: inline-flex; flex: none; width: 178px; }
+.brand { display: inline-flex; flex: none; width: 172px; }
 .brand img { width: 100%; }
 .logo-light { display: none; }
 html[data-theme='light'] .logo-light { display: block; }
@@ -133,7 +133,7 @@ html[data-theme='light'] .icon-moon { display: block; }
 .asset-preview { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 200px; padding: 36px; }
 .asset-preview img { width: min(100%, 330px); }
 .asset-preview--light { background: #fff; }
-.asset-preview--dark { background: #0f1117; }
+.asset-preview--dark { background: #151b1d; }
 .asset-preview--symbol img { width: 96px; }
 .asset-meta { padding: 20px 24px; }
 .asset-meta h3 { font-size: .96rem; margin-bottom: 10px; }
