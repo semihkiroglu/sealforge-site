@@ -7,6 +7,7 @@ SealForge ürün sitesi. Tek sayfa, statik HTML + CSS; build adımı ve harici b
 ```
 index.html                 # sayfanın tamamı
 assets/css/style.css       # tema (uygulamanın indigo token'larıyla uyumlu)
+assets/js/site.js          # tema anahtarı + dil altyapısı (bağımlılıksız)
 assets/img/mark.svg        # logo işareti (currentColor)
 assets/img/favicon.svg     # favicon (koyu zemin, indigo işaret)
 assets/img/favicon-32.png  # 32 px PNG favicon
@@ -24,6 +25,41 @@ assets/img/screenshots/    # 3 gerçek SealForge UI görüntüsü (WebP)
 
 GitHub Pages, `main` dalının kök dizininden yayınlar. Her push sonrası Pages
 workflow'u birkaç dakika içinde güncellenir.
+
+## Tema
+
+Varsayılan **koyu**. Header'daki düğme koyu/açık arasında geçiş yapar ve seçim
+`localStorage["sealforge.theme"]` içinde tutulur; sayfa yüklenmeden önce
+`<head>` içindeki üç satırlık script temayı uygular, böylece açık temada koyu
+ekran yanıp sönmez. Tüm renkler `style.css` başındaki değişkenlerden gelir:
+`:root` koyu palet, `html[data-theme="light"]` açık palet. Kod blokları her iki
+temada da koyu kalır.
+
+İşletim sistemi tercihine uymak istersen `site.js` içindeki
+`applyTheme(root.dataset.theme === 'light' ? 'light' : 'dark')` satırını
+`matchMedia('(prefers-color-scheme: light)').matches` kontrolüyle değiştir;
+`<head>`'deki script de aynı kuralı izlemeli.
+
+## Dil altyapısı
+
+Çevrilebilir her düğüm `data-i18n="anahtar"` taşır (81 anahtar). İngilizce
+metin doğrudan HTML'de durur; `site.js` ilk çalıştırmada her düğümün kendi
+markup'ını yedek olarak saklar, böylece `DICT.en` boş kalır ve İngilizce
+metin iki yerde tekrarlanmaz. Eksik anahtar boş metne değil, HTML'deki
+İngilizce metne düşer — JS kapalıyken sayfa tamamen İngilizce çalışır.
+
+Yeni dil eklemek için `site.js` içindeki `DICT` nesnesine bir blok ekle:
+
+```js
+tr: { name: 'Türkçe', 'hero.title': '…', 'nav.why': 'Neden' },
+```
+
+Dil seçici (`#lang-select`) DOM'da hazır ve bağlıdır; `hidden` olduğu için
+görünmez ve sekme sırasına girmez. Seçenekler `DICT`'ten üretilir, yani ikinci
+dil eklenince kendiliğinden dolar. Görünür yapmak için `hidden` özniteliğini
+kaldırmak ve `hidden` yerine bir `.lang-switch` sınıfıyla biçimlendirmek yeterli.
+Seçim `localStorage["sealforge.lang"]` içinde tutulur; bilinmeyen bir değer
+İngilizceye düşer.
 
 ## Görseller
 
