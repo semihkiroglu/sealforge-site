@@ -1,0 +1,62 @@
+{
+  "status": "proposal-only",
+  "production_changed": false,
+  "palettes": {
+    "coast": {
+      "name": "Coast & Copper",
+      "recommended": true,
+      "light": {
+        "bg": "#f7f8f5",
+        "surface": "#ffffff",
+        "text": "#203033",
+        "muted": "#56666a",
+        "brand": "#316b73",
+        "hover": "#28626a",
+        "warm": "#9f542e",
+        "line": "#d8e1de",
+        "soft": "#ebf2ef",
+        "on-brand": "#ffffff"
+      },
+      "dark": {
+        "bg": "#122326",
+        "surface": "#1b3032",
+        "text": "#eef5f3",
+        "muted": "#a7bcbb",
+        "brand": "#87c2c6",
+        "hover": "#a6d5d6",
+        "warm": "#e5ad7d",
+        "line": "#385254",
+        "soft": "#263f41",
+        "on-brand": "#122326"
+      }
+    },
+    "indigo": {
+      "name": "Iris & Copper",
+      "recommended": false,
+      "light": {
+        "bg": "#f8f9fb",
+        "surface": "#ffffff",
+        "text": "#1a1d23",
+        "muted": "#596273",
+        "brand": "#4f46e5",
+        "hover": "#4338ca",
+        "warm": "#9f542e",
+        "line": "#dfe3eb",
+        "soft": "#ededfb",
+        "on-brand": "#ffffff"
+      },
+      "dark": {
+        "bg": "#0f1117",
+        "surface": "#1a1d23",
+        "text": "#f3f4f6",
+        "muted": "#a4adbe",
+        "brand": "#a5b4fc",
+        "hover": "#c7d2fe",
+        "warm": "#e5ad7d",
+        "line": "#363a46",
+        "soft": "#23243c",
+        "on-brand": "#0f1117"
+      }
+    }
+  }
+}
