@@ -2,251 +2,84 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<script>
-  // Before the stylesheet paints: a stored light theme must not flash dark.
-  try { document.documentElement.dataset.theme = localStorage.getItem('sealforge.theme') === 'light' ? 'light' : 'dark'; } catch (e) {}
-</script>
+<script>try { document.documentElement.dataset.theme = localStorage.getItem('sealforge.theme') === 'light' ? 'light' : 'dark'; } catch (e) {}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n="page.title">SealForge — Self-hosted code signing on your own token</title>
-<meta name="description" content="SealForge is a self-hosted code signing service. It signs and verifies your artifacts with the PKCS#11 token, smart card or HSM you already own — private keys never leave the device.">
-<meta name="theme-color" content="#0b0d12">
-<meta property="og:title" content="SealForge — Self-hosted code signing">
-<meta property="og:description" content="Sign and verify artifacts with your own PKCS#11 token. Keys stay on the device, every signature is authorized and audited.">
+<title data-i18n="page.title">SealForge — Your software. Your signature. Your keys.</title>
+<meta name="description" content="Self-hosted code signing with your own token. Submit from a browser or CI pipeline; retrieve only after signing, timestamping and verification.">
+<meta name="theme-color" content="#0f1117">
+<link rel="canonical" href="https://semihkiroglu.github.io/sealforge-site/">
+<meta property="og:title" content="SealForge — Your software. Your signature. Your keys.">
+<meta property="og:description" content="Self-hosted code signing with your own token. Submit from a browser or CI pipeline; retrieve only after signing, timestamping and verification.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://semihkiroglu.github.io/sealforge-site/">
-<meta property="og:image" content="https://semihkiroglu.github.io/sealforge-site/assets/img/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image" content="https://semihkiroglu.github.io/sealforge-site/assets/brand/social-card.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SealForge — Self-hosted code signing">
-<meta name="twitter:description" content="Sign and verify artifacts with your own PKCS#11 token. Keys stay on the device, every signature is authorized and audited.">
-<meta name="twitter:image" content="https://semihkiroglu.github.io/sealforge-site/assets/img/og.png">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<meta name="twitter:image" content="https://semihkiroglu.github.io/sealforge-site/assets/brand/social-card.png">
+<link rel="icon" href="assets/brand/app-icon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/brand/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/brand/icon-180.png">
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<a class="skip" href="#main" data-i18n="skip.content">Skip to content</a>
-
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a class="brand" href="index.html" aria-label="SealForge home">
-      <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
-        <polygon points="21.1,12 16.55,19.9 7.45,19.9 2.9,12 7.45,4.1 16.55,4.1"/>
-        <path d="M8.6 12.25 L11.05 14.7 L15.85 9.3"/>
-      </svg>
-      <span class="brand__name">SealForge</span>
-    </a>
-    <nav class="nav" aria-label="Primary">
-      <a href="#what" data-i18n="nav.what">What it is</a>
-      <a href="#how" data-i18n="nav.how">How it works</a>
-      <a href="#install" data-i18n="nav.install">Install</a>
-      <a href="details.html" data-i18n="nav.details">Technical details</a>
-    </nav>
-    <button class="theme-toggle" id="theme-toggle" type="button"
-            aria-label="Switch to light theme" aria-pressed="false">
-      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none"
-           stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
-        <circle cx="12" cy="12" r="4.2"/>
-        <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/>
-      </svg>
-      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none"
-           stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20.4 14.2A8.4 8.4 0 0 1 9.8 3.6a8.4 8.4 0 1 0 10.6 10.6Z"/>
-      </svg>
-    </button>
-    <!-- Language switch: built and wired from assets/js/site.js, intentionally
-         hidden until a second dictionary exists. -->
-    <select id="lang-select" hidden aria-hidden="true" tabindex="-1"></select>
-  </div>
-</header>
-
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="site-header"><div class="wrap header-inner">
+<a class="brand" href="index.html" aria-label="SealForge home"><img class="logo-light" src="assets/brand/logo-on-light.svg" width="300" height="64" alt=""><img class="logo-dark" src="assets/brand/logo-on-dark.svg" width="300" height="64" alt=""></a>
+<nav class="nav" aria-label="Primary"><a href="index.html" aria-current="page" data-i18n="nav.0">Overview</a><a href="index.html#how" data-i18n="nav.1">How it works</a><a href="index.html#install" data-i18n="nav.2">Install</a><a href="details.html" data-i18n="nav.3">Details</a></nav>
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
+<svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
+<svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M20.4 14.2A8.4 8.4 0 0 1 9.8 3.6a8.4 8.4 0 1 0 10.6 10.6Z"/></svg>
+</button>
+<select id="lang-select" hidden aria-hidden="true" tabindex="-1"></select>
+</div></header>
 <main id="main">
-  <section class="hero" id="top">
-    <div class="hero__glow" aria-hidden="true"></div>
-    <div class="wrap hero__inner">
-      <p class="eyebrow" data-i18n="hero.eyebrow">Self-hosted code signing</p>
-      <h1 data-i18n="hero.title">Sign your software without handing over your keys.</h1>
-      <p class="lead" data-i18n="hero.lead">
-        SealForge runs on your own server and signs your artifacts through the token, smart card
-        or HSM you already own. The private key never leaves the device, and nothing gets uploaded
-        to anyone.
-      </p>
-      <div class="hero__actions">
-        <a class="btn btn--primary" href="#install" data-i18n="hero.cta.primary">Install it</a>
-        <a class="btn" href="details.html" data-i18n="hero.cta.secondary">Technical details</a>
-      </div>
-
-      <figure class="frame frame--hero">
-        <div class="frame__bar" aria-hidden="true">
-          <span class="frame__dots"><i></i><i></i><i></i></span>
-          <span class="frame__url">sealforge.internal/dashboard</span>
-        </div>
-        <img src="assets/img/screenshots/dashboard.webp" width="1920" height="1200"
-             alt="SealForge dashboard showing completed signing jobs, signing activity counters, system overview and the detected hardware token.">
-        <figcaption data-i18n="hero.caption">A live instance: these jobs went through a real token and passed verification.</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="strip" aria-label="Compatibility">
-    <div class="wrap strip__inner">
-      <span class="strip__label" data-i18n="strip.label">Works with any PKCS#11 provider</span>
-      <ul class="strip__items">
-        <li data-i18n="strip.tokens">USB security tokens</li>
-        <li data-i18n="strip.cards">Smart cards</li>
-        <li data-i18n="strip.hsms">Network HSMs</li>
-        <li>OpenSC</li>
-        <li>SoftHSM</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="section" id="what">
-    <div class="wrap">
-      <header class="section__head">
-        <h2 data-i18n="what.title">What you get — and what you don't</h2>
-        <p data-i18n="what.lead">
-          The boundary is explicit: SealForge owns the signing workflow, not your keys and not
-          your certificates.
-        </p>
-      </header>
-      <div class="split">
-        <article class="card">
-          <h3 data-i18n="what.is.title">What it is</h3>
-          <ul class="checklist">
-            <li data-i18n="what.is1">A signing service you run on your own host, next to the token.</li>
-            <li data-i18n="what.is2">A REST API your pipeline calls, and a web UI for whoever approves signing.</li>
-            <li data-i18n="what.is3">Audited end to end: who asked, which key signed, when, and whether it verified.</li>
-            <li data-i18n="what.is4">Boring to operate: one Linux host, Docker Compose, one open port.</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3 data-i18n="what.isnot.title">What it isn't</h3>
-          <ul class="checklist checklist--neg">
-            <li data-i18n="what.isnot1">Not a hosted service — no vendor account, no upload to a third party.</li>
-            <li data-i18n="what.isnot2">Not a key store — it never holds a copy of your private key.</li>
-            <li data-i18n="what.isnot3">Not a certificate authority — you bring the certificate and the CA bundle.</li>
-            <li data-i18n="what.isnot4">Not a build server — it signs an artifact you hand it.</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--alt" id="how">
-    <div class="wrap">
-      <header class="section__head">
-        <h2 data-i18n="how.title">How it works</h2>
-        <p data-i18n="how.lead">Four steps — and the last one only happens if verification passed.</p>
-      </header>
-
-      <ol class="flow">
-        <li class="flow__step">
-          <span class="flow__num">01</span>
-          <h3 data-i18n="how.step1.title">Submit</h3>
-          <p data-i18n="how.step1.body">Upload in the web UI, or post the file from your pipeline.</p>
-        </li>
-        <li class="flow__step">
-          <span class="flow__num">02</span>
-          <h3 data-i18n="how.step2.title">Authorize</h3>
-          <p data-i18n="how.step2.body">A signing permission binds the person, the token and the exact certificate.</p>
-        </li>
-        <li class="flow__step">
-          <span class="flow__num">03</span>
-          <h3 data-i18n="how.step3.title">Sign &amp; verify</h3>
-          <p data-i18n="how.step3.body">The isolated worker signs through the token, timestamps the result and checks the chain.</p>
-        </li>
-        <li class="flow__step">
-          <span class="flow__num">04</span>
-          <h3 data-i18n="how.step4.title">Retrieve</h3>
-          <p data-i18n="how.step4.body">The verified artifact is released for download, and the whole path is recorded.</p>
-        </li>
-      </ol>
-
-      <p class="section__note">
-        <a class="inline-link" href="details.html#architecture" data-i18n="how.more">See the architecture and the isolation rules →</a>
-      </p>
-    </div>
-  </section>
-
-  <section class="section" id="install">
-    <div class="wrap">
-      <header class="section__head">
-        <h2 data-i18n="install.title">Install</h2>
-        <p data-i18n="install.lead">
-          The installer resolves the latest published release, verifies its signed manifest and
-          every file hash, then brings the stack up.
-        </p>
-      </header>
-
-      <ol class="steps">
-        <li>
-          <span class="steps__num">01</span>
-          <div>
-            <h3 data-i18n="install.step1.title">Prepare the host</h3>
-            <p data-i18n="install.step1.body">
-              Linux with Docker and Compose, the token or HSM, and its PIN. One port is enough;
-              PostgreSQL comes with the stack.
-            </p>
-          </div>
-        </li>
-        <li>
-          <span class="steps__num">02</span>
-          <div>
-            <h3 data-i18n="install.step2.title">Run the installer</h3>
-            <p data-i18n="install.step2.body">It picks the latest release and verifies it before extracting anything.</p>
-            <pre class="code"><code>curl -fsSL https://github.com/semihkiroglu/SealForge/releases/latest/download/install.sh | bash</code></pre>
-          </div>
-        </li>
-        <li>
-          <span class="steps__num">03</span>
-          <div>
-            <h3 data-i18n="install.step3.title">Open the UI and claim the instance</h3>
-            <p data-i18n="install.step3.body">The one-time setup code is in the web container's log.</p>
-            <pre class="code"><code>docker logs sealforge-web 2&gt;&amp;1 | grep "setup code"</code></pre>
-          </div>
-        </li>
-      </ol>
-
-      <p class="section__note" data-i18n="install.note">
-        SealForge is in beta and the repository is private, so the command above needs access —
-        ask for a seat. No secrets are typed into the installer: the internal API secret and the
-        encryption key are generated on first start.
-      </p>
-
-      <div class="link-card">
-        <a class="link-card__body" href="details.html">
-          <strong data-i18n="next.title">Architecture, security model, API and host requirements</strong>
-          <span data-i18n="next.body">What an operator or a reviewer wants to check before running this.</span>
-        </a>
-        <a class="link-card__arrow" href="details.html" aria-label="Open technical details">→</a>
-      </div>
-    </div>
-  </section>
+<section class="hero"><div class="wrap hero-grid">
+<div>
+<p class="eyebrow" data-i18n="hero.eyebrow">Self-hosted code signing</p>
+<h1 data-i18n="hero.title">Your software.<br>Your signature.<br><span>Your keys.</span></h1>
+<p class="lead" data-i18n="hero.lead">A signing desk for your team, on your own server. Sign releases through your token, from a browser or your build pipeline. Your private key stays on the device.</p>
+<div class="actions"><a class="btn btn--primary" href="#how" data-i18n="hero.cta">See how it works <span aria-hidden="true">→</span></a><a class="btn" href="details.html" data-i18n="hero.details">Technical guide</a></div>
+<p class="small-note" data-i18n="hero.beta">Private beta · Runs on your infrastructure</p>
+</div>
+<figure class="product">
+<div class="product-head"><span><img src="assets/brand/symbol-on-dark.svg" width="64" height="64" alt=""><span data-i18n="hero.preview">The signing desk</span></span><small data-i18n="hero.preview.note">Product preview</small></div>
+<div class="product-image"><img src="assets/img/screenshots/dashboard.webp" width="1280" height="690" fetchpriority="high" alt="SealForge demo dashboard: five ready signing jobs, no failed jobs, and a detected demo token."></div>
+<figcaption data-i18n="hero.caption">Real application, software token. These demo jobs used SoftHSM for signing, timestamping and verification.</figcaption>
+</figure>
+</div></section>
+<section class="section section--alt" id="what"><div class="wrap">
+<header class="section-head"><p class="eyebrow" data-i18n="what.eyebrow">A clear boundary</p><h2 data-i18n="what.title">The workflow is ours.<br>The keys stay yours.</h2></header>
+<div class="split">
+<article class="card"><span class="kicker">01 / SEALFORGE</span><h3 data-i18n="what.is">One place to sign releases</h3><ul class="checklist">
+<li data-i18n="what.is1">Submit from the web UI or your CI pipeline.</li><li data-i18n="what.is2">Decide who can use each signing certificate.</li><li data-i18n="what.is3">See the result and the audit trail for every job.</li>
+</ul></article>
+<article class="card"><span class="kicker">02 / YOUR INFRASTRUCTURE</span><h3 data-i18n="what.not">Not another signing cloud</h3><ul class="checklist checklist--neutral">
+<li data-i18n="what.not1">No hosted signing account. You run the service.</li><li data-i18n="what.not2">Not a key vault or certificate authority. Bring your token and certificate.</li><li data-i18n="what.not3">Not a build server. It signs the artifact you provide.</li>
+</ul></article>
+</div></div></section>
+<section class="section" id="how"><div class="wrap">
+<header class="section-head"><p class="eyebrow" data-i18n="how.eyebrow">From artifact to release</p><h2 data-i18n="how.title">Four steps. No mystery.</h2><p data-i18n="how.lead">The download becomes available only after signing, timestamping and verification succeed.</p></header>
+<ol class="flow">
+<li><span class="num">01</span><h3 data-i18n="how.1.title">Submit</h3><p data-i18n="how.1.body">Upload a release in your browser or send it from your pipeline.</p></li>
+<li><span class="num">02</span><h3 data-i18n="how.2.title">Check permission</h3><p data-i18n="how.2.body">SealForge checks access to the selected token and certificate.</p></li>
+<li><span class="num">03</span><h3 data-i18n="how.3.title">Sign &amp; verify</h3><p data-i18n="how.3.body">The worker signs through the token, adds a timestamp and verifies the result.</p></li>
+<li><span class="num">04</span><h3 data-i18n="how.4.title">Download</h3><p data-i18n="how.4.body">Retrieve the verified artifact, with its job history recorded.</p></li>
+</ol></div></section>
+<section class="section section--alt" id="install"><div class="wrap">
+<div class="install-grid"><div><span class="notice" data-i18n="install.beta">Private beta</span><h2 data-i18n="install.title">Your host.<br>Your signing desk.</h2><p class="lead" data-i18n="install.lead">The installer and source repository currently require beta access. Access is arranged directly with the project owner; there is no public download yet.</p><a class="inline-link" href="details.html#host" data-i18n="install.requirements">Check host requirements →</a></div>
+<ol class="steps">
+<li><h3 data-i18n="install.1.title">Prepare your host</h3><p data-i18n="install.1.body">Use a Linux host with Docker Compose and a compatible signing token.</p></li>
+<li><h3 data-i18n="install.2.title">Install the latest release</h3><p data-i18n="install.2.body">With beta access, get the latest release bundle and follow its installation guide. The installer verifies the signed manifest and file hashes.</p></li>
+<li><h3 data-i18n="install.3.title">Claim your instance</h3><p data-i18n="install.3.body">Open the UI, enter the one-time setup code from the service log, enroll MFA and configure your token.</p></li>
+</ol></div>
+<a class="callout-link" href="details.html"><span><strong data-i18n="next.title">Want to look under the hood?</strong><small data-i18n="next.body">Architecture, security boundaries, API and deployment.</small></span><span class="arrow" aria-hidden="true">↗</span></a>
+</div></section>
 </main>
-
-<footer class="site-footer">
-  <div class="wrap footer-inner">
-    <div class="footer__brand">
-      <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
-        <polygon points="21.1,12 16.55,19.9 7.45,19.9 2.9,12 7.45,4.1 16.55,4.1"/>
-        <path d="M8.6 12.25 L11.05 14.7 L15.85 9.3"/>
-      </svg>
-      <div>
-        <span class="brand__name">SealForge</span>
-        <span class="footer__tag" data-i18n="footer.tag">Self-hosted code signing</span>
-      </div>
-    </div>
-    <nav class="footer__links" aria-label="Footer">
-      <a href="#what" data-i18n="footer.what">Overview</a>
-      <a href="#install" data-i18n="footer.install">Install</a>
-      <a href="details.html" data-i18n="footer.details">Technical details</a>
-    </nav>
-    <p class="footer__legal" data-i18n="footer.legal">Apache-2.0 · © 2026 SealForge</p>
-  </div>
-</footer>
+<footer class="site-footer"><div class="wrap footer-inner">
+<div class="footer-brand"><a class="brand" href="index.html" aria-label="SealForge home"><img class="logo-light" src="assets/brand/logo-on-light.svg" width="300" height="64" alt=""><img class="logo-dark" src="assets/brand/logo-on-dark.svg" width="300" height="64" alt=""></a><p data-i18n="footer.tag">Self-hosted code signing.</p></div>
+<nav class="footer-links" aria-label="Footer"><a href="index.html" data-i18n="footer.overview">Overview</a><a href="details.html" data-i18n="footer.guide">Technical guide</a><a href="brand.html" data-i18n="footer.brand">Brand assets</a></nav>
+<p class="legal" data-i18n="footer.legal">© 2026 SealForge. Software licensed under Apache-2.0. Currently in private beta.</p>
+</div></footer>
 <script src="assets/js/site.js"></script>
-</body>
-</html>
+</body></html>

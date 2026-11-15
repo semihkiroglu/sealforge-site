@@ -1,117 +1,103 @@
-# sealforge-site
+# SealForge ürün sitesi
 
-SealForge ürün sitesi. İki statik sayfa, build adımı ve harici bağımlılık yok.
+Build adımı, framework veya backend gerektirmeyen statik site.
 
-| Sayfa | Ne için |
-|-------|---------|
-| `index.html` | Karşılama: nedir / ne değildir, 4 adımlı akış, kurulum |
-| `details.html` | Teknik detay: mimari, güvenlik modeli, API, host ve sürüm gereksinimleri |
-
-Karşılama sayfası bilinçli olarak kısa: sürüm numarası, teknoloji listesi ve
-mimari diyagramı orada durmaz, hepsi `details.html` içinde. Detay sayfası da
-gerçek kaynağa (GitHub deposu) yönlendirir.
-
-## Yapı
-
-```
-index.html                 # karşılama sayfası
-details.html               # teknik detay sayfası
-assets/css/style.css       # tema (uygulamanın indigo token'larıyla uyumlu)
-assets/js/site.js          # tema anahtarı + dil altyapısı (bağımlılıksız)
-assets/img/mark.svg        # logo işareti (currentColor)
-assets/img/favicon.svg     # favicon (koyu zemin, indigo işaret)
-assets/img/favicon-32.png  # 32 px PNG favicon
-assets/img/apple-touch-icon.png
-assets/img/icon-512.png    # uygulama/mağaza ikonu
-assets/img/og.png          # 1200×630 sosyal kart
-assets/img/screenshots/    # 3 gerçek SealForge UI görüntüsü (WebP)
-```
+- `index.html`: kısa ürün tanıtımı, gerçek uygulama görüntüsü, akış ve başlangıç.
+- `details.html`: mimari, güvenlik sınırları, API, host gereksinimleri ve kanıt görselleri.
+- `brand.html`: logo galerisi, format bazlı indirme ve e-posta imzası.
+- `assets/brand/`: uygulamayla aynı kaynaktan gelen hazır SVG, PNG, PDF, ICO ve HTML dosyaları.
+- `assets/downloads/sealforge-brand-kit.zip`: kullanım kılavuzu ve font lisansı dahil marka paketi.
+- `assets/fonts/`: yerelde sunulan Inter Latin variable fontu ve SIL OFL lisansı.
+- `tests/site.test.cjs`: Playwright ile responsive, tema, bağlantı ve asset kontrolleri.
 
 ## Yerelde açma
 
-`index.html` dosyasını tarayıcıda açmak yeterli; herhangi bir sunucu gerekmez.
-Sayfalar birbirine göreli bağlantı verir (`details.html`, `index.html#install`),
-yani klasörü olduğu gibi taşımak yeterli.
-
-## Sürüm gösterimi
-
-Header'da sürüm rozeti **yok**. Sayfalar herkese açık, depo ise beta boyunca
-private olduğu için `api.github.com/repos/.../releases/latest` anonim çağrıya
-404 döner; rozeti canlı tutmanın yolu yok. Bunun yerine kurulum adımı
-`releases/latest/download/install.sh` kullanır — installer her zaman en son
-yayınlanan sürümü çözer. Depo public olduğunda rozet şu iki satırla geri
-gelebilir (fetch + `textContent`, sayfa yüklenirken):
-
-```js
-fetch('https://api.github.com/repos/semihkiroglu/SealForge/releases/latest')
-  .then((r) => r.json()).then((d) => { /* d.tag_name */ });
+```bash
+python3 -m http.server 4173 --bind 127.0.0.1
 ```
 
-## Yayın
+Tarayıcıda `http://127.0.0.1:4173/` adresini aç. Site dosyaları doğrudan da
+açılabilir; HTTP sunucusu, font ve sayfalar arası tema saklama davranışını daha
+sadık test eder. E-posta imzasındaki logo kalıcı public HTTPS adresini kullanır.
 
-GitHub Pages, `main` dalının kök dizininden yayınlar. Her push sonrası Pages
-workflow'u birkaç dakika içinde güncellenir.
+## Marka kaynağı
 
-## Tema
+Kanonik kaynak **SealForge uygulama deposundaki** `tools/branding/mark.py` ve
+aynı klasördeki lisanslı Inter fontudur. `SealForge/branding/` bütün hazır
+çıktıları ve kullanım kılavuzunu içerir. Site kopyalarını elle değiştirme:
 
-Varsayılan **koyu**. Header'daki düğme koyu/açık arasında geçiş yapar ve seçim
-`localStorage["sealforge.theme"]` içinde tutulur; sayfa yüklenmeden önce
-`<head>` içindeki üç satırlık script temayı uygular, böylece açık temada koyu
-ekran yanıp sönmez. Tüm renkler `style.css` başındaki değişkenlerden gelir:
-`:root` koyu palet, `html[data-theme="light"]` açık palet. Kod blokları her iki
-temada da koyu kalır.
-
-İşletim sistemi tercihine uymak istersen `site.js` içindeki
-`applyTheme(root.dataset.theme === 'light' ? 'light' : 'dark')` satırını
-`matchMedia('(prefers-color-scheme: light)').matches` kontrolüyle değiştir;
-`<head>`'deki script de aynı kuralı izlemeli.
-
-## Dil altyapısı
-
-Çevrilebilir her düğüm `data-i18n="anahtar"` taşır (index 55, details 65 anahtar). İngilizce
-metin doğrudan HTML'de durur; `site.js` ilk çalıştırmada her düğümün kendi
-markup'ını yedek olarak saklar, böylece `DICT.en` boş kalır ve İngilizce
-metin iki yerde tekrarlanmaz. Eksik anahtar boş metne değil, HTML'deki
-İngilizce metne düşer — JS kapalıyken sayfa tamamen İngilizce çalışır.
-
-Yeni dil eklemek için `site.js` içindeki `DICT` nesnesine bir blok ekle:
-
-```js
-tr: { name: 'Türkçe', 'hero.title': '…', 'nav.why': 'Neden' },
+```bash
+# SealForge deposunda; yalnız geliştirici tooling'i
+python -m pip install -r tools/branding/requirements.txt
+python tools/branding/mark.py --site ../sealforge-site
+python tools/branding/test_branding.py
 ```
 
-Dil seçici her iki sayfada da (`#lang-select`) DOM'da hazır ve bağlıdır; `hidden` olduğu için
-görünmez ve sekme sırasına girmez. Seçenekler `DICT`'ten üretilir, yani ikinci
-dil eklenince kendiliğinden dolar. Görünür yapmak için `hidden` özniteliğini
-kaldırmak ve `hidden` yerine bir `.lang-switch` sınıfıyla biçimlendirmek yeterli.
-Seçim `localStorage["sealforge.lang"]` içinde tutulur; bilinmeyen bir değer
-İngilizceye düşer.
+Uygulama yalnız commit edilmiş statik dosyaları sunar. Logo çizimi runtime'da
+yapılmaz. Logolar path'e çevrilmiştir; tüketen uygulamada font kurulumu gerekmez.
+Site kendi Inter WOFF2 dosyasını sunar, üçüncü taraf font servisine bağlanmaz.
 
-## Görseller
+## Tema ve dil
 
-Üç görüntü, aynı yerel SealForge örneğinden alındı (SoftHSM token, yapay
-`Northwind.*` artifact'ları, gerçek imzalama + zaman damgası + zincir
-doğrulaması):
+Varsayılan koyu tema korunur. `localStorage['sealforge.theme']`, stylesheet
+boyanmadan önce okunur; düğme, logo sürümü ve tarayıcı tema rengi birlikte
+geçiş yapar. Açık/koyu seçim sayfalar arasında ve yenilemede korunur.
+Mobilde navigasyon gizlenmez: başlığın ikinci satırındadır.
 
-| Dosya | Ne gösteriyor |
-|-------|----------------|
-| `dashboard.webp` | Genel durum: iş sayacıları, sistem özeti, algılanan token |
-| `signing-result.webp` | Tamamlanmış iş: `ReadyForDownload`, doğrulama sonrası teslim |
-| `token-state.webp` | Token detayı: sertifika, PIN durumu, worker'ın gördüğü operasyonel durum |
+Dil şimdilik yalnız İngilizce. `data-i18n` metinleri kaynak HTML'de kalır;
+`assets/js/site.js` eksik/bilinmeyen dil için bu içeriğe döner. `#lang-select`
+bağlıdır ama `hidden`, `aria-hidden` ve `tabindex=-1` ile görünmezdir. İkinci
+bir dil eklerken çeviri sözlüğünü tamamlayıp seçiciyi bilinçli olarak görünür yap.
+Marka adı, dosya formatları, alt metinler ve meta veriler dil seçimiyle değişmez.
 
-Tarayıcı 1920×1200, DPR 2 ile çekildi; WebP'ye 1200–1920 px genişlikte
-küçültüldü. Demo örneğinde kişisel veri yok (operatör adı `Operations`).
+## Kurulum ve repo görünürlüğü
 
-## Marka
+Ürün deposu private; public ziyaretçi için GitHub kurulum/release bağlantısı
+404 döner. Bu yüzden ana sayfada başarısız bir curl komutu veya çalışmayan
+"Download" butonu yok. Beta erişimi gereksinimi adımlardan önce açıkça yazılıdır.
+Teknik rehberde private GitHub bağlantısı yalnız beta kullanıcıları için etiketli
+bir disclosure içindedir. Repo görünürlüğünü bu siteyi yayınlamak için değiştirme.
+Sabit sürüm rozeti yok; başlangıç metni erişilebilen **latest release**'i önerir.
 
-Logo işareti: düz tepeli altıgen (somun/seal) içinde onay işareti.
-`mark.svg` ve `favicon.svg` uygulama deposundaki üreticiden
-(`SealForge/tools/branding/mark.py`) kopyadır — geometri orada tanımlı,
-orada değiştirilir; bu depodaki dosyalar elle düzenlenmez.
+## Görseller ve doğruluk
 
-## Özel alan adı
+Üç WebP, aynı gerçek SealForge demo örneğinde SoftHSM ile yapılan imzalama,
+zaman damgası ve doğrulama akışından gelir. Hero yalnız aktivite alanını gösteren
+bir kırpımdır; arayüz çizilmedi ve iş sonuçları üretilmedi. Bu görüntüler fiziksel
+token/HSM sertifikasyonu veya üretim trafiği kanıtı değildir.
 
-Alan adı bağlandığında depo köküne `CNAME` dosyası eklenir ve DNS'te
-`A`/`CNAME` kayıtları GitHub Pages hedefine yönlendirilir. `og:image`,
-`og:url` ve `twitter:image` şu an `https://semihkiroglu.github.io/sealforge-site/`
-adresini gösterir; özel alan adına geçince bu üç değer güncellenmelidir.
+E-posta imzası PNG + tablo + inline stil kullanır; kişisel isim, adres veya rol
+uydurmaz. Gerçek Outlook/Gmail gönderimi ve istemcilerin dark-mode dönüşümleri
+ayrı kontroldür. Uzaktaki görseller kapalıysa alt metin ve düz bağlantı kalır.
+
+## Tarayıcı doğrulaması
+
+Mevcut bir Playwright kurulumu ve Chromium kullanılır; bunlar site runtime
+bağımlılığı değildir. Test 320/390/768/1440 px, iki tema ve üç sayfayı dolaşır:
+
+```bash
+# Playwright ortamının node_modules dizini NODE_PATH ile sağlanabilir.
+NODE_PATH=/path/to/playwright/node_modules \
+CHROMIUM_PATH=/path/to/chrome \
+SITE_EVIDENCE=/path/to/output \
+node tests/site.test.cjs
+
+# Yayındaki aynı dosyalar için
+SITE_URL=https://semihkiroglu.github.io/sealforge-site/ \
+NODE_PATH=/path/to/playwright/node_modules \
+CHROMIUM_PATH=/path/to/chrome \
+SITE_EVIDENCE=/path/to/live-output \
+node tests/site.test.cjs
+```
+
+Yerel imza önizlemesinde final HTTPS logo adresi aynı gerçek yerel PNG'ye
+map edilir; canlı testte yönlendirme yoktur. Diğer kontroller: görseller ve
+indirme URL'leri, yatay taşma, tek H1, anchor'lar, kontrast, görünür mobil
+navigasyon, JS hataları, tema kalıcılığı, gizli İngilizce seçici ve JS'siz içerik.
+
+## Yayın ve alan adı
+
+GitHub Pages `main` dalının kökünden yayınlar. Push sonrası exact-head Pages
+çalışmasını ve HTTPS'ten gelen gerçek dosyaları kontrol et. Özel domain henüz
+bağlı değil; bağlanırsa `CNAME`, canonical/OG/Twitter URL'leri ve marka
+üreticisindeki e-posta imza URL'si birlikte güncellenmelidir.

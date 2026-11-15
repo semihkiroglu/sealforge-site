@@ -2,302 +2,86 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<script>
-  // Before the stylesheet paints: a stored light theme must not flash dark.
-  try { document.documentElement.dataset.theme = localStorage.getItem('sealforge.theme') === 'light' ? 'light' : 'dark'; } catch (e) {}
-</script>
+<script>try { document.documentElement.dataset.theme = localStorage.getItem('sealforge.theme') === 'light' ? 'light' : 'dark'; } catch (e) {}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n="page.title">Technical details — SealForge</title>
-<meta name="description" content="SealForge architecture, isolation rules, security model, REST API and host requirements.">
-<meta name="theme-color" content="#0b0d12">
-<meta property="og:title" content="Technical details — SealForge">
-<meta property="og:description" content="Architecture, isolation rules, security model, REST API and host requirements for SealForge.">
-<meta property="og:type" content="article">
+<title data-i18n="page.title">Technical guide — SealForge</title>
+<meta name="description" content="How SealForge handles signing permissions, encrypted PINs, worker isolation, verification and deployment.">
+<meta name="theme-color" content="#0f1117">
+<link rel="canonical" href="https://semihkiroglu.github.io/sealforge-site/details.html">
+<meta property="og:title" content="Technical guide — SealForge">
+<meta property="og:description" content="How SealForge handles signing permissions, encrypted PINs, worker isolation, verification and deployment.">
+<meta property="og:type" content="website">
 <meta property="og:url" content="https://semihkiroglu.github.io/sealforge-site/details.html">
-<meta property="og:image" content="https://semihkiroglu.github.io/sealforge-site/assets/img/og.png">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<meta property="og:image" content="https://semihkiroglu.github.io/sealforge-site/assets/brand/social-card.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://semihkiroglu.github.io/sealforge-site/assets/brand/social-card.png">
+<link rel="icon" href="assets/brand/app-icon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/brand/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/brand/icon-180.png">
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<a class="skip" href="#main" data-i18n="skip.content">Skip to content</a>
-
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a class="brand" href="index.html" aria-label="SealForge home">
-      <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
-        <polygon points="21.1,12 16.55,19.9 7.45,19.9 2.9,12 7.45,4.1 16.55,4.1"/>
-        <path d="M8.6 12.25 L11.05 14.7 L15.85 9.3"/>
-      </svg>
-      <span class="brand__name">SealForge</span>
-    </a>
-    <nav class="nav" aria-label="Primary">
-      <a href="index.html" data-i18n="nav.overview">← Overview</a>
-      <a href="#architecture" data-i18n="nav.architecture">Architecture</a>
-      <a href="#security" data-i18n="nav.security">Security</a>
-      <a href="#api" data-i18n="nav.api">API</a>
-      <a href="#host" data-i18n="nav.host">Host</a>
-    </nav>
-    <button class="theme-toggle" id="theme-toggle" type="button"
-            aria-label="Switch to light theme" aria-pressed="false">
-      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none"
-           stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
-        <circle cx="12" cy="12" r="4.2"/>
-        <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/>
-      </svg>
-      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none"
-           stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20.4 14.2A8.4 8.4 0 0 1 9.8 3.6a8.4 8.4 0 1 0 10.6 10.6Z"/>
-      </svg>
-    </button>
-    <!-- Language switch: built and wired from assets/js/site.js, intentionally
-         hidden until a second dictionary exists. -->
-    <select id="lang-select" hidden aria-hidden="true" tabindex="-1"></select>
-  </div>
-</header>
-
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="site-header"><div class="wrap header-inner">
+<a class="brand" href="index.html" aria-label="SealForge home"><img class="logo-light" src="assets/brand/logo-on-light.svg" width="300" height="64" alt=""><img class="logo-dark" src="assets/brand/logo-on-dark.svg" width="300" height="64" alt=""></a>
+<nav class="nav" aria-label="Primary"><a href="index.html" data-i18n="nav.0">Overview</a><a href="index.html#how" data-i18n="nav.1">How it works</a><a href="index.html#install" data-i18n="nav.2">Install</a><a href="details.html" aria-current="page" data-i18n="nav.3">Details</a></nav>
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
+<svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
+<svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M20.4 14.2A8.4 8.4 0 0 1 9.8 3.6a8.4 8.4 0 1 0 10.6 10.6Z"/></svg>
+</button>
+<select id="lang-select" hidden aria-hidden="true" tabindex="-1"></select>
+</div></header>
 <main id="main">
-  <section class="page-head">
-    <div class="wrap">
-      <p class="eyebrow" data-i18n="head.eyebrow">Technical details</p>
-      <h1 data-i18n="head.title">How it is built, and what it refuses to do</h1>
-      <p class="lead" data-i18n="head.lead">
-        For operators and security reviewers. If you only want to run it, the
-        <a class="inline-link" href="index.html#install">install steps</a> are on the overview page.
-      </p>
-    </div>
-  </section>
+<section class="page-head"><div class="wrap"><a class="back" href="index.html" data-i18n="back">← Back to overview</a><p class="eyebrow" data-i18n="head.eyebrow">Technical guide</p><h1 data-i18n="head.title">Clear boundaries.<br>Verifiable results.</h1><p class="lead" data-i18n="head.lead">For operators and security reviewers. Start with the architecture, then dig into the controls that protect a signing job.</p><div class="actions"><a class="btn" href="#security" data-i18n="head.security">Security</a><a class="btn" href="#api" data-i18n="head.api">API</a><a class="btn" href="#host" data-i18n="head.host">Host requirements</a></div></div></section>
+<section class="section" id="architecture"><div class="wrap">
+<header class="section-head"><h2 data-i18n="arch.title">The web handles requests.<br>The worker handles the token.</h2><p data-i18n="arch.lead">The web application authorizes requests and manages job state. An isolated worker is the only service that opens the PKCS#11 module.</p></header>
+<ol class="topology" aria-label="Signing architecture">
+<li><strong>Web UI / CI</strong><small data-i18n="arch.1">Submit &amp; track</small></li><li><strong>SealForge Web</strong><small data-i18n="arch.2">Access &amp; audit</small></li><li><strong>PostgreSQL</strong><small data-i18n="arch.3">Queue &amp; state</small></li><li><strong>Signing worker</strong><small>Jsign / PKCS#11</small></li><li><strong>Token</strong><small data-i18n="arch.5">Key stays here</small></li>
+</ol><ul class="checklist"><li data-i18n="arch.limit1">One operational token, one worker, one signing job at a time.</li><li data-i18n="arch.limit2">The worker has a read-only root filesystem, dropped Linux capabilities and no publicly exposed port.</li><li data-i18n="arch.limit3">Native token probes run in child processes with timeouts. Host hardening, TLS and swap policy remain operator responsibilities.</li></ul>
+</div></section>
+<section class="section section--alt" id="security"><div class="wrap">
+<header class="section-head"><p class="eyebrow" data-i18n="sec.eyebrow">Security model</p><h2 data-i18n="sec.title">The controls behind a signature.</h2><p data-i18n="sec.lead">Not just a sign button. Access, PIN handling and verification each have an explicit boundary.</p></header>
+<div class="grid-2">
+<article class="card"><h3 data-i18n="sec.1.title">Encrypted PIN provisioning</h3><p data-i18n="sec.1.body">The browser encrypts the PIN to the worker’s public key. The worker decrypts it for use through a short-lived, owner-only lease under <code>/dev/shm</code>. Persisted PIN data is an encrypted envelope.</p></article>
+<article class="card"><h3 data-i18n="sec.2.title">Specific certificate permissions</h3><p data-i18n="sec.2.body">Permissions bind a principal, token and exact certificate thumbprint. A failed token unlock clears the PIN and soft-locks access until an administrator reviews it with fresh MFA.</p></article>
+<article class="card"><h3 data-i18n="sec.3.title">Verification gates the download</h3><p data-i18n="sec.3.body">Timestamping is required. The signature chain must verify against the configured CA bundle before the job becomes ready for download. A failed check fails the job.</p></article>
+<article class="card"><h3 data-i18n="sec.4.title">More than a filename check</h3><p data-i18n="sec.4.body">Supported extensions are checked against their expected content structure: MZ for EXE/DLL, OLE for MSI and a NuGet manifest inside NUPKG. This is format validation, not malware scanning.</p></article>
+</div></div></section>
+<section class="section" id="api"><div class="wrap">
+<header class="section-head"><p class="eyebrow" data-i18n="api.eyebrow">Fits your build pipeline</p><h2 data-i18n="api.title">Submit. Poll. Download.</h2><p data-i18n="api.lead">An asynchronous REST API for EXE, DLL, MSI and NuGet packages. Set your instance URL and API key before using the example.</p></header>
+<pre class="code" tabindex="0" aria-label="Signing API curl example"><code># Submit an artifact (API key with submit permission)
+curl --fail-with-body &quot;$SEALFORGE_URL/api/v1/signing-jobs&quot; \
+  -H &quot;Authorization: Bearer $SEALFORGE_API_KEY&quot; \
+  -F &quot;artifact=@release.exe&quot;
 
-  <section class="section" id="architecture">
-    <div class="wrap">
-      <header class="section__head">
-        <h2 data-i18n="arch.title">Architecture</h2>
-        <p data-i18n="arch.lead">
-          The web application and the signing worker share a queue and a database, but only the
-          worker can reach the token. Nothing else in the stack touches key material.
-        </p>
-      </header>
+# Poll the returned job ID, then download when ready
+curl --fail-with-body &quot;$SEALFORGE_URL/api/v1/signing-jobs/$JOB_ID&quot; \
+  -H &quot;Authorization: Bearer $SEALFORGE_API_KEY&quot;
 
-      <div class="topology" role="img" aria-label="Topology: client submits to the web application, jobs are queued in PostgreSQL, the worker signs through the PKCS#11 token, and the verified artifact is downloaded.">
-        <div class="topology__row">
-          <div class="node">
-            <span class="node__title">Web UI / CI</span>
-            <span class="node__sub" data-i18n="arch.node1.sub">submit · status</span>
-          </div>
-          <span class="arrow" aria-hidden="true">→</span>
-          <div class="node node--accent">
-            <span class="node__title">sealforge-web</span>
-            <span class="node__sub" data-i18n="arch.node2.sub">auth · authz · audit</span>
-          </div>
-          <span class="arrow" aria-hidden="true">→</span>
-          <div class="node">
-            <span class="node__title">PostgreSQL</span>
-            <span class="node__sub" data-i18n="arch.node3.sub">queue · state</span>
-          </div>
-          <span class="arrow" aria-hidden="true">→</span>
-          <div class="node node--accent">
-            <span class="node__title" data-i18n="arch.node4.title">signing worker</span>
-            <span class="node__sub">Jsign · PKCS#11</span>
-          </div>
-          <span class="arrow" aria-hidden="true">→</span>
-          <div class="node">
-            <span class="node__title" data-i18n="arch.node5.title">Token / HSM</span>
-            <span class="node__sub" data-i18n="arch.node5.sub">private key stays here</span>
-          </div>
-        </div>
-      </div>
-
-      <ul class="checklist checklist--spaced">
-        <li data-i18n="arch.li1">The worker runs with a read-only root filesystem, every capability dropped, memory locked against swap and no public port.</li>
-        <li data-i18n="arch.li2">Concurrency is one job at a time; a busy token cannot be double-driven.</li>
-        <li data-i18n="arch.li3">PKCS#11 probes run in killable child processes, so a wedged module cannot take the service down with it.</li>
-        <li data-i18n="arch.li4">The web tier never opens the PKCS#11 module — it has no path to key material at all.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="section section--alt" id="security">
-    <div class="wrap">
-      <header class="section__head">
-        <h2 data-i18n="security.title">The parts that are hard to get right</h2>
-        <p data-i18n="security.lead">
-          Six behaviours decide whether a signing service is safe to run. They are spelled out
-          here, not summarised.
-        </p>
-      </header>
-      <div class="grid grid--2">
-        <article class="card card--tight">
-          <h3 data-i18n="security.c1.title">The PIN never crosses the wire in cleartext</h3>
-          <p data-i18n="security.c1.body">
-            The browser encrypts it with WebCrypto to the worker's public key. Only the worker
-            holds the private half; it writes an owner-only lease under <span class="mono">/dev/shm</span>
-            for the length of one signing call and deletes it afterwards. At rest the PIN is an
-            encrypted envelope, never a file.
-          </p>
-        </article>
-        <article class="card card--tight">
-          <h3 data-i18n="security.c2.title">Keys are bound to a job, not looked up</h3>
-          <p data-i18n="security.c2.body">
-            A permission names the principal, the token and the exact certificate thumbprint.
-            Selection by subject, or by "find something usable", is rejected outright — a job can
-            never drift onto a different key than the one that was approved.
-          </p>
-        </article>
-        <article class="card card--tight">
-          <h3 data-i18n="security.c3.title">A failed token access stops signing</h3>
-          <p data-i18n="security.c3.body">
-            One failed PKCS#11 unlock zeroizes the PIN, soft-locks the key and parks queued jobs
-            for review. Resuming takes the exact confirmation phrase plus a fresh TOTP check —
-            no silent retry, no "try again" button that loops.
-          </p>
-        </article>
-        <article class="card card--tight">
-          <h3 data-i18n="security.c4.title">Verification is part of signing, not a side feature</h3>
-          <p data-i18n="security.c4.body">
-            Timestamping is mandatory and the signature chain is checked against your CA bundle
-            before the artifact is released. An untrusted or incomplete chain fails the job with an
-            error code instead of producing a file.
-          </p>
-        </article>
-        <article class="card card--tight">
-          <h3 data-i18n="security.c5.title">Artifact type comes from the bytes</h3>
-          <p data-i18n="security.c5.body">
-            Extensions are a hint, not a fact: PE headers, OLE versus PE versus ZIP structure and
-            the <span class="mono">.nuspec</span> inside a package are all cross-checked, so a
-            renamed or disguised file is rejected before it reaches the token.
-          </p>
-        </article>
-        <article class="card card--tight">
-          <h3 data-i18n="security.c6.title">Only the worker goes near the token</h3>
-          <p data-i18n="security.c6.body">
-            Read-only root filesystem, every capability dropped, memory locked against swap, no
-            public port, one job at a time. PKCS#11 probes run in killable child processes so a
-            busy token cannot wedge the service.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="proof">
-    <div class="wrap">
-      <header class="section__head">
-        <h2 data-i18n="proof.title">What that looks like in practice</h2>
-        <p data-i18n="proof.lead">Both screens are from the same demo instance — a SoftHSM token and a real signature.</p>
-      </header>
-
-      <figure class="shot">
-        <img src="assets/img/screenshots/signing-result.webp" width="1600" height="381" loading="lazy"
-             alt="Signing result panel: job id, file name, artifact type Exe, status ReadyForDownload, completion time and the note that the artifact was signed successfully.">
-        <figcaption data-i18n="proof.shot1.caption">
-          <strong>Released only after verification</strong>
-          <span class="mono">ReadyForDownload</span> means the timestamp was applied and the
-          signature chain verified against the configured CA bundle. If either step fails, the
-          job fails — a signature that cannot be checked is never handed back.
-        </figcaption>
-      </figure>
-
-      <figure class="shot shot--narrow">
-        <img src="assets/img/screenshots/token-state.webp" width="1200" height="869" loading="lazy"
-             alt="Token details dialog: selected certificate and thumbprint, PIN state Provisioned, PIN storage encrypted worker flow, and operational status reported available by the worker.">
-        <figcaption data-i18n="proof.shot2.caption">
-          <strong>The token, as the worker sees it</strong>
-          Certificate thumbprint, PIN state and storage mode, and whether the worker can actually
-          reach the device right now. It is the worker's answer, not cached optimism.
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="section section--alt" id="api">
-    <div class="wrap">
-      <header class="section__head">
-        <h2 data-i18n="api.title">API</h2>
-        <p data-i18n="api.lead">A small REST surface for CI: submit, poll, download. Interactive and API clients share the same authorization rules.</p>
-      </header>
-      <div class="api-layout">
-        <pre class="code"><code><span class="c"># submit an artifact</span>
-curl -X POST https://sealforge.internal/api/v1/signing-jobs \
-  -H "Authorization: Bearer $SEALF..._KEY" \
-  -F "artifact=@Northwind.Desktop.exe" \
-  -F "clientCorrelationId=build-1042"
-
-<span class="c"># poll the job, then download the verified artifact</span>
-curl -H "Authorization: Bearer $SEALF..._KEY" \
-  https://sealforge.internal/api/v1/signing-jobs/$JOB_ID
-
-curl -H "Authorization: Bearer $SEALF..._KEY" \
-  -o signed.exe \
-  https://sealforge.internal/api/v1/signing-jobs/$JOB_ID/download</code></pre>
-        <ul class="checklist">
-          <li data-i18n="api.li1">Bearer API keys, hashed at rest, scoped to submit / status / download</li>
-          <li data-i18n="api.li2">Artifact type detected from content — <span class="mono">.exe</span>, <span class="mono">.dll</span>, <span class="mono">.msi</span>, <span class="mono">.nupkg</span></li>
-          <li data-i18n="api.li3">Asynchronous by design: there is no synchronous signing endpoint</li>
-          <li data-i18n="api.li4">Download gated by owner and permission, not by knowing the job ID</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="host">
-    <div class="wrap">
-      <header class="section__head">
-        <h2 data-i18n="host.title">Host and release requirements</h2>
-        <p data-i18n="host.lead">One Linux host, one open port, and the token you were going to use anyway.</p>
-      </header>
-      <div class="deploy-layout">
-        <div>
-          <h3 class="subhead" data-i18n="host.req.title">Requirements</h3>
-          <ul class="checklist">
-            <li data-i18n="host.req1">Linux with Docker Engine and Compose (x86_64 or arm64)</li>
-            <li data-i18n="host.req2">A PKCS#11 provider — OpenSC ships with the worker; vendor modules are mounted as <span class="mono">.so</span></li>
-            <li data-i18n="host.req3">A signing token, smart card or HSM, plus its PIN at provisioning time</li>
-            <li data-i18n="host.req4">PostgreSQL 16, provided by the stack</li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="subhead" data-i18n="host.rel.title">Releases</h3>
-          <ul class="checklist">
-            <li data-i18n="host.rel1">Versions are tagged and published as signed bundles; the installer always resolves the latest one.</li>
-            <li data-i18n="host.rel2">A minisign-signed manifest is verified, and every file hash checked, before anything is extracted.</li>
-            <li data-i18n="host.rel3">Upgrades and removal go through the same verified path — the uninstaller only acts on verified state.</li>
-            <li data-i18n="host.rel4">Changelog and the security model live in the repository, next to the code they describe.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="link-card">
-        <a class="link-card__body" href="https://github.com/semihkiroglu/SealForge">
-          <strong data-i18n="repo.title">Source, issues and docs on GitHub</strong>
-          <span data-i18n="repo.body">github.com/semihkiroglu/SealForge — private during the beta; the security model is in <span class="mono">docs/</span>.</span>
-        </a>
-        <a class="link-card__arrow" href="https://github.com/semihkiroglu/SealForge" aria-label="Open the repository">→</a>
-      </div>
-    </div>
-  </section>
+curl --fail-with-body --output signed.exe \
+  &quot;$SEALFORGE_URL/api/v1/signing-jobs/$JOB_ID/download&quot; \
+  -H &quot;Authorization: Bearer $SEALFORGE_API_KEY&quot;</code></pre>
+<ul class="checklist"><li data-i18n="api.1">Bearer keys are hashed at rest and scoped to the operations they can perform.</li><li data-i18n="api.2">A download requires the right owner and permission, not just knowledge of a job ID.</li><li data-i18n="api.3">The application includes API documentation for the deployed version.</li></ul>
+</div></section>
+<section class="section section--alt" id="host"><div class="wrap">
+<header class="section-head"><h2 data-i18n="host.title">A small stack. Your infrastructure.</h2><p data-i18n="host.lead">Linux-only deployment. No hosted signing service is required.</p></header>
+<div class="split"><article class="card"><h3 data-i18n="host.1.title">What you need</h3><ul class="checklist"><li data-i18n="host.1a">Linux x86_64 or arm64, Docker Engine and Compose.</li><li data-i18n="host.1b">A compatible token and Linux PKCS#11 module matching the worker architecture. OpenSC is included; vendor modules are provided separately.</li><li data-i18n="host.1c">A signing certificate, trusted CA bundle and reachable timestamp service. PostgreSQL is supplied by the stack.</li></ul></article>
+<article class="card"><h3 data-i18n="host.2.title">Installing and operating</h3><ul class="checklist"><li data-i18n="host.2a">Use the latest release available to your beta account. The installer verifies its minisign manifest and file hashes.</li><li data-i18n="host.2b">Initial setup provisions an administrator and MFA. Token configuration and signing permissions are managed in the UI.</li><li data-i18n="host.2c">Infrastructure secrets are generated on first start. Keep backups and follow the release’s upgrade instructions.</li></ul></article></div>
+<details class="disclosure"><summary data-i18n="repo.summary">Already have beta access? Open the source and full documentation</summary><p data-i18n="repo.note">The product repository is private. Sign in with an invited GitHub account; other visitors will see GitHub’s 404 page. It contains the security model, API contract, changelog and deployment guide.</p><a class="inline-link" href="https://github.com/semihkiroglu/SealForge" data-i18n="repo.link">Open the private repository →</a></details>
+</div></section>
+<section class="section" id="proof"><div class="wrap">
+<header class="section-head"><p class="eyebrow" data-i18n="proof.eyebrow">Inside the product</p><h2 data-i18n="proof.title">The result, not just the promise.</h2><p data-i18n="proof.lead">Real screenshots from a SoftHSM demo instance. Software-token evidence, not a physical-HSM certification.</p></header>
+<div class="evidence-grid"><figure class="shot"><img src="assets/img/screenshots/signing-result.webp" width="1600" height="381" loading="lazy" alt="Completed demo signing job with status ReadyForDownload."><figcaption data-i18n="proof.1"><strong>Ready means verified.</strong>The job is available only after the signing, timestamp and verification stages pass.</figcaption></figure>
+<figure class="shot"><img src="assets/img/screenshots/token-state.webp" width="1200" height="869" loading="lazy" alt="Demo token details showing the selected certificate, provisioned PIN and worker-reported availability."><figcaption data-i18n="proof.2"><strong>Token state, reported by the worker.</strong>Certificate identity, PIN state and current availability in one view.</figcaption></figure></div>
+<a class="callout-link" href="index.html#install"><span><strong data-i18n="close.title">Back to the simple version.</strong><small data-i18n="close.body">What SealForge does, how it works and how to get started.</small></span><span class="arrow" aria-hidden="true">↗</span></a>
+</div></section>
 </main>
-
-<footer class="site-footer">
-  <div class="wrap footer-inner">
-    <div class="footer__brand">
-      <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
-        <polygon points="21.1,12 16.55,19.9 7.45,19.9 2.9,12 7.45,4.1 16.55,4.1"/>
-        <path d="M8.6 12.25 L11.05 14.7 L15.85 9.3"/>
-      </svg>
-      <div>
-        <span class="brand__name">SealForge</span>
-        <span class="footer__tag" data-i18n="footer.tag">Self-hosted code signing</span>
-      </div>
-    </div>
-    <nav class="footer__links" aria-label="Footer">
-      <a href="index.html" data-i18n="footer.overview">Overview</a>
-      <a href="index.html#install" data-i18n="footer.install">Install</a>
-      <a href="https://github.com/semihkiroglu/SealForge" data-i18n="footer.repo">Repository</a>
-    </nav>
-    <p class="footer__legal" data-i18n="footer.legal">Apache-2.0 · © 2026 SealForge</p>
-  </div>
-</footer>
+<footer class="site-footer"><div class="wrap footer-inner">
+<div class="footer-brand"><a class="brand" href="index.html" aria-label="SealForge home"><img class="logo-light" src="assets/brand/logo-on-light.svg" width="300" height="64" alt=""><img class="logo-dark" src="assets/brand/logo-on-dark.svg" width="300" height="64" alt=""></a><p data-i18n="footer.tag">Self-hosted code signing.</p></div>
+<nav class="footer-links" aria-label="Footer"><a href="index.html" data-i18n="footer.overview">Overview</a><a href="details.html" data-i18n="footer.guide">Technical guide</a><a href="brand.html" data-i18n="footer.brand">Brand assets</a></nav>
+<p class="legal" data-i18n="footer.legal">© 2026 SealForge. Software licensed under Apache-2.0. Currently in private beta.</p>
+</div></footer>
 <script src="assets/js/site.js"></script>
-</body>
-</html>
+</body></html>
