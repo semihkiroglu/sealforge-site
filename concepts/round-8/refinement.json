@@ -1,0 +1,40 @@
+{
+  "status": "pre-final-raster-study",
+  "sourceRound": 6,
+  "newDrawingGenerated": false,
+  "paperEdgeCentres": {
+    "left": 634.0,
+    "right": 634.0
+  },
+  "copperUndersideMatchesImprint": true,
+  "stampInkColorUnchanged": true,
+  "opaqueStampPixelsUnchanged": true,
+  "previousRound": 7,
+  "plateCenterX": 1153.0,
+  "addedLineCenterX": 1153.0,
+  "paperJoinsVerified": true,
+  "keyAndCharacterUnchanged": true,
+  "wordmarkUnchanged": true,
+  "headFilesUnchanged": true,
+  "onlyEditedSourceRegions": [
+    [
+      1008,
+      620,
+      1142,
+      729
+    ],
+    [
+      1142,
+      620,
+      1248,
+      652
+    ],
+    [
+      1098,
+      678,
+      1208,
+      705
+    ]
+  ],
+  "paletteUnchanged": true
+}
