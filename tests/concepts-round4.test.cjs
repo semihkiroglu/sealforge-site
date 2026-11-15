@@ -25,7 +25,8 @@ function contrast(a, b) {
   const report = { cases: [], links: [], noJavaScript: false };
   const links = new Set();
   try {
-    for (const route of ['concepts/round-4/', 'concepts/']) {
+    // Historical checks target the immutable round, not the moving latest entry.
+    for (const route of ['concepts/round-4/']) {
       for (const width of [320, 390, 768, 1440]) {
         for (const palette of ['coast', 'indigo']) {
           for (const mode of ['light', 'dark']) {
