@@ -34,7 +34,15 @@ const contrast = (a, b) => { const x = [lum(rgb(a)), lum(rgb(b))].sort((a, b) =>
           await page.evaluate(async () => { document.querySelectorAll('img, iframe').forEach((i) => i.loading = 'eager'); await document.fonts.ready; });
           if (file === 'brand.html') {
             await page.frameLocator('.signature-preview').locator('table').waitFor();
-            await page.frameLocator('.signature-preview').locator('img').evaluate((i) => new Promise((resolve, reject) => { if (i.complete) return i.naturalWidth > 0 ? resolve() : reject(new Error('Email logo missing')); i.onload = resolve; i.onerror = () => reject(new Error('Email logo missing')); }));
+            const preview = page.frames().find((f) => f.url().endsWith('/assets/brand/email-signature.html'));
+            assert(preview, 'Email preview frame is missing');
+            // A script-disabled iframe cannot reliably run in-frame polling callbacks; poll from the driver.
+            let loaded = false;
+            for (let attempt = 0; attempt < 75 && !loaded; attempt++) {
+              loaded = await preview.locator('img').evaluate((i) => i.complete && i.naturalWidth > 0);
+              if (!loaded) await page.waitForTimeout(200);
+            }
+            assert(loaded, 'Email preview PNG did not load');
           }
           await page.waitForTimeout(150);
           const data = await page.evaluate(() => {
