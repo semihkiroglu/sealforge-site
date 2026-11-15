@@ -1,11 +1,21 @@
 # sealforge-site
 
-SealForge ürün sitesi. Tek sayfa, statik HTML + CSS; build adımı ve harici bağımlılık yok.
+SealForge ürün sitesi. İki statik sayfa, build adımı ve harici bağımlılık yok.
+
+| Sayfa | Ne için |
+|-------|---------|
+| `index.html` | Karşılama: nedir / ne değildir, 4 adımlı akış, kurulum |
+| `details.html` | Teknik detay: mimari, güvenlik modeli, API, host ve sürüm gereksinimleri |
+
+Karşılama sayfası bilinçli olarak kısa: sürüm numarası, teknoloji listesi ve
+mimari diyagramı orada durmaz, hepsi `details.html` içinde. Detay sayfası da
+gerçek kaynağa (GitHub deposu) yönlendirir.
 
 ## Yapı
 
 ```
-index.html                 # sayfanın tamamı
+index.html                 # karşılama sayfası
+details.html               # teknik detay sayfası
 assets/css/style.css       # tema (uygulamanın indigo token'larıyla uyumlu)
 assets/js/site.js          # tema anahtarı + dil altyapısı (bağımlılıksız)
 assets/img/mark.svg        # logo işareti (currentColor)
@@ -20,6 +30,22 @@ assets/img/screenshots/    # 3 gerçek SealForge UI görüntüsü (WebP)
 ## Yerelde açma
 
 `index.html` dosyasını tarayıcıda açmak yeterli; herhangi bir sunucu gerekmez.
+Sayfalar birbirine göreli bağlantı verir (`details.html`, `index.html#install`),
+yani klasörü olduğu gibi taşımak yeterli.
+
+## Sürüm gösterimi
+
+Header'da sürüm rozeti **yok**. Sayfalar herkese açık, depo ise beta boyunca
+private olduğu için `api.github.com/repos/.../releases/latest` anonim çağrıya
+404 döner; rozeti canlı tutmanın yolu yok. Bunun yerine kurulum adımı
+`releases/latest/download/install.sh` kullanır — installer her zaman en son
+yayınlanan sürümü çözer. Depo public olduğunda rozet şu iki satırla geri
+gelebilir (fetch + `textContent`, sayfa yüklenirken):
+
+```js
+fetch('https://api.github.com/repos/semihkiroglu/SealForge/releases/latest')
+  .then((r) => r.json()).then((d) => { /* d.tag_name */ });
+```
 
 ## Yayın
 
@@ -42,7 +68,7 @@ temada da koyu kalır.
 
 ## Dil altyapısı
 
-Çevrilebilir her düğüm `data-i18n="anahtar"` taşır (81 anahtar). İngilizce
+Çevrilebilir her düğüm `data-i18n="anahtar"` taşır (index 55, details 65 anahtar). İngilizce
 metin doğrudan HTML'de durur; `site.js` ilk çalıştırmada her düğümün kendi
 markup'ını yedek olarak saklar, böylece `DICT.en` boş kalır ve İngilizce
 metin iki yerde tekrarlanmaz. Eksik anahtar boş metne değil, HTML'deki
@@ -54,7 +80,7 @@ Yeni dil eklemek için `site.js` içindeki `DICT` nesnesine bir blok ekle:
 tr: { name: 'Türkçe', 'hero.title': '…', 'nav.why': 'Neden' },
 ```
 
-Dil seçici (`#lang-select`) DOM'da hazır ve bağlıdır; `hidden` olduğu için
+Dil seçici her iki sayfada da (`#lang-select`) DOM'da hazır ve bağlıdır; `hidden` olduğu için
 görünmez ve sekme sırasına girmez. Seçenekler `DICT`'ten üretilir, yani ikinci
 dil eklenince kendiliğinden dolar. Görünür yapmak için `hidden` özniteliğini
 kaldırmak ve `hidden` yerine bir `.lang-switch` sınıfıyla biçimlendirmek yeterli.

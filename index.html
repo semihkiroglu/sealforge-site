@@ -7,8 +7,8 @@
   try { document.documentElement.dataset.theme = localStorage.getItem('sealforge.theme') === 'light' ? 'light' : 'dark'; } catch (e) {}
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n="page.title">SealForge — Self-hosted code signing on your own PKCS#11 token</title>
-<meta name="description" content="SealForge is a self-hosted code signing platform. Sign and verify artifacts with your own PKCS#11 token, smart card or HSM — private keys never leave the device.">
+<title data-i18n="page.title">SealForge — Self-hosted code signing on your own token</title>
+<meta name="description" content="SealForge is a self-hosted code signing service. It signs and verifies your artifacts with the PKCS#11 token, smart card or HSM you already own — private keys never leave the device.">
 <meta name="theme-color" content="#0b0d12">
 <meta property="og:title" content="SealForge — Self-hosted code signing">
 <meta property="og:description" content="Sign and verify artifacts with your own PKCS#11 token. Keys stay on the device, every signature is authorized and audited.">
@@ -31,7 +31,7 @@
 
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="#top" aria-label="SealForge home">
+    <a class="brand" href="index.html" aria-label="SealForge home">
       <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
         <polygon points="21.1,12 16.55,19.9 7.45,19.9 2.9,12 7.45,4.1 16.55,4.1"/>
         <path d="M8.6 12.25 L11.05 14.7 L15.85 9.3"/>
@@ -39,14 +39,11 @@
       <span class="brand__name">SealForge</span>
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="#why" data-i18n="nav.why">Why</a>
+      <a href="#what" data-i18n="nav.what">What it is</a>
       <a href="#how" data-i18n="nav.how">How it works</a>
-      <a href="#product" data-i18n="nav.product">Product</a>
-      <a href="#security" data-i18n="nav.security">Security</a>
-      <a href="#api" data-i18n="nav.api">API</a>
-      <a href="#deploy" data-i18n="nav.deploy">Deploy</a>
+      <a href="#install" data-i18n="nav.install">Install</a>
+      <a href="details.html" data-i18n="nav.details">Technical details</a>
     </nav>
-    <span class="pill pill--beta">v1.0.0-beta.6</span>
     <button class="theme-toggle" id="theme-toggle" type="button"
             aria-label="Switch to light theme" aria-pressed="false">
       <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none"
@@ -69,23 +66,17 @@
   <section class="hero" id="top">
     <div class="hero__glow" aria-hidden="true"></div>
     <div class="wrap hero__inner">
-      <p class="eyebrow" data-i18n="hero.eyebrow">Self-hosted code signing · PKCS#11</p>
+      <p class="eyebrow" data-i18n="hero.eyebrow">Self-hosted code signing</p>
       <h1 data-i18n="hero.title">Sign your software without handing over your keys.</h1>
       <p class="lead" data-i18n="hero.lead">
-        SealForge is a self-hosted signing platform that runs on your own infrastructure.
-        It drives the token, smart card or HSM you already own, signs and verifies your
-        artifacts, and records every action — without ever exporting a private key.
+        SealForge runs on your own server and signs your artifacts through the token, smart card
+        or HSM you already own. The private key never leaves the device, and nothing gets uploaded
+        to anyone.
       </p>
       <div class="hero__actions">
-        <a class="btn btn--primary" href="#how" data-i18n="hero.cta.primary">See how it works</a>
-        <a class="btn" href="#api" data-i18n="hero.cta.secondary">Read the API</a>
+        <a class="btn btn--primary" href="#install" data-i18n="hero.cta.primary">Install it</a>
+        <a class="btn" href="details.html" data-i18n="hero.cta.secondary">Technical details</a>
       </div>
-      <ul class="meta">
-        <li>Apache-2.0</li>
-        <li>Linux · Docker</li>
-        <li>PKCS#11</li>
-        <li>.NET 10 · Jsign</li>
-      </ul>
 
       <figure class="frame frame--hero">
         <div class="frame__bar" aria-hidden="true">
@@ -94,7 +85,7 @@
         </div>
         <img src="assets/img/screenshots/dashboard.webp" width="1920" height="1200"
              alt="SealForge dashboard showing completed signing jobs, signing activity counters, system overview and the detected hardware token.">
-        <figcaption data-i18n="hero.caption">Live instance: every job here went through a real SoftHSM token and passed verification.</figcaption>
+        <figcaption data-i18n="hero.caption">A live instance: these jobs went through a real token and passed verification.</figcaption>
       </figure>
     </div>
   </section>
@@ -112,37 +103,33 @@
     </div>
   </section>
 
-  <section class="section" id="why">
+  <section class="section" id="what">
     <div class="wrap">
       <header class="section__head">
-        <h2 data-i18n="why.title">Signing infrastructure you actually control.</h2>
-        <p data-i18n="why.lead">
-          A hosted signing service means your artifacts and your authorization decisions
-          live somewhere else. SealForge runs where your keys already are.
+        <h2 data-i18n="what.title">What you get — and what you don't</h2>
+        <p data-i18n="what.lead">
+          The boundary is explicit: SealForge owns the signing workflow, not your keys and not
+          your certificates.
         </p>
       </header>
-      <div class="grid grid--3">
+      <div class="split">
         <article class="card">
-          <h3 data-i18n="why.card1.title">Keys stay in hardware</h3>
-          <p data-i18n="why.card1.body">
-            Private keys are held and used inside your token or HSM. SealForge asks
-            the PKCS#11 provider for a signature; it never imports, wraps or exports key
-            material.
-          </p>
+          <h3 data-i18n="what.is.title">What it is</h3>
+          <ul class="checklist">
+            <li data-i18n="what.is1">A signing service you run on your own host, next to the token.</li>
+            <li data-i18n="what.is2">A REST API your pipeline calls, and a web UI for whoever approves signing.</li>
+            <li data-i18n="what.is3">Audited end to end: who asked, which key signed, when, and whether it verified.</li>
+            <li data-i18n="what.is4">Boring to operate: one Linux host, Docker Compose, one open port.</li>
+          </ul>
         </article>
         <article class="card">
-          <h3 data-i18n="why.card2.title">Nothing leaves your network</h3>
-          <p data-i18n="why.card2.body">
-            Artifacts stay on your filesystem; the job queue and the audit trail live in your
-            PostgreSQL database. No vendor account, no upload to a third party.
-          </p>
-        </article>
-        <article class="card">
-          <h3 data-i18n="why.card3.title">Every signature is accounted for</h3>
-          <p data-i18n="why.card3.body">
-            Submission, authorization, token selection, signing, timestamping, verification
-            and download are recorded as job events and audit records.
-          </p>
+          <h3 data-i18n="what.isnot.title">What it isn't</h3>
+          <ul class="checklist checklist--neg">
+            <li data-i18n="what.isnot1">Not a hosted service — no vendor account, no upload to a third party.</li>
+            <li data-i18n="what.isnot2">Not a key store — it never holds a copy of your private key.</li>
+            <li data-i18n="what.isnot3">Not a certificate authority — you bring the certificate and the CA bundle.</li>
+            <li data-i18n="what.isnot4">Not a build server — it signs an artifact you hand it.</li>
+          </ul>
         </article>
       </div>
     </div>
@@ -151,230 +138,90 @@
   <section class="section section--alt" id="how">
     <div class="wrap">
       <header class="section__head">
-        <h2 data-i18n="how.title">How a signature is made</h2>
-        <p data-i18n="how.lead">
-          The web application and the signing worker share a queue and a database, but only
-          the worker can reach the token. Nothing else in the stack touches key material.
-        </p>
+        <h2 data-i18n="how.title">How it works</h2>
+        <p data-i18n="how.lead">Four steps — and the last one only happens if verification passed.</p>
       </header>
 
       <ol class="flow">
         <li class="flow__step">
           <span class="flow__num">01</span>
           <h3 data-i18n="how.step1.title">Submit</h3>
-          <p data-i18n="how.step1.body">Upload in the web UI or post multipart to <code>/api/v1/signing-jobs</code>.</p>
+          <p data-i18n="how.step1.body">Upload in the web UI, or post the file from your pipeline.</p>
         </li>
         <li class="flow__step">
           <span class="flow__num">02</span>
           <h3 data-i18n="how.step2.title">Authorize</h3>
-          <p data-i18n="how.step2.body">A signing permission binds the principal, the token and the exact certificate.</p>
+          <p data-i18n="how.step2.body">A signing permission binds the person, the token and the exact certificate.</p>
         </li>
         <li class="flow__step">
           <span class="flow__num">03</span>
           <h3 data-i18n="how.step3.title">Sign &amp; verify</h3>
-          <p data-i18n="how.step3.body">The isolated worker signs through PKCS#11, timestamps the result and verifies the chain.</p>
+          <p data-i18n="how.step3.body">The isolated worker signs through the token, timestamps the result and checks the chain.</p>
         </li>
         <li class="flow__step">
           <span class="flow__num">04</span>
           <h3 data-i18n="how.step4.title">Retrieve</h3>
-          <p data-i18n="how.step4.body">The verified artifact is released for download and the whole path is audited.</p>
+          <p data-i18n="how.step4.body">The verified artifact is released for download, and the whole path is recorded.</p>
         </li>
       </ol>
 
-      <div class="topology" role="img" aria-label="Topology: client submits to the web application, jobs are queued in PostgreSQL, the worker signs through the PKCS#11 token, and the verified artifact is downloaded.">
-        <div class="topology__row">
-          <div class="node">
-            <span class="node__title">Web UI / CI</span>
-            <span class="node__sub" data-i18n="how.node1.sub">submit · status</span>
-          </div>
-          <span class="arrow" aria-hidden="true">→</span>
-          <div class="node node--accent">
-            <span class="node__title">sealforge-web</span>
-            <span class="node__sub" data-i18n="how.node2.sub">auth · authz · audit</span>
-          </div>
-          <span class="arrow" aria-hidden="true">→</span>
-          <div class="node">
-            <span class="node__title">PostgreSQL</span>
-            <span class="node__sub" data-i18n="how.node3.sub">queue · state</span>
-          </div>
-          <span class="arrow" aria-hidden="true">→</span>
-          <div class="node node--accent">
-            <span class="node__title" data-i18n="how.node4.title">signing worker</span>
-            <span class="node__sub">Jsign · PKCS#11</span>
-          </div>
-          <span class="arrow" aria-hidden="true">→</span>
-          <div class="node">
-            <span class="node__title" data-i18n="how.node5.title">Token / HSM</span>
-            <span class="node__sub" data-i18n="how.node5.sub">private key stays here</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="product">
-    <div class="wrap">
-      <header class="section__head">
-        <h2 data-i18n="product.title">Two screens, one finished signature</h2>
-        <p data-i18n="product.lead">
-          Both are from the same demo instance. The job below was signed, timestamped and
-          chain-verified before it was released; the token is the one that did the work.
-        </p>
-      </header>
-
-      <figure class="shot">
-        <img src="assets/img/screenshots/signing-result.webp" width="1600" height="381" loading="lazy"
-             alt="Signing result panel: job id, file name, artifact type Exe, status ReadyForDownload, completion time and the note that the artifact was signed successfully.">
-        <figcaption data-i18n="product.shot1.caption">
-          <strong>Released only after verification</strong>
-          <span class="mono">ReadyForDownload</span> means the timestamp was applied and the
-          signature chain verified against the configured CA bundle. If either step fails, the
-          job fails — a signature that cannot be checked is never handed back.
-        </figcaption>
-      </figure>
-
-      <figure class="shot shot--narrow">
-        <img src="assets/img/screenshots/token-state.webp" width="1200" height="869" loading="lazy"
-             alt="Token details dialog: selected certificate and thumbprint, PIN state Provisioned, PIN storage encrypted worker flow, and operational status reported available by the worker.">
-        <figcaption data-i18n="product.shot2.caption">
-          <strong>The token, as the worker sees it</strong>
-          Certificate thumbprint, PIN state and storage mode, and whether the worker can actually
-          reach the device right now. Nothing here is cached optimism — it is the worker's answer.
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="section section--alt" id="security">
-    <div class="wrap">
-      <header class="section__head">
-        <h2 data-i18n="security.title">The parts that are hard to get right</h2>
-        <p data-i18n="security.lead">
-          Most of a signing platform is plumbing. These six behaviours are the ones that decide
-          whether it is actually safe to run — so they are spelled out, not summarised.
-        </p>
-      </header>
-      <div class="grid grid--2">
-        <article class="card card--tight">
-          <h3 data-i18n="security.c1.title">The PIN never crosses the wire in cleartext</h3>
-          <p data-i18n="security.c1.body">
-            The browser encrypts it with WebCrypto to the worker's public key. Only the worker
-            holds the private half; it writes an owner-only lease under <span class="mono">/dev/shm</span>
-            for the length of one signing call and deletes it afterwards. At rest the PIN is an
-            encrypted envelope, never a file.
-          </p>
-        </article>
-        <article class="card card--tight">
-          <h3 data-i18n="security.c2.title">Keys are bound to a job, not looked up</h3>
-          <p data-i18n="security.c2.body">
-            A permission names the principal, the token and the exact certificate thumbprint.
-            Selection by subject or by "find something usable" is rejected outright, so a job can
-            never drift onto a different key than the one that was approved.
-          </p>
-        </article>
-        <article class="card card--tight">
-          <h3 data-i18n="security.c3.title">A failed token access stops signing</h3>
-          <p data-i18n="security.c3.body">
-            One failed PKCS#11 unlock zeroizes the PIN, soft-locks the key and parks queued jobs
-            for review. Resuming takes the exact confirmation phrase plus a fresh TOTP check —
-            no silent retry, no "try again" button that loops.
-          </p>
-        </article>
-        <article class="card card--tight">
-          <h3 data-i18n="security.c4.title">Verification is part of signing, not a side feature</h3>
-          <p data-i18n="security.c4.body">
-            Timestamping is mandatory and the signature chain is checked against your CA bundle
-            before the artifact is released. An untrusted or incomplete chain fails the job with an
-            error code instead of producing a file.
-          </p>
-        </article>
-        <article class="card card--tight">
-          <h3 data-i18n="security.c5.title">Artifact type comes from the bytes</h3>
-          <p data-i18n="security.c5.body">
-            Extensions are a hint, not a fact: PE headers, OLE versus PE versus ZIP structure and
-            the <span class="mono">.nuspec</span> inside a package are all cross-checked, so a
-            renamed or disguised file is rejected before it reaches the token.
-          </p>
-        </article>
-        <article class="card card--tight">
-          <h3 data-i18n="security.c6.title">Only the worker goes near the token</h3>
-          <p data-i18n="security.c6.body">
-            Read-only root filesystem, every capability dropped, memory locked against swap, no
-            public port, one job at a time. PKCS#11 probes run in killable child processes so a
-            busy token cannot wedge the service.
-          </p>
-        </article>
-      </div>
-      <p class="section__note" data-i18n="security.note">
-        Threat model, hardening decisions and the release-signing pipeline are documented in the repository:
-        <span class="mono">docs/security-model.md</span>.
+      <p class="section__note">
+        <a class="inline-link" href="details.html#architecture" data-i18n="how.more">See the architecture and the isolation rules →</a>
       </p>
     </div>
   </section>
 
-  <section class="section" id="api">
+  <section class="section" id="install">
     <div class="wrap">
       <header class="section__head">
-        <h2 data-i18n="api.title">Built for pipelines</h2>
-        <p data-i18n="api.lead">A small REST surface for CI: submit, poll, download. Interactive and API clients share the same authorization rules.</p>
+        <h2 data-i18n="install.title">Install</h2>
+        <p data-i18n="install.lead">
+          The installer resolves the latest published release, verifies its signed manifest and
+          every file hash, then brings the stack up.
+        </p>
       </header>
-      <div class="api-layout">
-        <pre class="code"><code><span class="c"># submit an artifact</span>
-curl -X POST https://sealforge.internal/api/v1/signing-jobs \
-  -H "Authorization: Bearer $SEALFORGE_API_KEY" \
-  -F "artifact=@Northwind.Desktop.exe" \
-  -F "clientCorrelationId=build-1042"
 
-<span class="c"># poll the job, then download the verified artifact</span>
-curl -H "Authorization: Bearer $SEALFORGE_API_KEY" \
-  https://sealforge.internal/api/v1/signing-jobs/$JOB_ID
+      <ol class="steps">
+        <li>
+          <span class="steps__num">01</span>
+          <div>
+            <h3 data-i18n="install.step1.title">Prepare the host</h3>
+            <p data-i18n="install.step1.body">
+              Linux with Docker and Compose, the token or HSM, and its PIN. One port is enough;
+              PostgreSQL comes with the stack.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="steps__num">02</span>
+          <div>
+            <h3 data-i18n="install.step2.title">Run the installer</h3>
+            <p data-i18n="install.step2.body">It picks the latest release and verifies it before extracting anything.</p>
+            <pre class="code"><code>curl -fsSL https://github.com/semihkiroglu/SealForge/releases/latest/download/install.sh | bash</code></pre>
+          </div>
+        </li>
+        <li>
+          <span class="steps__num">03</span>
+          <div>
+            <h3 data-i18n="install.step3.title">Open the UI and claim the instance</h3>
+            <p data-i18n="install.step3.body">The one-time setup code is in the web container's log.</p>
+            <pre class="code"><code>docker logs sealforge-web 2&gt;&amp;1 | grep "setup code"</code></pre>
+          </div>
+        </li>
+      </ol>
 
-curl -H "Authorization: Bearer $SEALFORGE_API_KEY" \
-  -o signed.exe \
-  https://sealforge.internal/api/v1/signing-jobs/$JOB_ID/download</code></pre>
-        <ul class="checklist">
-          <li data-i18n="api.li1">Bearer API keys, hashed at rest, scoped to submit / status / download</li>
-          <li data-i18n="api.li2">Artifact type detected from content — <span class="mono">.exe</span>, <span class="mono">.dll</span>, <span class="mono">.msi</span>, <span class="mono">.nupkg</span></li>
-          <li data-i18n="api.li3">Asynchronous by design: no synchronous signing endpoint</li>
-          <li data-i18n="api.li4">Download gated by owner and permission, not by knowing the job ID</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+      <p class="section__note" data-i18n="install.note">
+        SealForge is in beta and the repository is private, so the command above needs access —
+        ask for a seat. No secrets are typed into the installer: the internal API secret and the
+        encryption key are generated on first start.
+      </p>
 
-  <section class="section section--alt" id="deploy">
-    <div class="wrap">
-      <header class="section__head">
-        <h2 data-i18n="deploy.title">Runs on one Linux host</h2>
-        <p data-i18n="deploy.lead">Docker Compose brings up the reverse proxy, web application, signing worker, queue and database.</p>
-      </header>
-      <div class="deploy-layout">
-        <div>
-          <h3 class="subhead" data-i18n="deploy.req.title">Requirements</h3>
-          <ul class="checklist">
-            <li data-i18n="deploy.req1">Linux with Docker Engine and Compose (x86_64 or arm64)</li>
-            <li data-i18n="deploy.req2">A PKCS#11 provider — the worker ships OpenSC; vendor modules are mounted as <span class="mono">.so</span></li>
-            <li data-i18n="deploy.req3">A signing token, smart card or HSM, plus its PIN at provisioning time</li>
-            <li data-i18n="deploy.req4">PostgreSQL 16, provided by the stack</li>
-          </ul>
-          <p class="section__note" data-i18n="deploy.req.note">
-            The repository is private during the beta. Releases are published as signed bundles:
-            the installer verifies a minisign-signed manifest and every file hash before it
-            extracts anything.
-          </p>
-        </div>
-        <div>
-          <h3 class="subhead" data-i18n="deploy.install.title">Install</h3>
-          <pre class="code"><code><span class="c"># verify and install the latest signed release</span>
-curl -fsSL https://github.com/semihkiroglu/SealForge/releases/latest/download/install.sh | bash
-
-<span class="c"># then open the UI and retrieve the one-time setup code</span>
-docker logs sealforge-web 2&gt;&amp;1 | grep "setup code"</code></pre>
-          <p class="section__note" data-i18n="deploy.install.note">
-            No manual secrets: the internal API secret and the encryption key are generated
-            on first start. The PIN is entered in the browser and encrypted before it is sent.
-          </p>
-        </div>
+      <div class="link-card">
+        <a class="link-card__body" href="details.html">
+          <strong data-i18n="next.title">Architecture, security model, API and host requirements</strong>
+          <span data-i18n="next.body">What an operator or a reviewer wants to check before running this.</span>
+        </a>
+        <a class="link-card__arrow" href="details.html" aria-label="Open technical details">→</a>
       </div>
     </div>
   </section>
@@ -393,10 +240,9 @@ docker logs sealforge-web 2&gt;&amp;1 | grep "setup code"</code></pre>
       </div>
     </div>
     <nav class="footer__links" aria-label="Footer">
-      <a href="#how" data-i18n="footer.arch">Architecture</a>
-      <a href="#security" data-i18n="footer.security">Security model</a>
-      <a href="#api">API</a>
-      <a href="#deploy">Deployment</a>
+      <a href="#what" data-i18n="footer.what">Overview</a>
+      <a href="#install" data-i18n="footer.install">Install</a>
+      <a href="details.html" data-i18n="footer.details">Technical details</a>
     </nav>
     <p class="footer__legal" data-i18n="footer.legal">Apache-2.0 · © 2026 SealForge</p>
   </div>
