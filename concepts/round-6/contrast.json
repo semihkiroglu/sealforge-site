@@ -1,0 +1,225 @@
+{
+  "method": "WCAG sRGB relative luminance, normal text threshold 4.5:1",
+  "pairs": [
+    {
+      "mode": "light",
+      "pair": "Body / page",
+      "foreground": "#203033",
+      "background": "#f7f8f5",
+      "ratio": 12.859,
+      "normalTextPass": true
+    },
+    {
+      "mode": "light",
+      "pair": "Secondary / page",
+      "foreground": "#56666a",
+      "background": "#f7f8f5",
+      "ratio": 5.622,
+      "normalTextPass": true
+    },
+    {
+      "mode": "light",
+      "pair": "Link / page",
+      "foreground": "#316b73",
+      "background": "#f7f8f5",
+      "ratio": 5.659,
+      "normalTextPass": true
+    },
+    {
+      "mode": "light",
+      "pair": "Copper / page",
+      "foreground": "#9f542e",
+      "background": "#f7f8f5",
+      "ratio": 5.209,
+      "normalTextPass": true
+    },
+    {
+      "mode": "light",
+      "pair": "Body / surface",
+      "foreground": "#203033",
+      "background": "#ffffff",
+      "ratio": 13.708,
+      "normalTextPass": true
+    },
+    {
+      "mode": "light",
+      "pair": "Secondary / surface",
+      "foreground": "#56666a",
+      "background": "#ffffff",
+      "ratio": 5.993,
+      "normalTextPass": true
+    },
+    {
+      "mode": "light",
+      "pair": "Button label / primary",
+      "foreground": "#ffffff",
+      "background": "#316b73",
+      "ratio": 6.032,
+      "normalTextPass": true
+    },
+    {
+      "mode": "light",
+      "pair": "Button label / hover",
+      "foreground": "#ffffff",
+      "background": "#28626a",
+      "ratio": 6.896,
+      "normalTextPass": true
+    },
+    {
+      "mode": "dark",
+      "pair": "Body / page",
+      "foreground": "#eef5f3",
+      "background": "#151b1d",
+      "ratio": 15.742,
+      "normalTextPass": true
+    },
+    {
+      "mode": "dark",
+      "pair": "Secondary / page",
+      "foreground": "#a7bcbb",
+      "background": "#151b1d",
+      "ratio": 8.748,
+      "normalTextPass": true
+    },
+    {
+      "mode": "dark",
+      "pair": "Link / page",
+      "foreground": "#87c2c6",
+      "background": "#151b1d",
+      "ratio": 8.755,
+      "normalTextPass": true
+    },
+    {
+      "mode": "dark",
+      "pair": "Copper / page",
+      "foreground": "#e5ad7d",
+      "background": "#151b1d",
+      "ratio": 8.791,
+      "normalTextPass": true
+    },
+    {
+      "mode": "dark",
+      "pair": "Body / surface",
+      "foreground": "#eef5f3",
+      "background": "#1c2426",
+      "ratio": 14.282,
+      "normalTextPass": true
+    },
+    {
+      "mode": "dark",
+      "pair": "Secondary / surface",
+      "foreground": "#a7bcbb",
+      "background": "#1c2426",
+      "ratio": 7.937,
+      "normalTextPass": true
+    },
+    {
+      "mode": "dark",
+      "pair": "Button label / primary",
+      "foreground": "#151b1d",
+      "background": "#87c2c6",
+      "ratio": 8.755,
+      "normalTextPass": true
+    },
+    {
+      "mode": "dark",
+      "pair": "Button label / hover",
+      "foreground": "#151b1d",
+      "background": "#a6d5d6",
+      "ratio": 10.867,
+      "normalTextPass": true
+    }
+  ],
+  "semanticFilledPairs": [
+    {
+      "mode": "light",
+      "role": "success",
+      "fill": "#236a45",
+      "label": "#ffffff",
+      "ratio": 6.5237,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "role": "error",
+      "fill": "#a42c37",
+      "label": "#ffffff",
+      "ratio": 7.0142,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "role": "warning",
+      "fill": "#865111",
+      "label": "#ffffff",
+      "ratio": 6.5651,
+      "required": 4.5
+    },
+    {
+      "mode": "light",
+      "role": "info",
+      "fill": "#2b638a",
+      "label": "#ffffff",
+      "ratio": 6.4527,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "role": "success",
+      "fill": "#91d2aa",
+      "label": "#151b1d",
+      "ratio": 9.9495,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "role": "error",
+      "fill": "#f29ca5",
+      "label": "#151b1d",
+      "ratio": 8.3506,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "role": "warning",
+      "fill": "#e2bc74",
+      "label": "#151b1d",
+      "ratio": 9.6811,
+      "required": 4.5
+    },
+    {
+      "mode": "dark",
+      "role": "info",
+      "fill": "#9dc6e3",
+      "label": "#151b1d",
+      "ratio": 9.6323,
+      "required": 4.5
+    }
+  ],
+  "inputBoundaryPairs": [
+    {
+      "mode": "light",
+      "adjacentSurface": "background",
+      "ratio": 3.3724,
+      "required": 3.0
+    },
+    {
+      "mode": "light",
+      "adjacentSurface": "surface",
+      "ratio": 3.5949,
+      "required": 3.0
+    },
+    {
+      "mode": "dark",
+      "adjacentSurface": "background",
+      "ratio": 5.1755,
+      "required": 3.0
+    },
+    {
+      "mode": "dark",
+      "adjacentSurface": "surface",
+      "ratio": 4.6955,
+      "required": 3.0
+    }
+  ]
+}

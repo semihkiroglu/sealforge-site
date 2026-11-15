@@ -11,7 +11,8 @@ if (out) fs.mkdirSync(out, { recursive: true });
   const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || '/home/ubuntu/.hermes/tools/chromium-1208/chrome-linux/chrome' });
   const report = [];
   try {
-    for (const route of ['concepts/round-5/', 'concepts/round-5/grip.html', 'concepts/round-5/imprint.html', 'concepts/']) {
+    // The latest entry now belongs to Round 6; keep this round's regression immutable.
+    for (const route of ['concepts/round-5/', 'concepts/round-5/grip.html', 'concepts/round-5/imprint.html']) {
       for (const width of [320, 390, 1440]) {
         const page = await browser.newPage({ viewport: { width, height: 960 } });
         const errors = [];

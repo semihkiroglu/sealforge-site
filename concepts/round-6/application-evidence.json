@@ -1,0 +1,606 @@
+{
+  "kind": "compiled-razor-component-fixture",
+  "sourceVerified": true,
+  "generatedUtc": "2026-11-15T19:39:07.717854+00:00",
+  "sourceCommit": "349d518de30807bd4cd5bb127f4ca00b84c7dce9",
+  "components": [
+    "Login",
+    "PublicLayout",
+    "MainLayout",
+    "NavMenu",
+    "Dashboard"
+  ],
+  "sourceFileSha256": {
+    "src/SealForge.Web/Components/Pages/Login.razor": "69918e791057680655f5f39f89589facf37b1d72d8e4b8db13c64e87df6adecc",
+    "src/SealForge.Web/Components/Layout/PublicLayout.razor": "92d856f56f24b48690731256b69f38615951ee8fd104ece5e3d1c74c07889792",
+    "src/SealForge.Web/Components/Layout/MainLayout.razor": "455ef1e1650eced50ef149e4948fe89cc04d8187ddd3065372fff36cecc6df40",
+    "src/SealForge.Web/Components/Layout/NavMenu.razor": "c2a25d71e843b20a51db5828b148f81e51ccedd107d64560ebe9b4d1f26d6fe1",
+    "src/SealForge.Web/Components/Shared/BrandLogo.razor": "9f211cbde529c9dd327dfe23ee9921ab919580a327cf3e976e108b01ab5430be",
+    "src/SealForge.Web/Components/Pages/Dashboard.razor": "445084078c2bd98bf0ccc641cb76eb911cab83eee59e042959f85d4d22bd8185",
+    "src/SealForge.Web/Theme/AppTheme.cs": "f10cc8e812da17c4741a25923b2bd87970076f72ccaefc7e8d9cc21210087f51",
+    "src/SealForge.Web/wwwroot/app.css": "f9bc4bc9f9820b2af0a11041fa05b4a14a4b5088b5e04f631f388e50f392a1cb",
+    "tests/SealForge.Tests/UiRenderTestHelpers.cs": "2edc0e5558435ec10715a64bc5160083218cf184448e7280b740e31b74d8bc66",
+    "tests/SealForge.Tests/ManualPagePollingTimer.cs": "4537729ab2d8b9234266972715b8cc204f6a512b946082f742ffbbeeb0c978f1"
+  },
+  "builtWebDllSha256": "28f650d2fc2f13b6201fd0777035cbba13afcecfcdc025e0a4e0f83bea104a92",
+  "cssSha256": {
+    "app.css": "f9bc4bc9f9820b2af0a11041fa05b4a14a4b5088b5e04f631f388e50f392a1cb",
+    "mud.css": "35d7906dc6735f9502ca10543016124b22c79f2b8ccca5b9a61a13399a1ae181",
+    "coast-copper.css": "2ce2b757b89d1fa6a49104fc76b45724980aed237605d1202f43a0e7248741d2",
+    "refinement.css": "3a2d9d4785e1a217f3d2bf28d4588d1c6465e003f1e59a2e1f0654d35d8e11a8"
+  },
+  "productionSourceChanged": false,
+  "postgresqlAccess": false,
+  "scope": "Static bUnit render of the actual compiled Razor components, isolated palette/semantic overrides and Round 6 artwork. In-memory authentication/data services; synthetic status handler.",
+  "limitations": [
+    "No live authentication, MFA or middleware coverage.",
+    "No signing, worker, physical hardware or PostgreSQL activity.",
+    "Drawer visibility is a fixture layout state; responsive JavaScript and live theme initialization are not exercised.",
+    "This is component palette evidence, not a production deployment or human visual approval."
+  ],
+  "changesWithinPreview": [
+    "Round 6 quiet-tool logos replace the prior temporary artwork.",
+    "Existing semantic hue families retained with readable filled-chip foreground/background pairs.",
+    "Interactive input boundaries use a separate outline token; decorative separators stay soft."
+  ],
+  "normalTextFailures": 0,
+  "componentAudit": [
+    {
+      "screen": "login",
+      "theme": "light",
+      "width": 1440,
+      "checks": [
+        {
+          "type": "label",
+          "text": "Sign In",
+          "foreground": [
+            255,
+            255,
+            255
+          ],
+          "background": [
+            49,
+            107,
+            115
+          ],
+          "ratio": 6.032346246854755,
+          "required": 4.5
+        },
+        {
+          "type": "input boundary",
+          "foreground": [
+            122,
+            138,
+            140
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 3.594907645806095,
+          "required": 3
+        },
+        {
+          "type": "input boundary",
+          "foreground": [
+            122,
+            138,
+            140
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 3.594907645806095,
+          "required": 3
+        },
+        {
+          "type": "input boundary",
+          "foreground": [
+            122,
+            138,
+            140
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 3.594907645806095,
+          "required": 3
+        }
+      ],
+      "errors": [],
+      "overflow": 0
+    },
+    {
+      "screen": "login",
+      "theme": "light",
+      "width": 390,
+      "checks": [
+        {
+          "type": "label",
+          "text": "Sign In",
+          "foreground": [
+            255,
+            255,
+            255
+          ],
+          "background": [
+            49,
+            107,
+            115
+          ],
+          "ratio": 6.032346246854755,
+          "required": 4.5
+        },
+        {
+          "type": "input boundary",
+          "foreground": [
+            122,
+            138,
+            140
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 3.594907645806095,
+          "required": 3
+        },
+        {
+          "type": "input boundary",
+          "foreground": [
+            122,
+            138,
+            140
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 3.594907645806095,
+          "required": 3
+        },
+        {
+          "type": "input boundary",
+          "foreground": [
+            122,
+            138,
+            140
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 3.594907645806095,
+          "required": 3
+        }
+      ],
+      "errors": [],
+      "overflow": 0
+    },
+    {
+      "screen": "login",
+      "theme": "dark",
+      "width": 1440,
+      "checks": [
+        {
+          "type": "label",
+          "text": "Sign In",
+          "foreground": [
+            21,
+            27,
+            29
+          ],
+          "background": [
+            135,
+            194,
+            198
+          ],
+          "ratio": 8.755247613065709,
+          "required": 4.5
+        },
+        {
+          "type": "input boundary",
+          "foreground": [
+            126,
+            143,
+            148
+          ],
+          "background": [
+            28,
+            36,
+            38
+          ],
+          "ratio": 4.69554529499734,
+          "required": 3
+        },
+        {
+          "type": "input boundary",
+          "foreground": [
+            126,
+            143,
+            148
+          ],
+          "background": [
+            28,
+            36,
+            38
+          ],
+          "ratio": 4.69554529499734,
+          "required": 3
+        },
+        {
+          "type": "input boundary",
+          "foreground": [
+            126,
+            143,
+            148
+          ],
+          "background": [
+            28,
+            36,
+            38
+          ],
+          "ratio": 4.69554529499734,
+          "required": 3
+        }
+      ],
+      "errors": [],
+      "overflow": 0
+    },
+    {
+      "screen": "login",
+      "theme": "dark",
+      "width": 390,
+      "checks": [
+        {
+          "type": "label",
+          "text": "Sign In",
+          "foreground": [
+            21,
+            27,
+            29
+          ],
+          "background": [
+            135,
+            194,
+            198
+          ],
+          "ratio": 8.755247613065709,
+          "required": 4.5
+        },
+        {
+          "type": "input boundary",
+          "foreground": [
+            126,
+            143,
+            148
+          ],
+          "background": [
+            28,
+            36,
+            38
+          ],
+          "ratio": 4.69554529499734,
+          "required": 3
+        },
+        {
+          "type": "input boundary",
+          "foreground": [
+            126,
+            143,
+            148
+          ],
+          "background": [
+            28,
+            36,
+            38
+          ],
+          "ratio": 4.69554529499734,
+          "required": 3
+        },
+        {
+          "type": "input boundary",
+          "foreground": [
+            126,
+            143,
+            148
+          ],
+          "background": [
+            28,
+            36,
+            38
+          ],
+          "ratio": 4.69554529499734,
+          "required": 3
+        }
+      ],
+      "errors": [],
+      "overflow": 0
+    },
+    {
+      "screen": "main",
+      "theme": "light",
+      "width": 1440,
+      "checks": [
+        {
+          "type": "label",
+          "text": "Admin",
+          "foreground": [
+            255,
+            255,
+            255
+          ],
+          "background": [
+            164,
+            44,
+            55
+          ],
+          "ratio": 7.014162599489079,
+          "required": 4.5
+        },
+        {
+          "type": "label",
+          "text": "Detected",
+          "foreground": [
+            255,
+            255,
+            255
+          ],
+          "background": [
+            35,
+            106,
+            69
+          ],
+          "ratio": 6.523739129018832,
+          "required": 4.5
+        }
+      ],
+      "errors": [],
+      "overflow": 0
+    },
+    {
+      "screen": "main",
+      "theme": "light",
+      "width": 390,
+      "checks": [
+        {
+          "type": "label",
+          "text": "Admin",
+          "foreground": [
+            255,
+            255,
+            255
+          ],
+          "background": [
+            164,
+            44,
+            55
+          ],
+          "ratio": 7.014162599489079,
+          "required": 4.5
+        },
+        {
+          "type": "label",
+          "text": "Detected",
+          "foreground": [
+            255,
+            255,
+            255
+          ],
+          "background": [
+            35,
+            106,
+            69
+          ],
+          "ratio": 6.523739129018832,
+          "required": 4.5
+        }
+      ],
+      "errors": [],
+      "overflow": 0
+    },
+    {
+      "screen": "main",
+      "theme": "dark",
+      "width": 1440,
+      "checks": [
+        {
+          "type": "label",
+          "text": "Admin",
+          "foreground": [
+            21,
+            27,
+            29
+          ],
+          "background": [
+            242,
+            156,
+            165
+          ],
+          "ratio": 8.35059022555782,
+          "required": 4.5
+        },
+        {
+          "type": "label",
+          "text": "Detected",
+          "foreground": [
+            21,
+            27,
+            29
+          ],
+          "background": [
+            145,
+            210,
+            170
+          ],
+          "ratio": 9.949464677191921,
+          "required": 4.5
+        }
+      ],
+      "errors": [],
+      "overflow": 0
+    },
+    {
+      "screen": "main",
+      "theme": "dark",
+      "width": 390,
+      "checks": [
+        {
+          "type": "label",
+          "text": "Admin",
+          "foreground": [
+            21,
+            27,
+            29
+          ],
+          "background": [
+            242,
+            156,
+            165
+          ],
+          "ratio": 8.35059022555782,
+          "required": 4.5
+        },
+        {
+          "type": "label",
+          "text": "Detected",
+          "foreground": [
+            21,
+            27,
+            29
+          ],
+          "background": [
+            145,
+            210,
+            170
+          ],
+          "ratio": 9.949464677191921,
+          "required": 4.5
+        }
+      ],
+      "errors": [],
+      "overflow": 0
+    }
+  ],
+  "hoverAudit": [
+    {
+      "page": "login-light",
+      "state": "primary button hover",
+      "selector": "button.mud-button-filled-primary",
+      "text": "Sign In",
+      "color": "#ffffff",
+      "background": "#28626a",
+      "ratio": 6.9,
+      "pass": true
+    },
+    {
+      "page": "login-light",
+      "state": "link hover",
+      "selector": "a",
+      "text": "Already have a reset code?",
+      "color": "#316b73",
+      "background": "#ffffff",
+      "ratio": 6.03,
+      "pass": true
+    },
+    {
+      "page": "main-light",
+      "state": "nav link hover",
+      "selector": "a.mud-nav-link",
+      "text": "Dashboard",
+      "color": "#28626a",
+      "background": "#e8e9e6",
+      "ratio": 5.67,
+      "pass": true
+    },
+    {
+      "page": "login-dark",
+      "state": "primary button hover",
+      "selector": "button.mud-button-filled-primary",
+      "text": "Sign In",
+      "color": "#151b1d",
+      "background": "#a6d5d6",
+      "ratio": 10.87,
+      "pass": true
+    },
+    {
+      "page": "login-dark",
+      "state": "link hover",
+      "selector": "a",
+      "text": "Already have a reset code?",
+      "color": "#87c2c6",
+      "background": "#1c2426",
+      "ratio": 7.94,
+      "pass": true
+    },
+    {
+      "page": "main-dark",
+      "state": "nav link hover",
+      "selector": "a.mud-nav-link",
+      "text": "Dashboard",
+      "color": "#a6d5d6",
+      "background": "#1e2426",
+      "ratio": 9.84,
+      "pass": true
+    }
+  ],
+  "imageCount": 8,
+  "images": {
+    "app-login-light.png": {
+      "sha256": "bfa5a23d2947ebd4c8b047a6112d30fbbf53c5cc63d1f644c6aeec6150878b0f",
+      "width": 1440,
+      "height": 900,
+      "source": "login-light.html"
+    },
+    "app-login-mobile-light.png": {
+      "sha256": "32b4e26bd9a14b72673d7acd29bf083c21c065d70c7dcafdd03e531a0c145afc",
+      "width": 390,
+      "height": 844,
+      "source": "login-light.html"
+    },
+    "app-login-dark.png": {
+      "sha256": "3c49b40b6b2e4d1835863ff54af56029834ca0ec0a0beb0134031b02641a6da2",
+      "width": 1440,
+      "height": 900,
+      "source": "login-dark.html"
+    },
+    "app-login-mobile-dark.png": {
+      "sha256": "b42251521146ed61658749d48dd0637df37b886e9e1a29c7dd4163b5a0354f36",
+      "width": 390,
+      "height": 844,
+      "source": "login-dark.html"
+    },
+    "app-shell-light.png": {
+      "sha256": "943bf1b0a29858bdb13203210ff31369baa4bf507779e5d04afd8bf3ca5edc08",
+      "width": 1440,
+      "height": 903,
+      "source": "main-light.html"
+    },
+    "app-shell-mobile-light.png": {
+      "sha256": "96a67501af29d847a3fb14b6f1c2568f2c1f46b20ce2eedd3d4b0636f8eb4439",
+      "width": 390,
+      "height": 2474,
+      "source": "main-light.html"
+    },
+    "app-shell-dark.png": {
+      "sha256": "901fabe569b7df5b887b7a8daff814de0d3ab8466d1aea5e847e066328eebbfc",
+      "width": 1440,
+      "height": 903,
+      "source": "main-dark.html"
+    },
+    "app-shell-mobile-dark.png": {
+      "sha256": "92330115313e7d59440161eaf723ece4728da6c02e04d33e221a324b5e69410b",
+      "width": 390,
+      "height": 2474,
+      "source": "main-dark.html"
+    }
+  }
+}
