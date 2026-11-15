@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-label="SealForge">
-  <rect width="24" height="24" rx="5.5" fill="#0f1117"/>
-  <polygon points="20.2,12 16.2,18.95 8.1,18.95 4.1,12 8.1,5.05 16.2,5.05"
-           fill="none" stroke="#8b7dff" stroke-width="1.7" stroke-linejoin="round"/>
-  <path d="M9.3 12.2 L11.5 14.4 L15.7 9.5"
-        fill="none" stroke="#8b7dff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect width="24" height="24" rx="5.5" fill="#0f1117" />
+  <polygon points="21.1,12 16.55,19.9 7.45,19.9 2.9,12 7.45,4.1 16.55,4.1" fill="none" stroke="#8b7dff" stroke-width="1.7" stroke-linejoin="round" />
+  <path d="M8.6 12.25 L11.05 14.7 L15.85 9.3" fill="none" stroke="#8b7dff" stroke-width="1.7"
+        stroke-linecap="round" stroke-linejoin="round" />
 </svg>

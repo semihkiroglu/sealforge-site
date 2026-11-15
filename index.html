@@ -74,8 +74,8 @@
           <span class="frame__url">sealforge.internal/dashboard</span>
         </div>
         <img src="assets/img/screenshots/dashboard.webp" width="1920" height="1200"
-             alt="SealForge dashboard showing four completed signing jobs, signing activity counters and the detected hardware token.">
-        <figcaption>Live instance: four artifacts signed and verified with a SoftHSM token.</figcaption>
+             alt="SealForge dashboard showing completed signing jobs, signing activity counters, system overview and the detected hardware token.">
+        <figcaption>Live instance: every job here went through a real SoftHSM token and passed verification.</figcaption>
       </figure>
     </div>
   </section>
@@ -196,74 +196,98 @@
   <section class="section" id="product">
     <div class="wrap">
       <header class="section__head">
-        <h2>Inside the product</h2>
-        <p>Administration, signing and audit in one place — no separate tooling to keep in sync.</p>
+        <h2>Two screens, one finished signature</h2>
+        <p>
+          Both are from the same demo instance. The job below was signed, timestamped and
+          chain-verified before it was released; the token is the one that did the work.
+        </p>
       </header>
 
       <figure class="shot">
-        <img src="assets/img/screenshots/jobs.webp" width="1600" height="1000" loading="lazy"
-             alt="Signing job requests table listing four artifacts with ReadyForDownload status.">
+        <img src="assets/img/screenshots/signing-result.webp" width="1600" height="381" loading="lazy"
+             alt="Signing result panel: job id, file name, artifact type Exe, status ReadyForDownload, completion time and the note that the artifact was signed successfully.">
         <figcaption>
-          <strong>Signing jobs</strong>
-          Every submission carries its artifact type, status and timestamps; failures keep their reason and error code.
+          <strong>Released only after verification</strong>
+          <span class="mono">ReadyForDownload</span> means the timestamp was applied and the
+          signature chain verified against the configured CA bundle. If either step fails, the
+          job fails — a signature that cannot be checked is never handed back.
         </figcaption>
       </figure>
 
-      <div class="shot-row">
-        <figure class="shot">
-          <img src="assets/img/screenshots/tokens.webp" width="1600" height="1000" loading="lazy"
-               alt="Admin tokens page showing the configured SoftHSM token with PIN provisioned and key access healthy.">
-          <figcaption>
-            <strong>Token state</strong>
-            The selected certificate, PIN provisioning and key-access health, in one row.
-          </figcaption>
-        </figure>
-        <figure class="shot">
-          <img src="assets/img/screenshots/audit.webp" width="1600" height="1000" loading="lazy"
-               alt="Audit trail table with security-relevant events, actor, outcome and source address.">
-          <figcaption>
-            <strong>Audit trail</strong>
-            Security-relevant events with actor, outcome and request context.
-          </figcaption>
-        </figure>
-      </div>
+      <figure class="shot shot--narrow">
+        <img src="assets/img/screenshots/token-state.webp" width="1200" height="869" loading="lazy"
+             alt="Token details dialog: selected certificate and thumbprint, PIN state Provisioned, PIN storage encrypted worker flow, and operational status reported available by the worker.">
+        <figcaption>
+          <strong>The token, as the worker sees it</strong>
+          Certificate thumbprint, PIN state and storage mode, and whether the worker can actually
+          reach the device right now. Nothing here is cached optimism — it is the worker's answer.
+        </figcaption>
+      </figure>
     </div>
   </section>
 
   <section class="section section--alt" id="security">
     <div class="wrap">
       <header class="section__head">
-        <h2>Security model</h2>
-        <p>Built for the assumption that the web tier is the least trusted part of the system.</p>
+        <h2>The parts that are hard to get right</h2>
+        <p>
+          Most of a signing platform is plumbing. These six behaviours are the ones that decide
+          whether it is actually safe to run — so they are spelled out, not summarised.
+        </p>
       </header>
       <div class="grid grid--2">
         <article class="card card--tight">
-          <h3>Private keys never leave the device</h3>
-          <p>Signing is delegated to the PKCS#11 provider. The web application has no path to key material.</p>
+          <h3>The PIN never crosses the wire in cleartext</h3>
+          <p>
+            The browser encrypts it with WebCrypto to the worker's public key. Only the worker
+            holds the private half; it writes an owner-only lease under <span class="mono">/dev/shm</span>
+            for the length of one signing call and deletes it afterwards. At rest the PIN is an
+            encrypted envelope, never a file.
+          </p>
         </article>
         <article class="card card--tight">
-          <h3>The PIN is encrypted in the browser</h3>
-          <p>WebCrypto encrypts it to the worker's RSA key. The worker materializes a short-lived, owner-only lease and deletes it after use.</p>
+          <h3>Keys are bound to a job, not looked up</h3>
+          <p>
+            A permission names the principal, the token and the exact certificate thumbprint.
+            Selection by subject or by "find something usable" is rejected outright, so a job can
+            never drift onto a different key than the one that was approved.
+          </p>
         </article>
         <article class="card card--tight">
-          <h3>Fail-closed authorization</h3>
-          <p>A job is bound to a permission, a principal, a token and a certificate. Missing, stale or ambiguous selections are rejected, never defaulted.</p>
+          <h3>A failed token access stops signing</h3>
+          <p>
+            One failed PKCS#11 unlock zeroizes the PIN, soft-locks the key and parks queued jobs
+            for review. Resuming takes the exact confirmation phrase plus a fresh TOTP check —
+            no silent retry, no "try again" button that loops.
+          </p>
         </article>
         <article class="card card--tight">
-          <h3>Fresh MFA for dangerous actions</h3>
-          <p>Re-enabling a token, removing it or re-provisioning the PIN requires a TOTP re-verification, even inside an authenticated admin session.</p>
+          <h3>Verification is part of signing, not a side feature</h3>
+          <p>
+            Timestamping is mandatory and the signature chain is checked against your CA bundle
+            before the artifact is released. An untrusted or incomplete chain fails the job with an
+            error code instead of producing a file.
+          </p>
         </article>
         <article class="card card--tight">
-          <h3>A failed token access soft-locks the key</h3>
-          <p>The PIN is zeroized, pending jobs are held for administrator review, and the key is not retried until it is explicitly re-enabled.</p>
+          <h3>Artifact type comes from the bytes</h3>
+          <p>
+            Extensions are a hint, not a fact: PE headers, OLE versus PE versus ZIP structure and
+            the <span class="mono">.nuspec</span> inside a package are all cross-checked, so a
+            renamed or disguised file is rejected before it reaches the token.
+          </p>
         </article>
         <article class="card card--tight">
-          <h3>The worker is a separate, hardened service</h3>
-          <p>Read-only root filesystem, all capabilities dropped, no public port, one job at a time — and the only service allowed near the token.</p>
+          <h3>Only the worker goes near the token</h3>
+          <p>
+            Read-only root filesystem, every capability dropped, memory locked against swap, no
+            public port, one job at a time. PKCS#11 probes run in killable child processes so a
+            busy token cannot wedge the service.
+          </p>
         </article>
       </div>
       <p class="section__note">
-        Full threat model and deployment requirements are documented in the repository:
+        Threat model, hardening decisions and the release-signing pipeline are documented in the repository:
         <span class="mono">docs/security-model.md</span>.
       </p>
     </div>

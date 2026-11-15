@@ -13,7 +13,7 @@ assets/img/favicon-32.png  # 32 px PNG favicon
 assets/img/apple-touch-icon.png
 assets/img/icon-512.png    # uygulama/mağaza ikonu
 assets/img/og.png          # 1200×630 sosyal kart
-assets/img/screenshots/    # gerçek SealForge UI görüntüleri (WebP)
+assets/img/screenshots/    # 3 gerçek SealForge UI görüntüsü (WebP)
 ```
 
 ## Yerelde açma
@@ -27,15 +27,25 @@ workflow'u birkaç dakika içinde güncellenir.
 
 ## Görseller
 
-Ekran görüntüleri yerel bir SealForge örneğinden alındı: SoftHSM token,
-`Northwind.*` adlı dört yapay artifact, gerçek imzalama + zaman damgası +
-doğrulama akışı. Tarayıcı 1920×1200, DPR 2 (3840×2400) ile çekildi,
-WebP'ye 1600–1920 px genişlikte küçültüldü.
+Üç görüntü, aynı yerel SealForge örneğinden alındı (SoftHSM token, yapay
+`Northwind.*` artifact'ları, gerçek imzalama + zaman damgası + zincir
+doğrulaması):
+
+| Dosya | Ne gösteriyor |
+|-------|----------------|
+| `dashboard.webp` | Genel durum: iş sayacıları, sistem özeti, algılanan token |
+| `signing-result.webp` | Tamamlanmış iş: `ReadyForDownload`, doğrulama sonrası teslim |
+| `token-state.webp` | Token detayı: sertifika, PIN durumu, worker'ın gördüğü operasyonel durum |
+
+Tarayıcı 1920×1200, DPR 2 ile çekildi; WebP'ye 1200–1920 px genişlikte
+küçültüldü. Demo örneğinde kişisel veri yok (operatör adı `Operations`).
 
 ## Marka
 
-Logo işareti: düz tepeli altıgen (somun/seal) içinde onay işareti. Renk
-uygulamadaki `--sf-accent` (#4f46e5) ailesinin açık zemin varyantı (#8b7dff).
+Logo işareti: düz tepeli altıgen (somun/seal) içinde onay işareti.
+`mark.svg` ve `favicon.svg` uygulama deposundaki üreticiden
+(`SealForge/tools/branding/mark.py`) kopyadır — geometri orada tanımlı,
+orada değiştirilir; bu depodaki dosyalar elle düzenlenmez.
 
 ## Özel alan adı
 
