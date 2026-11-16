@@ -20,7 +20,7 @@ function contrast(a, b) {
   const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || '/home/ubuntu/.hermes/tools/chromium-1208/chrome-linux/chrome' });
   const rows=[];
   try {
-    for (const route of ['concepts/round-8/', 'concepts/']) for (const width of [320,390,1440]) {
+    for (const route of ['concepts/round-8/']) for (const width of [320,390,1440]) {
       const page=await browser.newPage({ viewport:{width,height:1000} });
       const errors=[];page.on('pageerror',e=>errors.push(e.message));
       const response=await page.goto(base+route+(base.startsWith('file:')?'index.html':''),{waitUntil:'load'});

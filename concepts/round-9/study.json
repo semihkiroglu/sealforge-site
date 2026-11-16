@@ -1,0 +1,139 @@
+{
+  "round": 9,
+  "status": "Raster design study; not a production identity update or final vector artwork",
+  "primaryLogo": "Existing canonical head retained byte-for-byte",
+  "paletteSourceSha256": "cf42648bab8e3d08bd3d855a4f8ecf16c6faadf2091634dda0f1a9f80e740bff",
+  "derivation": "Original head used as image-generation reference. Each head detail is cropped from its own full figure, not separately generated. Light/dark share one alpha mask.",
+  "variants": [
+    {
+      "id": "glide",
+      "label": "A / Glide",
+      "view": "Right profile",
+      "sourceSha256": "ef309916ead917a7597facd11b86b4dcd75f9a27631fc183783e2e7b40b3a2f9",
+      "sourceDimensions": [
+        2172,
+        724
+      ],
+      "bodyCrop": [
+        99,
+        118,
+        2087,
+        598
+      ],
+      "headCrop": [
+        1480,
+        130,
+        2070,
+        460
+      ],
+      "sameHeadAndBodySource": true,
+      "sameLightDarkGeometry": true
+    },
+    {
+      "id": "turn",
+      "label": "B / Turn",
+      "view": "Three-quarter view",
+      "sourceSha256": "75766ecf6992222415d32a4aae882ba77f93b751b4532f7ee709bf66481d0fe3",
+      "sourceDimensions": [
+        1665,
+        944
+      ],
+      "bodyCrop": [
+        51,
+        199,
+        1665,
+        753
+      ],
+      "headCrop": [
+        1035,
+        205,
+        1645,
+        605
+      ],
+      "sameHeadAndBodySource": true,
+      "sameLightDarkGeometry": true
+    },
+    {
+      "id": "lookout",
+      "label": "C / Lookout",
+      "view": "Near-frontal view",
+      "sourceSha256": "9c18389921914ab9316f6e06d224d9fd9eaa2ea13c797ba677185f730b587d50",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "bodyCrop": [
+        93,
+        137,
+        1609,
+        766
+      ],
+      "headCrop": [
+        1080,
+        145,
+        1635,
+        610
+      ],
+      "sameHeadAndBodySource": true,
+      "sameLightDarkGeometry": true
+    }
+  ],
+  "files": {
+    "glide-body-dark.png": {
+      "bytes": 105317,
+      "sha256": "fe8996201b107a5eb62df1d721a63d5a40fb042b10222d48e5008473f2cfb9c8"
+    },
+    "glide-body-light.png": {
+      "bytes": 105644,
+      "sha256": "d3c0b613074e22482d812466f9c8977f2f5c7ffe79e6f962c1124f34b4e58167"
+    },
+    "glide-head-dark.png": {
+      "bytes": 32647,
+      "sha256": "67ae2db40a9410b3187e57c3741e1cc19d14852a6b81b7fee75e6297ca6c642e"
+    },
+    "glide-head-light.png": {
+      "bytes": 32760,
+      "sha256": "8d97dbbadc1d4df21d13929eb016189065d8ff4cdcfc7338606b5fe5f20caef2"
+    },
+    "lookout-body-dark.png": {
+      "bytes": 101491,
+      "sha256": "27d4bc830be24c041f34d83c5cf6cc9b31ab5fd24660967388a51e1104090216"
+    },
+    "lookout-body-light.png": {
+      "bytes": 101648,
+      "sha256": "4187b0e5bb2927aaf980f3c94b1049a443f4c1775b30ee93136ac91fbc39b21c"
+    },
+    "lookout-head-dark.png": {
+      "bytes": 40976,
+      "sha256": "a18b0c9e85a6391581790258a5efaf566682a5b75418dd759e41cee64ae47dec"
+    },
+    "lookout-head-light.png": {
+      "bytes": 41008,
+      "sha256": "4cead3ed28def6b035e9222f0815b152cc21c147b60fb640eb4a67d834dc475c"
+    },
+    "primary-head-dark.svg": {
+      "bytes": 2287,
+      "sha256": "05c2d1d04feb3a27b5c81956e48377c2170ebbf04fb03a9148b48da42a0c9fe0"
+    },
+    "primary-head-light.svg": {
+      "bytes": 2287,
+      "sha256": "0b96ab6f78d52ec28be2eadc0f89f7ee3d7ab1029343d24f60b69cfaf1884b66"
+    },
+    "turn-body-dark.png": {
+      "bytes": 85477,
+      "sha256": "dd23b696aa57bc05be213177ffda082d9e69bd394467092f3bfa5c1ca3d403ad"
+    },
+    "turn-body-light.png": {
+      "bytes": 85595,
+      "sha256": "c78f9bb6cef6d558266c9691c2d6cf7107437ece3dedd64600f6bcfd0f740cd1"
+    },
+    "turn-head-dark.png": {
+      "bytes": 35325,
+      "sha256": "cc1d94d33474d065084c971eb444202355ee13244c72876017b483f59513adf9"
+    },
+    "turn-head-light.png": {
+      "bytes": 35374,
+      "sha256": "85d5b1c7ab81dbf1c3552f5f72454b3d6f9d720196b75b7444ecee3260d0023c"
+    }
+  }
+}
