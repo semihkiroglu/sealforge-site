@@ -64,7 +64,7 @@ const contrast = (a, b) => { const x = [lum(rgb(a)), lum(rgb(b))].sort((a, b) =>
                 const mark = document.querySelector('.site-header .brand');
                 const text = mark.querySelector('.brand-wordmark');
                 const visible = [...mark.querySelectorAll('img')].filter(i => i.getBoundingClientRect().width > 0 && getComputedStyle(i).display !== 'none');
-                return { text: text?.textContent, fontSize: text ? parseFloat(getComputedStyle(text).fontSize) : null, visibleSources: visible.map(i => i.getAttribute('src')), height: mark.getBoundingClientRect().height };
+                return { text: text?.textContent, fontSize: text ? parseFloat(getComputedStyle(text).fontSize) : null, fontFamily: text ? getComputedStyle(text).fontFamily : null, manropeLoaded: [...document.fonts].some(f => f.family.includes('Manrope') && f.status === 'loaded'), visibleSources: visible.map(i => i.getAttribute('src')), height: mark.getBoundingClientRect().height };
               })(),
               visibleShots: [...document.querySelectorAll('.capture img')].filter(i => i.getBoundingClientRect().width > 0 && getComputedStyle(i).display !== 'none').map(i => i.getAttribute('src')),
               text: document.body.innerText,
@@ -80,6 +80,7 @@ const contrast = (a, b) => { const x = [lum(rgb(a)), lum(rgb(b))].sort((a, b) =>
           assert.equal(data.h1, 1);
           assert.equal(data.compactBrand.text, 'SealForge', 'Header must use compact icon + real text');
           assert(data.compactBrand.fontSize <= 20 && data.compactBrand.height <= 40, JSON.stringify(data.compactBrand));
+          assert(data.compactBrand.fontFamily.includes('Manrope') && data.compactBrand.manropeLoaded, 'The real local Manrope wordmark font must load');
           assert.deepEqual(data.compactBrand.visibleSources, [`assets/brand/head-on-${theme}.svg`]);
           assert(!/\b(?:licensed|licen[sc]e|Apache|MIT|PKCS|SoftHSM|PostgreSQL|Blazor|Jsign)\b/i.test(data.text), 'Visible product pages must not contain licensing or stack lists');
           assert(!/\bv?\d+\.\d+(?:\.\d+)?\b/i.test(data.text), 'No fixed release/stack versions');
@@ -106,7 +107,7 @@ const contrast = (a, b) => { const x = [lum(rgb(a)), lum(rgb(b))].sort((a, b) =>
           await page.reload({ waitUntil: 'networkidle' });
           // addInitScript seeds the original theme on reload; persistence is tested below in an unseeded context.
           assert.deepEqual(errors, []);
-          if (width === 1440 || width === 390) {
+          if (process.env.SITE_SCREENSHOTS !== '0' && (width === 1440 || width === 390)) {
             if (file === 'brand.html') {
               await page.locator('.signature-preview').scrollIntoViewIfNeeded();
               await page.waitForTimeout(150);
@@ -165,7 +166,8 @@ const contrast = (a, b) => { const x = [lum(rgb(a)), lum(rgb(b))].sort((a, b) =>
     if (live) {
       const p = await browser.newPage();
       await p.goto(base + 'assets/brand/email-signature.html', { waitUntil: 'networkidle' });
-      assert(await p.locator('img').evaluate((i) => i.complete && i.naturalWidth === 648));
+      const expectedSignatureWidth = fs.readFileSync(path.resolve(__dirname, '../assets/brand/email-logo.png')).readUInt32BE(16);
+      assert(await p.locator('img').evaluate((i, expected) => i.complete && i.naturalWidth === expected, expectedSignatureWidth));
       assert.equal(await p.locator('img').getAttribute('alt'), 'SealForge');
       await p.close();
     }

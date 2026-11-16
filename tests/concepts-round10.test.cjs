@@ -46,7 +46,7 @@ const luminance=s=>s.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>v/255).map(v
         assert.equal(data.pressed,String(tone==='dark'));assert.equal(data.storage,'dark');assert.deepEqual(errors,[]);
         const ratios=data.pairs.map(([a,b])=>{const[x,y]=[luminance(a),luminance(b)].sort((a,b)=>a-b);return(y+.05)/(x+.05);});assert(ratios.every(r=>r>=4.5));
         rows.push({route,width,tone,sideBySide:true,overflow:0,primaryAndOriginalPreserved:true,minimumTextContrast:Math.min(...ratios)});
-        if(route==='concepts/round-10/'&&[390,1440].includes(width)){
+        if(process.env.SITE_SCREENSHOTS !== '0' && route==='concepts/round-10/'&&[390,1440].includes(width)){
           await page.screenshot({path:path.join(output,`${width}-${tone}.png`),fullPage:true});
           await page.locator('#comparison').screenshot({path:path.join(output,`three-up-${width}-${tone}.png`)});
         }

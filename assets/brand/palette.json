@@ -68,5 +68,12 @@
   },
   "master": "raw/master.svg",
   "head": "raw/head.svg",
-  "note": "The full key and press stay petrol. Only the added under-press line and the impression are copper. Decorative lines and input boundaries are different tokens."
+  "note": "One compact Cove seal-head emblem. Petrol/mint for the emblem; copper remains a separate layout accent, never warning/error. No full-animal or signing-prop variant.",
+  "identity": "Cove",
+  "approvalRound": 11,
+  "typography": {
+    "brandFamily": "Manrope",
+    "brandWeight": 600,
+    "bodyFamily": "Inter"
+  }
 }

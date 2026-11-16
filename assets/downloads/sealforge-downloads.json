@@ -1,38 +1,38 @@
 {
-  "artwork": "Approved Coast & Copper profile seal; canonical master geometry unchanged",
+  "artwork": "Approved Cove single emblem; Manrope 600 wordmark and Inter body",
   "files": {
     "sealforge-corporate-identity.zip": {
-      "bytes": 6563459,
-      "files": 140,
-      "sha256": "35d062d96ecc83476809e74b0e10d96f9e2cf6f09df700c1ecab10943a8cd0b1"
+      "bytes": 4572679,
+      "files": 143,
+      "sha256": "4563241f14e85ba96e068ef41d1ab3ce93c17c55f0176e8d6741f07c12f2fc4b"
     },
     "sealforge-stationery.zip": {
-      "bytes": 3886069,
-      "files": 100,
-      "sha256": "b00dae08053073e2f626b1e951e6d2aa86e4927d1f5f398f539878bcfb494fa5"
+      "bytes": 3735176,
+      "files": 115,
+      "sha256": "7a9aac0b685477cca17a9e18342676d20a7948d90f23648389aa599264926f5f"
     },
     "sealforge-digital-kit.zip": {
-      "bytes": 3407038,
-      "files": 33,
-      "sha256": "a4600689bda4eef26470161a448fc4bae22da042d89a11c035d3b5897b4bfe82"
+      "bytes": 1581075,
+      "files": 27,
+      "sha256": "78c621a7b2435a06626e0ebb85f6cd2abe4b3ff228b0b1a33bca003e5b20c458"
     },
     "sealforge-editable-sources.zip": {
-      "bytes": 3055309,
-      "files": 76,
-      "sha256": "80eef792a1c990e4579f67117a0f4481e6e6f877c61afef588cc67f5504862bf"
+      "bytes": 2989556,
+      "files": 87,
+      "sha256": "ad3b95e10cbb14d2667596b6609c6f12ce69d01d7c5029e26e81385bee4fa35f"
     },
     "sealforge-brand-kit.zip": {
-      "bytes": 2936158,
-      "files": 87,
-      "sha256": "f88567609991b74aefad252aa5e5639426cf8ff4dbf4cabfb937f8128bcc8d63"
+      "bytes": 2943586,
+      "files": 96,
+      "sha256": "83d7be5aab00450a8903da36624a5908cdf071305c8e86bcdbce6fb979ba696d"
     },
     "sealforge-brand-guidelines.pdf": {
-      "bytes": 669819,
-      "sha256": "68f54528aa17b8875fe27120a2582e5889ae12d79488b25efe2a00c2e7dfa977"
+      "bytes": 527693,
+      "sha256": "aa80f6b7e240df18bc72954586ac573b23a00a565744e237957cc9adb2a41815"
     },
     "sealforge-letterhead.pdf": {
-      "bytes": 94087,
-      "sha256": "6ddcf4f0da77ebeb5fd5f15c0fc9f3f1a5a5077a7f43a8a0aab6570e48c4d449"
+      "bytes": 80369,
+      "sha256": "19931faade0232d0c07c71a046cf446b4a053ababcb6e0c22f56bc61770fbd4c"
     }
   }
 }

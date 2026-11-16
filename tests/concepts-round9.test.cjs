@@ -2,6 +2,7 @@
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const crypto = require('node:crypto');
 const path = require('node:path');
 const base = (process.env.SITE_URL || 'http://127.0.0.1:4173/').replace(/\/?$/, '/');
 const output = process.env.SITE_EVIDENCE || path.resolve('round9-evidence');
@@ -10,8 +11,12 @@ fs.mkdirSync(output, { recursive: true });
 const luminance = s => s.match(/[\d.]+/g).slice(0,3).map(Number).map(v => v/255).map(v => v<=.04045 ? v/12.92 : ((v+.055)/1.055)**2.4).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);
 const contrast = (a,b) => { const [x,y]=[luminance(a),luminance(b)].sort((a,b)=>a-b); return (y+.05)/(x+.05); };
 (async () => {
-  for (const tone of ['light','dark']) assert.deepEqual(fs.readFileSync(path.join(repo,`concepts/round-9/assets/primary-head-${tone}.svg`)),fs.readFileSync(path.join(repo,`assets/brand/head-on-${tone}.svg`)));
   const manifest=JSON.parse(fs.readFileSync(path.join(repo,'concepts/round-9/study.json')));
+  // Historical references stay frozen when the live production identity changes.
+  for (const tone of ['light','dark']) {
+    const name=`primary-head-${tone}.svg`;
+    assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(repo,'concepts/round-9/assets',name))).digest('hex'),manifest.files[name].sha256);
+  }
   assert.equal(manifest.variants.length,3);
   assert(manifest.variants.every(v=>v.sameHeadAndBodySource && v.sameLightDarkGeometry));
   const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH || '/home/ubuntu/.hermes/tools/chromium-1208/chrome-linux/chrome'});
@@ -63,7 +68,7 @@ const contrast = (a,b) => { const [x,y]=[luminance(a),luminance(b)].sort((a,b)=>
           assert(data.ratioError<.01);assert.equal(data.storage,'dark','Study must not modify production theme storage');
           const ratios=data.pairs.map(p=>contrast(...p));assert(ratios.every(v=>v>=4.5));assert.deepEqual(errors,[]);
           rows.push({route,width,tone,choice,format,overflow:0,minimumTextContrast:Math.min(...ratios),aspectRatioPreserved:true,productionThemeUntouched:true});
-          if(route==='concepts/round-9/' && ((width===1440 && tone==='light')||(width===1440&&tone==='dark'&&choice==='turn'&&format==='portrait')||(width===390&&choice==='glide'&&format==='landscape'))) {
+          if(process.env.SITE_SCREENSHOTS !== '0' && route==='concepts/round-9/' && ((width===1440 && tone==='light')||(width===1440&&tone==='dark'&&choice==='turn'&&format==='portrait')||(width===390&&choice==='glide'&&format==='landscape'))) {
             await page.evaluate(()=>window.scrollTo(0,0));
             await page.screenshot({path:path.join(output,`${choice}-${format}-${width}-${tone}.png`),fullPage:true});
             await page.locator('.composition').screenshot({path:path.join(output,`composition-${choice}-${format}-${width}-${tone}.png`)});

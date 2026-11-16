@@ -1,5 +1,5 @@
 {
-  "method": "WCAG sRGB relative luminance; sampled token pairs, not whole-application certification",
+  "method": "WCAG sRGB token pairs, not whole-application certification",
   "pairs": [
     {
       "mode": "light",

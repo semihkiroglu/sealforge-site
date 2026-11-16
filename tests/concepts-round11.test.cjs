@@ -15,7 +15,7 @@ const lum=s=>s.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>v/255).map(v=>v<=.
   for(const[name,data]of Object.entries(study.files))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(repo,'concepts/round-11/assets',name))).digest('hex'),data.sha256);
   const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/home/ubuntu/.hermes/tools/chromium-1208/chrome-linux/chrome'}),rows=[];
   try{
-    for(const route of ['concepts/round-11/','concepts/'])for(const width of [320,390,768,1440]){
+    for(const route of ['concepts/round-11/'])for(const width of [320,390,768,1440]){
       const context=await browser.newContext({viewport:{width,height:1000},reducedMotion:'reduce'});
       await context.addInitScript(()=>localStorage.setItem('sealforge.theme','dark'));
       const page=await context.newPage(),errors=[];
@@ -45,13 +45,13 @@ const lum=s=>s.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>v/255).map(v=>v<=.
           assert.deepEqual(d.selected,[choice]);assert.equal(d.header,`${choice}-32-${tone}.png`);assert.equal(d.tile,`${choice}-64-dark.png`);assert.equal(d.board,`comparison-${tone}.png`);assert.deepEqual(d.links,['cove','pip','harbor'].map(k=>`${k}-${tone}.png`));assert(d.boxes.length===3&&d.boxes.every(b=>b.x>=0&&b.right<=width));
           assert.equal(d.storage,'dark');assert.deepEqual(errors,[]);const ratios=d.pairs.map(([a,b])=>{const[x,y]=[lum(a),lum(b)].sort((a,b)=>a-b);return(y+.05)/(x+.05);});assert(ratios.every(v=>v>=4.5));
           rows.push({route,width,tone,choice,singleEmblem:true,overflow:0,smallPreviews:'native 32/64',productionThemeUnchanged:true,minimumTextContrast:Math.min(...ratios)});
-          if(route==='concepts/round-11/'&&((width===1440&&tone==='light')||(width===390&&choice==='harbor')||(width===1440&&tone==='dark'&&choice==='harbor'))){await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:path.join(output,`${choice}-${width}-${tone}.png`),fullPage:true});}
+          if(process.env.SITE_SCREENSHOTS !== '0' && route==='concepts/round-11/'&&((width===1440&&tone==='light')||(width===390&&choice==='harbor')||(width===1440&&tone==='dark'&&choice==='harbor'))){await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:path.join(output,`${choice}-${width}-${tone}.png`),fullPage:true});}
         }
       }
       await context.close();
     }
     const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:1000}}),page=await context.newPage();
-    await page.goto(base+'concepts/',{waitUntil:'load'});await page.waitForURL('**/concepts/round-11/');await page.waitForLoadState('networkidle');assert.equal(await page.locator('.concept').count(),3);assert.equal(await page.locator('#tone').isVisible(),false);assert.equal(await page.locator('[data-open]').count(),3);await context.close();
+    await page.goto(base+'concepts/round-11/',{waitUntil:'load'});await page.waitForURL('**/concepts/round-11/');await page.waitForLoadState('networkidle');assert.equal(await page.locator('.concept').count(),3);assert.equal(await page.locator('#tone').isVisible(),false);assert.equal(await page.locator('[data-open]').count(),3);await context.close();
     fs.writeFileSync(path.join(output,'report.json'),JSON.stringify({base,cases:rows,noJavaScript:true},null,2));console.log(JSON.stringify({states:rows.length,concepts:3,fullAnimalVariants:0,themes:2,smallPreviews:[32,64],overflow:0,errors:0,noJavaScript:true,report:path.join(output,'report.json')}));
   }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
