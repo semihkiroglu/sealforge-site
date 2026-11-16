@@ -1,30 +1,78 @@
-# SealForge product site
+# SealForge website
 
-A small static site. No framework, build step, analytics or backend is required.
+The product website is plain HTML, CSS and a small theme script. There is no
+framework, build step, backend, analytics or package dependency in the published
+site. All public copy is English.
 
-- `index.html`: a concise welcome page, one product preview, benefits and workflow.
-- `details.html`: getting started, pipeline integration, interface previews and contribution links.
-- `brand.html`: the complete corporate identity and focused download sets.
-- `assets/css/landing.css`: the current pages' shared responsive styling.
-- `assets/css/style.css`: preserved styling used by historical concept pages.
-- `assets/brand/`: canonical artwork copied from the product's brand tooling.
-- `assets/downloads/`: identity archives, brand guide, letterhead and file checksums.
-- `assets/img/screenshots/`: theme-specific captures of the current compiled components.
+## Pages
 
-## Local verification
+- `index.html` — the product overview, benefits and signing workflow.
+- `details.html` — architecture, security boundaries, API integration and deployment.
+- `development.html` — source access, licensing, building and contribution.
+- `usage.html` — first use, administration, signing jobs and troubleshooting.
+- `brand.html` — the approved Cove identity and its current downloads.
 
-Use an existing Playwright installation and Chromium. They are development tools,
-not dependencies of the published website.
+The primary navigation has four destinations; the brand kit remains in the
+footer. Every page shares the same local fonts, theme control and responsive
+stylesheet. Content and navigation work without JavaScript. With storage blocked,
+the theme control still works for the current page.
+
+## Source accuracy and access
+
+The product copy is checked against the source at
+`b63fdf27dce10999c2071dcb0ec55a4bf778ab1e` in the SealForge product repository,
+including its architecture, API, development and operations documentation and
+the corresponding implementation. A current source check is required when
+changing a behavior, supported format, API field or operating instruction.
+
+The product source carries Apache-2.0, but its GitHub repository is currently
+private. Product links are explicitly marked as access-restricted. This public
+website and its issue tracker are separate from product-source access. Do not
+turn a license statement into a claim that an anonymous clone, installer or
+product download is available.
+
+The application UI is still being finalized. The maintained pages contain no
+outdated interface previews or invented product screenshots. Website browser
+checks do not start the application or access a database, signing token or worker.
+
+## Identity assets
+
+`assets/brand/` contains the canonical Cove exports from the product's
+`tools/branding/cove.py`. Manrope 600 carries brand/display text; Inter carries
+body copy. Logo lettering is outlined. Do not independently redraw, recolor or
+regenerate the website copies.
+
+`assets/downloads/sealforge-downloads.json` is the current download catalogue.
+The artwork, complete corporate set, stationery, digital kit and editable-source
+ZIPs, brand-guide PDF and letterhead PDF retain their published addresses. They
+are identity materials, not application source or installation packages.
+
+Keep their manifests, font notices and required font files. Current icon/social
+aliases under `assets/img/` are also retained. Website cleanup does not authorize
+editing the product repository or regenerating its corporate documents.
+
+## Local checks
+
+Playwright and Chromium are verification tools only. Use an existing installation
+and set their paths; do not install them into the published directory.
 
 ```bash
+node --check assets/js/site.js
+node --check tests/site.test.cjs
 NODE_PATH=/path/to/playwright/node_modules \
 CHROMIUM_PATH=/path/to/chrome \
 python tools/test-local.py --evidence /path/to/evidence
 ```
 
-The wrapper serves only this repository over a task-owned loopback HTTP server,
-uses an available port, runs the browser test and closes the server in `finally`.
-To test the public deployment without local asset interception:
+The helper chooses an available loopback port, serves this repository, runs the
+real browser matrix and closes its own server in `finally`. The matrix exercises
+all maintained pages at 320, 390, 768, 1440 and 1920 pixels in both themes. It
+checks navigation, required content sections, visible artwork, real loaded
+fonts, document/header overflow, text contrast, links and anchors, download
+bytes/checksums, no-JavaScript content and blocked-storage behavior. It records
+JSON evidence, not screenshots.
+
+To verify the real public deployment without local asset interception:
 
 ```bash
 SITE_URL=https://semihkiroglu.github.io/sealforge-site/ \
@@ -34,83 +82,13 @@ CHROMIUM_PATH=/path/to/chrome \
 node tests/site.test.cjs
 ```
 
-The matrix covers all three pages, both themes and 320/390/768/1440 px. It checks
-compact header sizing, exactly one visible theme-specific head, screenshot
-selection, loaded images, contrast, navigation, anchors, download URLs, storage,
-English fallback and no-JavaScript content. A welcome-page length guard prevents
-specification material from accumulating in the landing page again.
-
-## Identity and downloads
-
-The owner-selected Cove identity is generated by `tools/branding/cove.py` into
-`branding-cove/` in the product repository. One compact head emblem drives every
-variant; there is no full-animal companion. Manrope SemiBold 600 carries the brand
-wordmark; Inter remains the interface and long-text family. Full lockup lettering
-is outlined. Headers use the same emblem with modest live text. Do not edit the
-generated copies independently.
-
-From the product repository, after generating the corporate templates:
-
-```bash
-python tools/branding/cove.py --sync-app --site ../sealforge-site
-python tools/branding/package_corporate.py --output /path/to/downloads --site ../sealforge-site
-```
-
-The complete set contains canonical artwork, the guide, A4 stationery, editable
-Word and PowerPoint, business-card source/print files, social assets, email
-signatures and reproducible generation sources. Focused artwork, stationery,
-digital and editable-source downloads are also available. Archives contain file
-hash manifests, not redundant nested ZIP bundles. The generator retains required
-font redistribution files inside the packages.
-
-Both Manrope and Inter are served locally. Live header text uses Manrope 600,
-with 32 px emblem boxes on desktop and 28 px on narrow screens. The large outlined
-lockup stays in editorial applications, not the compact site header.
-
-## Screenshot provenance
-
-Existing previews are earlier browser captures of compiled SealForge components
-with isolated sample data. They predate Cove and are labelled as earlier previews.
-The owner explicitly deferred fresh captures until the interface is finalized;
-do not regenerate them or imply they show the final UI during this branding pass.
-They are not drawn HTML mockups or live authenticated signing sessions.
-Captions and in-image labels disclose sample data. No production database, real
-private key, personal account or hardware activity is represented.
-
-The fixture does not establish login/MFA, interactive JavaScript, signing,
-timestamping, download or physical-token correctness. Do not carry over captions
-from the previous signing-demo screenshots. The website's responsive checks do
-not certify every application modal's mobile behaviour.
-
-## Theme, language and access boundaries
-
-The default remains dark. `localStorage['sealforge.theme']` is read before the
-stylesheet paints. The control, image variants and browser theme colour switch
-together; the choice persists across pages and reloads. Navigation remains
-visible on narrow screens.
-
-English is currently the only public language. Source text stays in HTML;
-`assets/js/site.js` supplies fallback behaviour and a deliberately hidden language
-selector. Unknown language values fall back to English. Do not expose an empty
-second language.
-
-The product repository is access-restricted during preview. Public pages do not
-claim an anonymous installer or public product-source download. The product link
-is labelled **access required**. Website source and feedback links are genuinely
-public; their identity is not confused with the private application repository.
-
-The welcome pages intentionally avoid fixed release badges, stack inventories,
-licensing footers, architecture dumps and stale API command examples. Integration
-contracts belong with the product deployment.
-
 ## Publication
 
-GitHub Pages publishes the repository's `main` branch. Verify the deployment for
-the exact pushed SHA, then compare public HTML, assets and downloads to local
-bytes and rerun the browser matrix over HTTPS. A successful older run is not
-proof of the new deployment.
+GitHub Pages publishes `main`. Push only the intended website changes, verify the
+remote commit, require a successful Pages deployment for that exact SHA, then
+compare public HTML/assets/downloads with committed bytes and run the HTTPS
+browser matrix. An older successful deployment does not verify a new push.
 
-The `concepts/` index is an archive with a link to the selected Cove identity.
-Historical round files are preserved; revisions to the current site do not
-rewrite past design rounds. A custom domain is not configured. If one is added,
-update canonical/OG/social URLs and the email-signature asset URL together.
+The canonical origin is `https://semihkiroglu.github.io/sealforge-site/`. If a
+custom domain is introduced, update page canonical/OG URLs, social metadata and
+the email-signature image URL together.
