@@ -1,0 +1,38 @@
+{
+  "artwork": "Approved Coast & Copper profile seal; canonical master geometry unchanged",
+  "files": {
+    "sealforge-corporate-identity.zip": {
+      "bytes": 6563459,
+      "files": 140,
+      "sha256": "35d062d96ecc83476809e74b0e10d96f9e2cf6f09df700c1ecab10943a8cd0b1"
+    },
+    "sealforge-stationery.zip": {
+      "bytes": 3886069,
+      "files": 100,
+      "sha256": "b00dae08053073e2f626b1e951e6d2aa86e4927d1f5f398f539878bcfb494fa5"
+    },
+    "sealforge-digital-kit.zip": {
+      "bytes": 3407038,
+      "files": 33,
+      "sha256": "a4600689bda4eef26470161a448fc4bae22da042d89a11c035d3b5897b4bfe82"
+    },
+    "sealforge-editable-sources.zip": {
+      "bytes": 3055309,
+      "files": 76,
+      "sha256": "80eef792a1c990e4579f67117a0f4481e6e6f877c61afef588cc67f5504862bf"
+    },
+    "sealforge-brand-kit.zip": {
+      "bytes": 2936158,
+      "files": 87,
+      "sha256": "f88567609991b74aefad252aa5e5639426cf8ff4dbf4cabfb937f8128bcc8d63"
+    },
+    "sealforge-brand-guidelines.pdf": {
+      "bytes": 669819,
+      "sha256": "68f54528aa17b8875fe27120a2582e5889ae12d79488b25efe2a00c2e7dfa977"
+    },
+    "sealforge-letterhead.pdf": {
+      "bytes": 94087,
+      "sha256": "6ddcf4f0da77ebeb5fd5f15c0fc9f3f1a5a5077a7f43a8a0aab6570e48c4d449"
+    }
+  }
+}

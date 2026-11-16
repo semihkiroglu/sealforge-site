@@ -1,103 +1,111 @@
-# SealForge ürün sitesi
+# SealForge product site
 
-Build adımı, framework veya backend gerektirmeyen statik site.
+A small static site. No framework, build step, analytics or backend is required.
 
-- `index.html`: kısa ürün tanıtımı, gerçek uygulama görüntüsü, akış ve başlangıç.
-- `details.html`: mimari, güvenlik sınırları, API, host gereksinimleri ve kanıt görselleri.
-- `brand.html`: logo galerisi, format bazlı indirme ve e-posta imzası.
-- `assets/brand/`: uygulamayla aynı kaynaktan gelen hazır SVG, PNG, PDF, ICO ve HTML dosyaları.
-- `assets/downloads/sealforge-brand-kit.zip`: kullanım kılavuzu ve font lisansı dahil marka paketi.
-- `assets/fonts/`: yerelde sunulan Inter Latin variable fontu ve SIL OFL lisansı.
-- `tests/site.test.cjs`: Playwright ile responsive, tema, bağlantı ve asset kontrolleri.
+- `index.html`: a concise welcome page, one product preview, benefits and workflow.
+- `details.html`: getting started, pipeline integration, interface previews and contribution links.
+- `brand.html`: the complete corporate identity and focused download sets.
+- `assets/css/landing.css`: the current pages' shared responsive styling.
+- `assets/css/style.css`: preserved styling used by historical concept pages.
+- `assets/brand/`: canonical artwork copied from the product's brand tooling.
+- `assets/downloads/`: identity archives, brand guide, letterhead and file checksums.
+- `assets/img/screenshots/`: theme-specific captures of the current compiled components.
 
-## Yerelde açma
+## Local verification
 
-```bash
-python3 -m http.server 4173 --bind 127.0.0.1
-```
-
-Tarayıcıda `http://127.0.0.1:4173/` adresini aç. Site dosyaları doğrudan da
-açılabilir; HTTP sunucusu, font ve sayfalar arası tema saklama davranışını daha
-sadık test eder. E-posta imzasındaki logo kalıcı public HTTPS adresini kullanır.
-
-## Marka kaynağı
-
-Kanonik kaynak **SealForge uygulama deposundaki** `tools/branding/mark.py` ve
-aynı klasördeki lisanslı Inter fontudur. `SealForge/branding/` bütün hazır
-çıktıları ve kullanım kılavuzunu içerir. Site kopyalarını elle değiştirme:
+Use an existing Playwright installation and Chromium. They are development tools,
+not dependencies of the published website.
 
 ```bash
-# SealForge deposunda; yalnız geliştirici tooling'i
-python -m pip install -r tools/branding/requirements.txt
-python tools/branding/mark.py --site ../sealforge-site
-python tools/branding/test_branding.py
-```
-
-Uygulama yalnız commit edilmiş statik dosyaları sunar. Logo çizimi runtime'da
-yapılmaz. Logolar path'e çevrilmiştir; tüketen uygulamada font kurulumu gerekmez.
-Site kendi Inter WOFF2 dosyasını sunar, üçüncü taraf font servisine bağlanmaz.
-
-## Tema ve dil
-
-Varsayılan koyu tema korunur. `localStorage['sealforge.theme']`, stylesheet
-boyanmadan önce okunur; düğme, logo sürümü ve tarayıcı tema rengi birlikte
-geçiş yapar. Açık/koyu seçim sayfalar arasında ve yenilemede korunur.
-Mobilde navigasyon gizlenmez: başlığın ikinci satırındadır.
-
-Dil şimdilik yalnız İngilizce. `data-i18n` metinleri kaynak HTML'de kalır;
-`assets/js/site.js` eksik/bilinmeyen dil için bu içeriğe döner. `#lang-select`
-bağlıdır ama `hidden`, `aria-hidden` ve `tabindex=-1` ile görünmezdir. İkinci
-bir dil eklerken çeviri sözlüğünü tamamlayıp seçiciyi bilinçli olarak görünür yap.
-Marka adı, dosya formatları, alt metinler ve meta veriler dil seçimiyle değişmez.
-
-## Kurulum ve repo görünürlüğü
-
-Ürün deposu private; public ziyaretçi için GitHub kurulum/release bağlantısı
-404 döner. Bu yüzden ana sayfada başarısız bir curl komutu veya çalışmayan
-"Download" butonu yok. Beta erişimi gereksinimi adımlardan önce açıkça yazılıdır.
-Teknik rehberde private GitHub bağlantısı yalnız beta kullanıcıları için etiketli
-bir disclosure içindedir. Repo görünürlüğünü bu siteyi yayınlamak için değiştirme.
-Sabit sürüm rozeti yok; başlangıç metni erişilebilen **latest release**'i önerir.
-
-## Görseller ve doğruluk
-
-Üç WebP, aynı gerçek SealForge demo örneğinde SoftHSM ile yapılan imzalama,
-zaman damgası ve doğrulama akışından gelir. Hero yalnız aktivite alanını gösteren
-bir kırpımdır; arayüz çizilmedi ve iş sonuçları üretilmedi. Bu görüntüler fiziksel
-token/HSM sertifikasyonu veya üretim trafiği kanıtı değildir.
-
-E-posta imzası PNG + tablo + inline stil kullanır; kişisel isim, adres veya rol
-uydurmaz. Gerçek Outlook/Gmail gönderimi ve istemcilerin dark-mode dönüşümleri
-ayrı kontroldür. Uzaktaki görseller kapalıysa alt metin ve düz bağlantı kalır.
-
-## Tarayıcı doğrulaması
-
-Mevcut bir Playwright kurulumu ve Chromium kullanılır; bunlar site runtime
-bağımlılığı değildir. Test 320/390/768/1440 px, iki tema ve üç sayfayı dolaşır:
-
-```bash
-# Playwright ortamının node_modules dizini NODE_PATH ile sağlanabilir.
 NODE_PATH=/path/to/playwright/node_modules \
 CHROMIUM_PATH=/path/to/chrome \
-SITE_EVIDENCE=/path/to/output \
-node tests/site.test.cjs
+python tools/test-local.py --evidence /path/to/evidence
+```
 
-# Yayındaki aynı dosyalar için
+The wrapper serves only this repository over a task-owned loopback HTTP server,
+uses an available port, runs the browser test and closes the server in `finally`.
+To test the public deployment without local asset interception:
+
+```bash
 SITE_URL=https://semihkiroglu.github.io/sealforge-site/ \
+SITE_EVIDENCE=/path/to/live-evidence \
 NODE_PATH=/path/to/playwright/node_modules \
 CHROMIUM_PATH=/path/to/chrome \
-SITE_EVIDENCE=/path/to/live-output \
 node tests/site.test.cjs
 ```
 
-Yerel imza önizlemesinde final HTTPS logo adresi aynı gerçek yerel PNG'ye
-map edilir; canlı testte yönlendirme yoktur. Diğer kontroller: görseller ve
-indirme URL'leri, yatay taşma, tek H1, anchor'lar, kontrast, görünür mobil
-navigasyon, JS hataları, tema kalıcılığı, gizli İngilizce seçici ve JS'siz içerik.
+The matrix covers all three pages, both themes and 320/390/768/1440 px. It checks
+compact header sizing, exactly one visible theme-specific head, screenshot
+selection, loaded images, contrast, navigation, anchors, download URLs, storage,
+English fallback and no-JavaScript content. A welcome-page length guard prevents
+specification material from accumulating in the landing page again.
 
-## Yayın ve alan adı
+## Identity and downloads
 
-GitHub Pages `main` dalının kökünden yayınlar. Push sonrası exact-head Pages
-çalışmasını ve HTTPS'ten gelen gerçek dosyaları kontrol et. Özel domain henüz
-bağlı değil; bağlanırsa `CNAME`, canonical/OG/Twitter URL'leri ve marka
-üreticisindeki e-posta imza URL'si birlikte güncellenmelidir.
+The approved Coast & Copper artwork is generated by `tools/branding/mark.py` in
+the product repository. The full outlined lockup remains available in the kit.
+Application and website headers instead pair its same head with restrained live
+SealForge text. Do not edit generated SVG/PNG copies independently.
+
+From the product repository, after generating the corporate templates:
+
+```bash
+python tools/branding/mark.py --site ../sealforge-site
+python tools/branding/package_corporate.py --output /path/to/downloads --site ../sealforge-site
+```
+
+The complete set contains canonical artwork, the guide, A4 stationery, editable
+Word and PowerPoint, business-card source/print files, social assets, email
+signatures and reproducible generation sources. Focused artwork, stationery,
+digital and editable-source downloads are also available. Archives contain file
+hash manifests, not redundant nested ZIP bundles. The generator retains required
+font redistribution files inside the packages.
+
+The site uses a local Inter font. Full logo lettering is outlined. Live header
+text deliberately follows the compact interface treatment rather than embedding
+the large horizontal lockup.
+
+## Screenshot provenance
+
+Published previews are actual browser captures of compiled SealForge components
+with isolated sample data, using the real application styling and assets. They
+are not drawn HTML mockups and are not live authenticated signing sessions.
+Captions and in-image labels disclose sample data. No production database, real
+private key, personal account or hardware activity is represented.
+
+The fixture does not establish login/MFA, interactive JavaScript, signing,
+timestamping, download or physical-token correctness. Do not carry over captions
+from the previous signing-demo screenshots. The website's responsive checks do
+not certify every application modal's mobile behaviour.
+
+## Theme, language and access boundaries
+
+The default remains dark. `localStorage['sealforge.theme']` is read before the
+stylesheet paints. The control, image variants and browser theme colour switch
+together; the choice persists across pages and reloads. Navigation remains
+visible on narrow screens.
+
+English is currently the only public language. Source text stays in HTML;
+`assets/js/site.js` supplies fallback behaviour and a deliberately hidden language
+selector. Unknown language values fall back to English. Do not expose an empty
+second language.
+
+The product repository is access-restricted during preview. Public pages do not
+claim an anonymous installer or public product-source download. The product link
+is labelled **access required**. Website source and feedback links are genuinely
+public; their identity is not confused with the private application repository.
+
+The welcome pages intentionally avoid fixed release badges, stack inventories,
+licensing footers, architecture dumps and stale API command examples. Integration
+contracts belong with the product deployment.
+
+## Publication
+
+GitHub Pages publishes the repository's `main` branch. Verify the deployment for
+the exact pushed SHA, then compare public HTML, assets and downloads to local
+bytes and rerun the browser matrix over HTTPS. A successful older run is not
+proof of the new deployment.
+
+Historical `concepts/` files are preserved; revisions to the current site do not
+rewrite past design rounds. A custom domain is not configured. If one is added,
+update canonical/OG/social URLs and the email-signature asset URL together.

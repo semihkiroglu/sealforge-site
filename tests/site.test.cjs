@@ -59,6 +59,14 @@ const contrast = (a, b) => { const x = [lum(rgb(a)), lum(rgb(b))].sort((a, b) =>
               emptyTranslation: [...document.querySelectorAll('[data-i18n]')].some((e) => !e.textContent.trim()),
               navVisible: [...document.querySelectorAll('.nav a')].every((a) => a.getBoundingClientRect().width > 0),
               colors: { text: css.color, bg: css.backgroundColor, muted: css.getPropertyValue('--muted').trim(), button: button ? getComputedStyle(button).backgroundColor : null, buttonText: button ? getComputedStyle(button).color : null },
+              compactBrand: (() => {
+                const mark = document.querySelector('.site-header .brand');
+                const text = mark.querySelector('.brand-wordmark');
+                const visible = [...mark.querySelectorAll('img')].filter(i => i.getBoundingClientRect().width > 0 && getComputedStyle(i).display !== 'none');
+                return { text: text?.textContent, fontSize: text ? parseFloat(getComputedStyle(text).fontSize) : null, visibleSources: visible.map(i => i.getAttribute('src')), height: mark.getBoundingClientRect().height };
+              })(),
+              visibleShots: [...document.querySelectorAll('.capture img')].filter(i => i.getBoundingClientRect().width > 0 && getComputedStyle(i).display !== 'none').map(i => i.getAttribute('src')),
+              text: document.body.innerText,
               height: document.body.scrollHeight,
               deadAnchors: [...document.querySelectorAll('a[href^="#"]')].map((a) => a.hash.slice(1)).filter((id) => !document.getElementById(id)),
             };
@@ -69,6 +77,20 @@ const contrast = (a, b) => { const x = [lum(rgb(a)), lum(rgb(b))].sort((a, b) =>
           if (data.colors.button) ratios.button = contrast(data.colors.buttonText, data.colors.button);
           assert.equal(data.overflow, 0, `${file} ${width} ${theme}: horizontal overflow`);
           assert.equal(data.h1, 1);
+          assert.equal(data.compactBrand.text, 'SealForge', 'Header must use compact icon + real text');
+          assert(data.compactBrand.fontSize <= 20 && data.compactBrand.height <= 40, JSON.stringify(data.compactBrand));
+          assert.deepEqual(data.compactBrand.visibleSources, [`assets/brand/head-on-${theme}.svg`]);
+          assert(!/\b(?:licensed|licen[sc]e|Apache|MIT|PKCS|SoftHSM|PostgreSQL|Blazor|Jsign)\b/i.test(data.text), 'Visible product pages must not contain licensing or stack lists');
+          assert(!/\bv?\d+\.\d+(?:\.\d+)?\b/i.test(data.text), 'No fixed release/stack versions');
+          if (file === 'index.html') {
+            assert(data.text.trim().split(/\s+/).length < 420, 'Welcome page must stay concise');
+            if (width === 1440) assert(data.height < 2300, `Welcome page too tall: ${data.height}`);
+          }
+          if (file !== 'brand.html') {
+            assert(data.visibleShots.length > 0);
+            assert(data.visibleShots.every(s => s.includes(`-${theme}.webp`)), JSON.stringify(data.visibleShots));
+            assert(/sample data/i.test(data.text), 'Captures must disclose synthetic preview data');
+          }
           assert(data.images.every((i) => i.ok && i.alt), JSON.stringify(data.images));
           assert.deepEqual(data.language, { value: 'en', hidden: true, tab: -1, options: ['en'] });
           assert.deepEqual(data.duplicateKeys, []);
@@ -90,6 +112,7 @@ const contrast = (a, b) => { const x = [lum(rgb(a)), lum(rgb(b))].sort((a, b) =>
               await page.screenshot({ path: path.join(output, `email-preview-${width}-${theme}.png`) });
             }
             await page.evaluate((t) => { localStorage.setItem('sealforge.theme', t); document.documentElement.dataset.theme = t; document.querySelectorAll('img').forEach(i => i.loading = 'eager'); }, theme);
+            await page.evaluate(() => window.scrollTo(0, 0));
             await page.waitForTimeout(100);
             await page.screenshot({ path: path.join(output, `${file.replace('.html', '')}-${width}-${theme}.png`), fullPage: true });
           }
