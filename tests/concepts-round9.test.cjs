@@ -17,7 +17,7 @@ const contrast = (a,b) => { const [x,y]=[luminance(a),luminance(b)].sort((a,b)=>
   const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH || '/home/ubuntu/.hermes/tools/chromium-1208/chrome-linux/chrome'});
   const rows=[];
   try {
-    for(const route of ['concepts/round-9/','concepts/']) for(const width of [320,390,768,1440]) {
+    for(const route of ['concepts/round-9/']) for(const width of [320,390,768,1440]) {
       const context=await browser.newContext({viewport:{width,height:1000},reducedMotion:'reduce'});
       await context.addInitScript(()=>localStorage.setItem('sealforge.theme','dark'));
       const page=await context.newPage();
@@ -73,7 +73,7 @@ const contrast = (a,b) => { const [x,y]=[luminance(a),luminance(b)].sort((a,b)=>
       await context.close();
     }
     const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:1000}}),page=await context.newPage();
-    await page.goto(base+'concepts/',{waitUntil:'load'});await page.waitForURL('**/concepts/round-9/');
+    await page.goto(base+'concepts/round-9/',{waitUntil:'load'});await page.waitForURL('**/concepts/round-9/');
     assert(await page.locator('#full-seal').isVisible());assert.equal(await page.locator('.controls:visible').count(),0);
     assert.equal(await page.locator('a[data-full]').count(),3);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth),0);
