@@ -32,6 +32,7 @@ const contrast = (a, b) => { const x = [lum(rgb(a)), lum(rgb(b))].sort((a, b) =>
           const response = await page.goto(base + file, { waitUntil: 'networkidle' });
           assert.equal(response.status(), 200);
           await page.evaluate(async () => { document.querySelectorAll('img, iframe').forEach((i) => i.loading = 'eager'); await document.fonts.ready; });
+          await page.waitForFunction(() => [...document.images].every(i => i.complete && i.naturalWidth > 0), null, { timeout: 30_000 });
           if (file === 'brand.html') {
             await page.frameLocator('.signature-preview').locator('table').waitFor();
             const preview = page.frames().find((f) => f.url().endsWith('/assets/brand/email-signature.html'));
