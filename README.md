@@ -84,7 +84,9 @@ node tests/site.test.cjs
 
 ## Publication
 
-GitHub Pages publishes `main`. Push only the intended website changes, verify the
+GitHub Pages publishes `main`. The root `.nojekyll` marker keeps publication purely
+static, without generating a default theme stylesheet or processing the HTML.
+Push only the intended website changes, verify the
 remote commit, require a successful Pages deployment for that exact SHA, then
 compare public HTML/assets/downloads with committed bytes and run the HTTPS
 browser matrix. An older successful deployment does not verify a new push.

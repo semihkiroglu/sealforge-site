@@ -105,7 +105,7 @@ fs.mkdirSync(output, { recursive: true });
     }
     const catalogue = JSON.parse(fs.readFileSync(path.join(repo, 'assets/downloads/sealforge-downloads.json')));
     for (const [name, info] of Object.entries(catalogue.files)) { const r = await probe.request.get(base + 'assets/downloads/' + name); assert.equal(r.status(), 200); const data = await r.body(); assert.equal(data.length, info.bytes); assert.equal(crypto.createHash('sha256').update(data).digest('hex'), info.sha256); }
-    for (const retired of ['concepts/', 'concepts/round-11/', 'assets/downloads/sealforge-brand-kit-workshop.zip']) assert.equal((await probe.request.get(base + retired)).status(), 404, retired);
+    for (const retired of ['assets/css/style.css', 'concepts/', 'concepts/round-11/', 'assets/downloads/sealforge-brand-kit-workshop.zip']) assert.equal((await probe.request.get(base + retired)).status(), 404, retired);
     await probe.close(); report.checkedLocalLinks = links.size; report.persistence = true; report.noJavaScript = true; report.blockedStorage = true; report.downloads = Object.keys(catalogue.files).length;
     assert.equal(report.cases.length, Object.keys(pages).length * 5 * 2);
     fs.writeFileSync(path.join(output, 'site-report.json'), JSON.stringify(report, null, 2));
