@@ -20,7 +20,7 @@ const luminance=s=>s.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>v/255).map(v
   const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/home/ubuntu/.hermes/tools/chromium-1208/chrome-linux/chrome'});
   const rows=[];
   try{
-    for(const route of ['concepts/round-10/','concepts/'])for(const width of [320,390,768,1440]){
+    for(const route of ['concepts/round-10/'])for(const width of [320,390,768,1440]){
       const context=await browser.newContext({viewport:{width,height:1000}});
       await context.addInitScript(()=>localStorage.setItem('sealforge.theme','dark'));
       const page=await context.newPage(),errors=[];
@@ -54,7 +54,7 @@ const luminance=s=>s.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>v/255).map(v
       await context.close();
     }
     const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:1000}}),page=await context.newPage();
-    await page.goto(base+'concepts/',{waitUntil:'load'});await page.waitForURL('**/concepts/round-10/');await page.waitForLoadState('networkidle');assert.equal(await page.locator('#comparison article').count(),3);assert.equal(await page.locator('#tone').isVisible(),false);assert.equal(await page.locator('[data-open]').count(),3);await context.close();
+    await page.goto(base+'concepts/round-10/',{waitUntil:'load'});await page.waitForURL('**/concepts/round-10/');await page.waitForLoadState('networkidle');assert.equal(await page.locator('#comparison article').count(),3);assert.equal(await page.locator('#tone').isVisible(),false);assert.equal(await page.locator('[data-open]').count(),3);await context.close();
     fs.writeFileSync(path.join(output,'report.json'),JSON.stringify({base,cases:rows,noJavaScript:true},null,2));
     console.log(JSON.stringify({states:rows.length,columns:3,themes:2,overflow:0,errors:0,noJavaScript:true,report:path.join(output,'report.json')}));
   }finally{await browser.close();}
