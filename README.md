@@ -1,8 +1,8 @@
 # SealForge website
 
-The product website is plain HTML, CSS and a small theme script. There is no
+The product website is plain HTML, CSS and small preference scripts. There is no
 framework, build step, backend, analytics or package dependency in the published
-site. All public copy is English.
+site. All five pages have complete English and Turkish copies.
 
 ## Pages
 
@@ -16,6 +16,24 @@ The primary navigation has four destinations; the brand kit remains in the
 footer. Every page shares the same local fonts, theme control and responsive
 stylesheet. Content and navigation work without JavaScript. With storage blocked,
 the theme control still works for the current page.
+
+## Languages
+
+English keeps the existing URLs; Turkish pages are under `tr/`. The top
+English/Türkçe links work without JavaScript. With JavaScript, an explicit
+`?lang=en|tr` wins, followed by a saved choice; otherwise a direct Turkish URL
+stays Turkish, and English entry points negotiate the browser's supported
+language (English fallback). Switching preserves the page and URL fragment.
+Manual preference is carried through links when storage is blocked.
+
+English HTML is the source. Turkish pages are generated, not runtime-replaced
+strings. The private `sealforge-branding` repository owns the strict catalogs
+under `tools/branding/locales/tr/`, the shared language script and generation
+tools; those sources are also in the deliberately public editable-source ZIP.
+After editing English content, update the Turkish catalog and run
+`python tools/branding/cove.py --site /path/to/sealforge-site` from that source
+repository. Missing translations stop generation. Keep commands, API fields and
+`{{tokens}}` unchanged. Both supplied font files contain Turkish glyphs.
 
 ## Source accuracy and access
 
@@ -37,8 +55,10 @@ checks do not start the application or access a database, signing token or worke
 
 ## Identity assets
 
-`assets/brand/` contains the canonical Cove exports from the product's
-`tools/branding/cove.py`. Manrope 600 carries brand/display text; Inter carries
+`assets/brand/` contains exports from the separate private `sealforge-branding`
+repository's `tools/branding/cove.py`. Seal + Forge explains the name; Cove is
+only a supporting association within Seal and the drawing's internal name.
+Manrope 600 carries brand/display text; Inter carries
 body copy. Logo lettering is outlined. Do not independently redraw, recolor or
 regenerate the website copies.
 
@@ -46,6 +66,10 @@ regenerate the website copies.
 The artwork, complete corporate set, stationery, digital kit and editable-source
 ZIPs, brand-guide PDF and letterhead PDF retain their published addresses. They
 are identity materials, not application source or installation packages.
+Every ZIP includes the relevant English and Turkish outputs. Existing English
+PDF links stay valid; Turkish adds `sealforge-brand-guidelines-tr.pdf` and
+`sealforge-letterhead-tr.pdf`. Turkish pages link to their localized PDFs,
+social image and email signature. Logos/icons are shared across languages.
 
 Keep their manifests, font notices and required font files. Current icon/social
 aliases under `assets/img/` are also retained. Website cleanup does not authorize
@@ -58,15 +82,19 @@ and set their paths; do not install them into the published directory.
 
 ```bash
 node --check assets/js/site.js
+node --check assets/js/language.js
 node --check tests/site.test.cjs
 NODE_PATH=/path/to/playwright/node_modules \
 CHROMIUM_PATH=/path/to/chrome \
 python tools/test-local.py --evidence /path/to/evidence
+# Same environment, focused negotiation/switching check:
+python tools/test-local.py --evidence /path/to/language-evidence --test tests/language.test.cjs
 ```
 
 The helper chooses an available loopback port, serves this repository, runs the
 real browser matrix and closes its own server in `finally`. The matrix exercises
-all maintained pages at 320, 390, 768, 1440 and 1920 pixels in both themes. It
+all maintained pages at 320, 390, 768, 1440 and 1920 pixels in both themes and
+both languages (100 cases). It
 checks navigation, required content sections, visible artwork, real loaded
 fonts, document/header overflow, text contrast, links and anchors, download
 bytes/checksums, no-JavaScript content and blocked-storage behavior. It records

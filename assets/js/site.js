@@ -1,4 +1,4 @@
-/* The only client-side preference is the theme; all content and navigation work without JavaScript. */
+/* Static content works without JavaScript; this control only changes the theme. */
 (() => {
   'use strict';
   const root = document.documentElement;
@@ -6,7 +6,7 @@
   const applyTheme = theme => {
     root.dataset.theme = theme;
     document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#f7f8f5' : '#151b1d';
-    toggle.setAttribute('aria-label', `Switch to ${theme === 'light' ? 'dark' : 'light'} theme`);
+    toggle.setAttribute('aria-label', root.lang === 'tr' ? (theme === 'light' ? 'Koyu temaya geç' : 'Açık temaya geç') : `Switch to ${theme === 'light' ? 'dark' : 'light'} theme`);
     toggle.setAttribute('aria-pressed', String(theme === 'light'));
     try { localStorage.setItem('sealforge.theme', theme); } catch { /* Storage may be blocked; the control still works. */ }
   };

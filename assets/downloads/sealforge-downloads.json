@@ -1,38 +1,50 @@
 {
   "artwork": "Approved Cove single emblem; Manrope 600 wordmark and Inter body",
+  "languages": [
+    "en",
+    "tr"
+  ],
   "files": {
     "sealforge-corporate-identity.zip": {
-      "bytes": 4572679,
-      "files": 143,
-      "sha256": "4563241f14e85ba96e068ef41d1ab3ce93c17c55f0176e8d6741f07c12f2fc4b"
+      "bytes": 5710226,
+      "files": 180,
+      "sha256": "7f655a0c131d03bd439fb404c154c124aeb0444ccaff5667d6663f5f51895bb1"
     },
     "sealforge-stationery.zip": {
-      "bytes": 3735176,
-      "files": 115,
-      "sha256": "7a9aac0b685477cca17a9e18342676d20a7948d90f23648389aa599264926f5f"
+      "bytes": 4782405,
+      "files": 151,
+      "sha256": "79ae7c6a5f49383265f3f67217e3fdcc399b6c0204a6718e1f65d797505c4667"
     },
     "sealforge-digital-kit.zip": {
-      "bytes": 1581075,
-      "files": 27,
-      "sha256": "78c621a7b2435a06626e0ebb85f6cd2abe4b3ff228b0b1a33bca003e5b20c458"
+      "bytes": 1807418,
+      "files": 38,
+      "sha256": "cfcea6d83d089a5a4846eedeb5f79f4de204efd02d5e59e9d16c28a675463ccc"
     },
     "sealforge-editable-sources.zip": {
-      "bytes": 2989556,
-      "files": 87,
-      "sha256": "ad3b95e10cbb14d2667596b6609c6f12ce69d01d7c5029e26e81385bee4fa35f"
+      "bytes": 3513709,
+      "files": 116,
+      "sha256": "3c3d95b3177c538f4c698f250d19310552d57ce6deecd490c53912ad6c4c16bd"
     },
     "sealforge-brand-kit.zip": {
-      "bytes": 2943586,
-      "files": 96,
-      "sha256": "83d7be5aab00450a8903da36624a5908cdf071305c8e86bcdbce6fb979ba696d"
+      "bytes": 3433692,
+      "files": 107,
+      "sha256": "76cc13b94208ea5525eb9ae336577ef4e0397ab7f6b146eba38fe88d83593576"
     },
     "sealforge-brand-guidelines.pdf": {
-      "bytes": 527693,
-      "sha256": "aa80f6b7e240df18bc72954586ac573b23a00a565744e237957cc9adb2a41815"
+      "bytes": 537261,
+      "sha256": "551e1cad59957f858389640cd64e4452bc56483f44e0a53a46fec4c5de1f7325"
     },
     "sealforge-letterhead.pdf": {
-      "bytes": 80369,
-      "sha256": "19931faade0232d0c07c71a046cf446b4a053ababcb6e0c22f56bc61770fbd4c"
+      "bytes": 82006,
+      "sha256": "25a8004bbc2cb34d89bc9c9ebf1f59ee5203eb3f54b34a21af8a84f40d48241b"
+    },
+    "sealforge-brand-guidelines-tr.pdf": {
+      "bytes": 569878,
+      "sha256": "182a1d3ff83df5d805ce09a195ded6ef2c0d02d72c7d0b30b42b870c0f1a6592"
+    },
+    "sealforge-letterhead-tr.pdf": {
+      "bytes": 80840,
+      "sha256": "689568319effa488dfd104abbdfeac1352b906851a3df77179a2aea79af9b21c"
     }
   }
 }

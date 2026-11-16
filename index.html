@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-language-root="./">
 <head>
 <meta charset="utf-8">
+<script src="assets/js/language.js"></script>
 <script>try { document.documentElement.dataset.theme = localStorage.getItem('sealforge.theme') === 'light' ? 'light' : 'dark'; } catch (e) {}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SealForge — Your releases, signed with care.</title>
 <meta name="description" content="A self-hosted code-signing workspace for teams and build pipelines. Control certificate access and follow signing jobs on your own infrastructure.">
 <meta name="theme-color" content="#151b1d">
 <link rel="canonical" href="https://semihkiroglu.github.io/sealforge-site/">
+<link rel="alternate" hreflang="en" href="https://semihkiroglu.github.io/sealforge-site/"><link rel="alternate" hreflang="tr" href="https://semihkiroglu.github.io/sealforge-site/tr/"><link rel="alternate" hreflang="x-default" href="https://semihkiroglu.github.io/sealforge-site/">
+<meta property="og:locale" content="en_US">
 <meta property="og:title" content="SealForge — Your releases, signed with care.">
 <meta property="og:description" content="A self-hosted code-signing workspace for teams and build pipelines. Control certificate access and follow signing jobs on your own infrastructure.">
 <meta property="og:type" content="website"><meta property="og:url" content="https://semihkiroglu.github.io/sealforge-site/">
@@ -25,6 +28,7 @@
 <header class="site-header"><div class="wrap header-inner">
 <a class="brand" href="index.html" aria-label="SealForge home"><img class="logo-light" src="assets/brand/head-on-light.svg" width="1024" height="1024" alt=""><img class="logo-dark" src="assets/brand/head-on-dark.svg" width="1024" height="1024" alt=""><span class="brand-wordmark">SealForge</span></a>
 <nav class="nav" aria-label="Primary"><a href="index.html" aria-current="page">Overview</a><a href="details.html">Technical</a><a href="development.html">Development</a><a href="usage.html">Usage</a></nav>
+<nav class="language-switch" aria-label="Language"><a href="index.html?lang=en" lang="en" hreflang="en" aria-current="true">English</a><a href="tr/index.html?lang=tr" lang="tr" hreflang="tr">Türkçe</a></nav>
 <button class="theme-toggle" id="theme-toggle" type="button" hidden aria-label="Switch to light theme" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M20.4 14.2A8.4 8.4 0 0 1 9.8 3.6a8.4 8.4 0 1 0 10.6 10.6Z"/></svg></button>
 </div></header>
 <main id="main">
