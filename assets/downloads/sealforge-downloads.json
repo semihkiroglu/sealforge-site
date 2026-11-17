@@ -6,14 +6,14 @@
   ],
   "files": {
     "sealforge-corporate-identity.zip": {
-      "bytes": 3895839,
+      "bytes": 3915461,
       "files": 119,
-      "sha256": "5050020b600767f1cb286cf070450127f78870f809cd86d8c9c67a00599c5f5c"
+      "sha256": "d8c3be5b049ddd7fe32e4fbdd6955fe5015732a472e3fdb498f3b8f8f302a173"
     },
     "sealforge-stationery.zip": {
-      "bytes": 2719703,
+      "bytes": 2739325,
       "files": 74,
-      "sha256": "4361ff6d223c978922c3efcdd84a2a922c3ccecb47069b10899db7a0a75ed49f"
+      "sha256": "0cc4fdc47a6bb5245f361bf9f1045e357ea2c2e638580c0421b83e9066609c00"
     },
     "sealforge-digital-kit.zip": {
       "bytes": 466966,
