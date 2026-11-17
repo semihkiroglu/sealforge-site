@@ -12,7 +12,7 @@ const pages = {
   'index.html': ['how', 'start'],
   'details.html': ['architecture', 'security', 'integration', 'deployment'],
   'development.html': ['source', 'build', 'contribute'],
-  'usage.html': ['start', 'sign', 'automation', 'troubleshooting'],
+  'usage.html': ['install', 'start', 'sign', 'automation', 'troubleshooting'],
   'brand.html': ['social', 'downloads', 'email'],
 };
 const navigation = ['index.html', 'usage.html', 'details.html', 'development.html'];
