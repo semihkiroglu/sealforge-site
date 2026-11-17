@@ -63,7 +63,6 @@ fs.mkdirSync(output, { recursive: true });
           images: [...document.images].every(i => i.complete && i.naturalWidth > 0 && i.hasAttribute('alt')),
           retiredMarkup: !!document.querySelector('[data-i18n],#lang-select,.capture'),
           pairs: [[body.color, body.backgroundColor], [secondary, body.backgroundColor], ...(button ? [[getComputedStyle(button).color, getComputedStyle(button).backgroundColor]] : [])],
-          restrictedLinks: [...document.querySelectorAll('a[href^="https://github.com/semihkiroglu/SealForge"]')].every(a => a.dataset.access === 'restricted'),
         };
       });
       assert.deepEqual(d.nav, navigation, `${file}: four distinct primary destinations`);
@@ -76,7 +75,7 @@ fs.mkdirSync(output, { recursive: true });
       assert(d.fonts.some(f => f.includes('Manrope')) && d.fonts.some(f => f.includes('Inter')));
        assert.deepEqual(d.brand.sources, [`${prefix ? '../' : ''}assets/brand/head-on-${theme}.svg`]);
       assert(d.brand.boxes.every(b => b.width === (width <= 440 ? 28 : 32) && b.height === b.width));
-      assert(d.images && !d.retiredMarkup && d.restrictedLinks);
+      assert(d.images && !d.retiredMarkup);
       const ratios = d.pairs.map(([a,b]) => contrast(a,b)); assert(ratios.every(r => r >= 4.5), JSON.stringify(ratios));
       if (file === 'index.html') { assert(d.text.trim().split(/\s+/).length < 430); assert(!/PostgreSQL|PKCS#11|Apache-2\.0/.test(d.text), 'Keep technical and licensing depth off the overview'); }
        if (file === 'development.html') assert(/Apache-2\.0/.test(d.text) && /GitHub/.test(d.text));

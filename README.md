@@ -37,14 +37,13 @@ canonical URLs and the top switch. English remains the default at the root; no
 page content is replaced at runtime.
 
 English HTML is the source. Turkish pages are generated, not runtime-replaced
-strings. The private `sealforge-branding` repository owns the strict catalogs
-under `tools/branding/locales/tr/`, the shared language script and generation
-tools.
+strings. The private brand source repository owns the strict catalogs under
+`tools/branding/locales/tr/`, the shared language script and generation tools.
 After editing English content at the root, update the Turkish catalog and
 regenerate the Turkish pages without rebuilding brand downloads:
 
 ```bash
-python -c 'import sys; from pathlib import Path; sys.path.insert(0, "tools/branding"); import localize; localize.site(Path("/path/to/sealforge-site"))'
+python -c 'import sys; from pathlib import Path; sys.path.insert(0, "tools/branding"); import localize; localize.site(Path("/path/to/site"))'
 ```
 
 Run this from the branding repository. Missing translations stop generation.
@@ -70,8 +69,8 @@ application or access a database, signing token or worker.
 
 ## Identity assets
 
-`assets/brand/` contains exports from the separate `sealforge-branding`
-repository's `tools/branding/cove.py`. Seal + Forge explains the name.
+`assets/brand/` contains exports from the separate brand source repository's
+`tools/branding/cove.py`. Seal + Forge explains the name.
 Manrope 600 carries brand/display text; Inter carries
 body copy. Logo lettering is outlined. Do not independently redraw, recolor or
 regenerate the website copies.
@@ -135,6 +134,11 @@ node tests/site.test.cjs
 Report a vulnerability privately; never include PINs, private keys or production
 audit data.
 
+## Repositories
+
+- Website: <https://github.com/SealForgeProject/site>
+- Application: <https://github.com/SealForgeProject/sealforge>
+
 ## Profiles
 
 - GitHub: <https://github.com/SealForgeProject>
@@ -152,10 +156,10 @@ sets the custom domain. DNS points the apex at GitHub Pages:
 - Apex `getsealforge.com`: A records `185.199.108.153`, `185.199.109.153`,
   `185.199.110.153`, `185.199.111.153` (and the matching AAAA records if you
   use IPv6).
-- `www`: CNAME to `semihkiroglu.github.io`.
+- `www`: CNAME to the Pages host shown in the GitHub repository settings.
 
-After DNS changes, keep **Enforce HTTPS** enabled and verify that the old
-`github.io` address redirects to the custom domain.
+After DNS changes, keep **Enforce HTTPS** enabled and verify the custom domain
+serves the site.
 
 ## Publication
 
