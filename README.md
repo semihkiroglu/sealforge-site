@@ -131,6 +131,15 @@ CHROMIUM_PATH=/path/to/chrome \
 node tests/site.test.cjs
 ```
 
+## Profiles
+
+- GitHub: <https://github.com/SealForgeProject>
+- LinkedIn: <https://www.linkedin.com/company/SealForgeProject>
+- YouTube: <https://www.youtube.com/@SealForgeProject>
+
+The footer links to all three with `rel="me"`. LinkedIn is case-sensitive and
+belongs on the company page, not a personal profile.
+
 ## Custom domain
 
 The target public address is `https://getsealforge.com/`. GitHub Pages still

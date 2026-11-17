@@ -19,7 +19,9 @@ const menus = {
         await page.goto(`${base}${prefix}${file}?lang=${language}`, { waitUntil: 'networkidle' });
         const footer = await page.locator('.site-footer').innerText();
         check(`${language}/${file}: single footer slogan`, footer.includes(language === 'tr' ? 'Kodu imzalayın, anahtar sizde kalsın.' : 'Sign code, keep your keys.') && !/Your keys\. Your signature|Anahtarınız\. İmzanız|Your infrastructure\. Your keys|Altyapınız\. Anahtarınız|signed with care|özenle imzalı/i.test(footer));
-        check(`${language}/${file}: GitHub organisation linked once in footer`, await page.locator('.site-footer a[href="https://github.com/SealForgeProject"]').count() === 1);
+        for (const profile of ['https://github.com/SealForgeProject', 'https://www.linkedin.com/company/SealForgeProject', 'https://www.youtube.com/@SealForgeProject']) {
+          check(`${language}/${file}: profile ${profile}`, await page.locator(`.site-footer a[href="${profile}"][rel~="me"]`).count() === 1);
+        }
         check(`${language}/${file}: menu starts with user destinations`, JSON.stringify(await page.locator('.nav a').allTextContents()) === JSON.stringify(menus[language]));
         if (file === 'index.html') {
           const text = await page.locator('#screenshots').innerText();
