@@ -37,8 +37,8 @@ canonical URLs and the top switch. English remains the default at the root; no
 page content is replaced at runtime.
 
 English HTML is the source. Turkish pages are generated, not runtime-replaced
-strings. The private brand source repository owns the strict catalogs under
-`tools/branding/locales/tr/`, the shared language script and generation tools.
+strings. The brand catalogs under `tools/branding/locales/tr/`, the shared
+language script and generation tools are maintained separately.
 After editing English content at the root, update the Turkish catalog and
 regenerate the Turkish pages without rebuilding brand downloads:
 
@@ -69,7 +69,7 @@ application or access a database, signing token or worker.
 
 ## Identity assets
 
-`assets/brand/` contains exports from the separate brand source repository's
+`assets/brand/` contains exports from the brand source tooling in
 `tools/branding/cove.py`. Seal + Forge explains the name.
 Manrope 600 carries brand/display text; Inter carries
 body copy. Logo lettering is outlined. Do not independently redraw, recolor or
