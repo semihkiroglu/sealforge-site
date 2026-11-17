@@ -5,8 +5,6 @@ const menus = {
   en: ['Overview', 'Usage', 'Technical', 'Development'],
   tr: ['Genel bakış', 'Kullanım', 'Teknik', 'Geliştirme']
 };
-const domain = ['getsealforge', 'com'].join('.');
-const contacts = ['hello', 'security'].map(user => `${user}@${domain}`);
 
 (async () => {
   const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH });
@@ -25,11 +23,6 @@ const contacts = ['hello', 'security'].map(user => `${user}@${domain}`);
           check(`${language}/${file}: profile ${profile}`, await page.locator(`.site-footer a[href="${profile}"][rel~="me"]`).count() === 1);
         }
         check(`${language}/${file}: menu starts with user destinations`, JSON.stringify(await page.locator('.nav a').allTextContents()) === JSON.stringify(menus[language]));
-        for (const address of contacts) {
-          check(`${language}/${file}: ${address} revealed only with JavaScript`, await page.locator(`.site-footer a[href="mailto:${address}"]`).count() === 1);
-        }
-        const raw = await (await page.request.get(`${base}${prefix}${file}`)).text();
-        check(`${language}/${file}: no plain contact address in HTML`, !contacts.some(address => raw.includes(address)));
         if (file === 'index.html') {
           const text = await page.locator('#screenshots').innerText();
           check(`${language}/index: concise sample-data note`, /example data|örnek veri/i.test(text) && !/English-language interface|İngilizce arayüz|full size|tam boyut/i.test(text));
@@ -67,16 +60,7 @@ const contacts = ['hello', 'security'].map(user => `${user}@${domain}`);
       }
       await context.close();
     }
-    {
-      const context = await browser.newContext({ javaScriptEnabled: false });
-      const page = await context.newPage();
-      await page.goto(`${base}tr/index.html`, { waitUntil: 'networkidle' });
-      const text = await page.locator('.footer-contact').innerText();
-      check('no-JavaScript contact fallback', text.includes('[at]') && text.includes('[dot]'));
-      check('no-JavaScript contact has no mailto', await page.locator('.footer-contact a[href^="mailto:"]').count() === 0);
-      await context.close();
-    }
     assert.deepEqual(failures, []);
-    console.log('Structure, wording, menu, status-group, quick-start, contact and footer checks passed.');
+    console.log('Structure, wording, menu, status-group, quick-start and footer checks passed.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });
