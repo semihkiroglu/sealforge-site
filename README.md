@@ -10,7 +10,7 @@ site. All five pages have complete English and Turkish copies.
 - `details.html` — architecture, security boundaries, API integration and deployment.
 - `development.html` — source access, licensing, building and contribution.
 - `usage.html` — first use, administration, signing jobs and troubleshooting.
-- `brand.html` — the approved Cove identity and its current downloads.
+- `brand.html` — the approved identity and its current downloads.
 
 The primary navigation has four destinations; the brand kit remains in the
 footer. Every page shares the same local fonts, theme control and responsive
@@ -56,8 +56,7 @@ checks do not start the application or access a database, signing token or worke
 ## Identity assets
 
 `assets/brand/` contains exports from the separate private `sealforge-branding`
-repository's `tools/branding/cove.py`. Seal + Forge explains the name; Cove is
-only a supporting association within Seal and the drawing's internal name.
+repository's `tools/branding/cove.py`. Seal + Forge explains the name.
 Manrope 600 carries brand/display text; Inter carries
 body copy. Logo lettering is outlined. Do not independently redraw, recolor or
 regenerate the website copies.
