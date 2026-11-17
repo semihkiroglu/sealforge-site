@@ -15,7 +15,7 @@ const pages = {
   'usage.html': ['start', 'sign', 'automation', 'troubleshooting'],
   'brand.html': ['downloads', 'email'],
 };
-const navigation = ['index.html', 'details.html', 'development.html', 'usage.html'];
+const navigation = ['index.html', 'usage.html', 'details.html', 'development.html'];
 const report = { base, screenshots: false, cases: [] };
 const rgb = value => value.match(/[\d.]+/g).slice(0, 3).map(Number);
 const lum = values => values.map(v => v / 255).map(v => v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4).reduce((s, v, i) => s + v * [.2126, .7152, .0722][i], 0);

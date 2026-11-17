@@ -6,32 +6,42 @@ site. All five pages have complete English and Turkish copies.
 
 ## Pages
 
-- `index.html` — the product overview, benefits and signing workflow.
+English is the default and stays at the root; other languages live in their
+own folders. Turkish is under `tr/`.
+
+- `index.html` — the product overview, quick start, benefits and signing workflow.
 - `details.html` — architecture, security boundaries, API integration and deployment.
 - `development.html` — source access, licensing, building and contribution.
 - `usage.html` — first use, administration, signing jobs and troubleshooting.
 - `brand.html` — the approved identity and its current downloads.
+- `tr/` — the generated Turkish copies of all five pages.
 
-The primary navigation has four destinations; the brand kit remains in the
-footer. Every page shares the same local fonts, theme control and responsive
-stylesheet. Content and navigation work without JavaScript. With storage blocked,
-the theme control still works for the current page.
+The primary navigation has four destinations, ordered for normal users first.
+The brand kit and the GitHub organisation remain in the footer. Every page
+shares the same local fonts, theme control and responsive stylesheet. Content
+and navigation work without JavaScript. With storage blocked, the theme control
+still works for the current page.
 
 ## Languages
 
-English keeps the existing URLs; Turkish pages are under `tr/`. The top
+English is the default at the root; Turkish is under `tr/`. The top
 English/Türkçe links work without JavaScript. With JavaScript, an explicit
 `?lang=en|tr` wins, followed by a saved choice; otherwise a direct Turkish URL
 stays Turkish, and English entry points negotiate the browser's supported
 language (English fallback). Switching preserves the page and URL fragment.
 Manual preference is carried through links when storage is blocked.
 
+Adding another language means adding a sibling folder, a catalog and its entry
+in the supported-language list in `assets/js/language.js`, plus hreflang and
+canonical URLs and the top switch. English remains the default at the root; no
+page content is replaced at runtime.
+
 English HTML is the source. Turkish pages are generated, not runtime-replaced
 strings. The private `sealforge-branding` repository owns the strict catalogs
 under `tools/branding/locales/tr/`, the shared language script and generation
 tools.
-After editing English content, update the Turkish catalog and regenerate the
-site pages without rebuilding brand downloads:
+After editing English content at the root, update the Turkish catalog and
+regenerate the Turkish pages without rebuilding brand downloads:
 
 ```bash
 python -c 'import sys; from pathlib import Path; sys.path.insert(0, "tools/branding"); import localize; localize.site(Path("/path/to/sealforge-site"))'
@@ -98,6 +108,8 @@ python tools/test-local.py --evidence /path/to/evidence
 python tools/test-local.py --evidence /path/to/language-evidence --test tests/language.test.cjs
 # Screenshot, copy and heading-alignment checks:
 python tools/test-local.py --evidence /path/to/finalization-evidence --test tests/finalization.test.cjs
+# Structure, menu, quick-start, status and footer checks:
+python tools/test-local.py --evidence /path/to/copy-evidence --test tests/copy-polish.test.cjs
 ```
 
 The helper chooses an available loopback port, serves this repository, runs the
@@ -118,6 +130,24 @@ NODE_PATH=/path/to/playwright/node_modules \
 CHROMIUM_PATH=/path/to/chrome \
 node tests/site.test.cjs
 ```
+
+## Custom domain
+
+The target public address is `https://getsealforge.com/`. GitHub Pages still
+serves the current `github.io` address until the domain is switched.
+
+Before adding a root `CNAME` file or enabling the custom domain in repository
+settings, point DNS at GitHub Pages:
+
+- Apex `getsealforge.com`: A records `185.199.108.153`, `185.199.109.153`,
+  `185.199.110.153`, `185.199.111.153` (and the matching AAAA records if you
+  use IPv6).
+- `www`: CNAME to `semihkiroglu.github.io`.
+
+Then add `CNAME` containing `getsealforge.com`, enable **Enforce HTTPS**, and
+verify that the old `github.io` address redirects to the custom domain. Do not
+enable the domain while DNS still points elsewhere: the old address will
+redirect to an unreachable host.
 
 ## Publication
 
