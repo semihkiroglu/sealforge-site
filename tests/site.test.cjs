@@ -79,7 +79,7 @@ fs.mkdirSync(output, { recursive: true });
       assert(d.images && !d.retiredMarkup && d.restrictedLinks);
       const ratios = d.pairs.map(([a,b]) => contrast(a,b)); assert(ratios.every(r => r >= 4.5), JSON.stringify(ratios));
       if (file === 'index.html') { assert(d.text.trim().split(/\s+/).length < 430); assert(!/PostgreSQL|PKCS#11|Apache-2\.0/.test(d.text), 'Keep technical and licensing depth off the overview'); }
-       if (file === 'development.html') assert(/Apache-2\.0/.test(d.text) && /access.required|access.restricted|private|erişim|özeldir/i.test(d.text));
+       if (file === 'development.html') assert(/Apache-2\.0/.test(d.text) && /GitHub/.test(d.text));
        if (file === 'usage.html') assert((language === 'tr' ? /İmzalama İzinleri/ : /Signing Permissions/).test(d.text) && /MFA/.test(d.text));
        await page.locator('#theme-toggle').click(); assert.equal(await page.getAttribute('html', 'data-theme'), theme === 'dark' ? 'light' : 'dark');
        assert.equal(await page.locator('#theme-toggle').getAttribute('aria-label'), language === 'tr' ? (theme === 'dark' ? 'Koyu temaya geç' : 'Açık temaya geç') : `Switch to ${theme} theme`);

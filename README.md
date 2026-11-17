@@ -59,11 +59,9 @@ including its architecture, API, development and operations documentation and
 the corresponding implementation. A current source check is required when
 changing a behavior, supported format, API field or operating instruction.
 
-The product source carries Apache-2.0, but its GitHub repository is currently
-private. Product links are explicitly marked as access-restricted. This public
-website and its issue tracker are separate from product-source access. Do not
-turn a license statement into a claim that an anonymous clone, installer or
-product download is available.
+The product source carries Apache-2.0. Source links are published on the
+development page when they are available; the website and its issue tracker are
+separate from source access.
 
 The homepage screenshots use compiled components from the same feature commit
 with fictional in-memory data; see `assets/screenshots/README.md`. They do not
@@ -72,7 +70,7 @@ application or access a database, signing token or worker.
 
 ## Identity assets
 
-`assets/brand/` contains exports from the separate private `sealforge-branding`
+`assets/brand/` contains exports from the separate `sealforge-branding`
 repository's `tools/branding/cove.py`. Seal + Forge explains the name.
 Manrope 600 carries brand/display text; Inter carries
 body copy. Logo lettering is outlined. Do not independently redraw, recolor or
@@ -81,8 +79,6 @@ regenerate the website copies.
 `assets/downloads/sealforge-downloads.json` is the current download catalogue.
 The artwork, complete corporate set, stationery and digital ZIPs, brand-guide PDF
 and letterhead PDF contain approved identity materials, not production sources.
-The retired editable-source archive must not be republished. Its historical
-copies in the public repository and previously downloaded files remain accessible.
 Every ZIP includes the relevant English and Turkish outputs. Existing English
 PDF links stay valid; Turkish adds `sealforge-brand-guidelines-tr.pdf` and
 `sealforge-letterhead-tr.pdf`. Turkish pages link to their localized PDFs,
@@ -136,8 +132,8 @@ node tests/site.test.cjs
 - General: `hello [at] getsealforge [dot] com`
 - Security reports: `security [at] getsealforge [dot] com`
 
-Contact addresses are not published in the site pages. Report a vulnerability
-privately; never include PINs, private keys or production audit data.
+Report a vulnerability privately; never include PINs, private keys or production
+audit data.
 
 ## Profiles
 
