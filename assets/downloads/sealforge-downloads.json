@@ -6,24 +6,24 @@
   ],
   "files": {
     "sealforge-corporate-identity.zip": {
-      "bytes": 4474951,
-      "files": 126,
-      "sha256": "2853b72c15297bffd2dc62596b2dbd71652e53f2e4daa1b7d09a65b7fc3dba3d"
+      "bytes": 3742034,
+      "files": 109,
+      "sha256": "09a1ab19a07f0856b8a4d09ffcf5c44f2cd05376371c2b978414c6b84d2e3a75"
     },
     "sealforge-stationery.zip": {
-      "bytes": 4163168,
-      "files": 114,
-      "sha256": "c640c0cceb3859837e697ae2609e65acc2916435d97145eb7779c29931066bc5"
+      "bytes": 2719703,
+      "files": 74,
+      "sha256": "4361ff6d223c978922c3efcdd84a2a922c3ccecb47069b10899db7a0a75ed49f"
     },
     "sealforge-digital-kit.zip": {
-      "bytes": 1375637,
-      "files": 32,
-      "sha256": "c45f3bf7a6a7dfecfc07dddbe06bae8eab0bbd31bb145c7100fc1d6d9dfb59a7"
+      "bytes": 313161,
+      "files": 15,
+      "sha256": "bdfdfa8efee2571f2f3518e914515c2ae30037a8465bd82d9f2d2212beb8b795"
     },
     "sealforge-brand-kit.zip": {
-      "bytes": 2903504,
-      "files": 91,
-      "sha256": "f196a73313fcd715fb1b046c04abc811ed15ff3909c2c71fc840cf9c90e47205"
+      "bytes": 2172015,
+      "files": 76,
+      "sha256": "8995022df828740f8c9eb661bb9a45b429042f13bc85ec5ead7fc937e87531cd"
     },
     "sealforge-brand-guidelines.pdf": {
       "bytes": 527503,
