@@ -14,3 +14,13 @@
   applyTheme(root.dataset.theme === 'light' ? 'light' : 'dark');
   toggle.hidden = false;
 })();
+
+// Reveal contact addresses only after loading, so the static HTML contains no plain mailto.
+document.querySelectorAll('.cipher-email[data-contact]').forEach(span => {
+  const address = atob(span.dataset.contact);
+  const link = document.createElement('a');
+  link.href = `mailto:${address}`;
+  link.textContent = address;
+  link.setAttribute('aria-label', address);
+  span.replaceWith(link);
+});

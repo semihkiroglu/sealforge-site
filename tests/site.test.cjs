@@ -13,7 +13,7 @@ const pages = {
   'details.html': ['architecture', 'security', 'integration', 'deployment'],
   'development.html': ['source', 'build', 'contribute'],
   'usage.html': ['start', 'sign', 'automation', 'troubleshooting'],
-  'brand.html': ['downloads', 'email'],
+  'brand.html': ['social', 'downloads', 'email'],
 };
 const navigation = ['index.html', 'usage.html', 'details.html', 'development.html'];
 const report = { base, screenshots: false, cases: [] };
