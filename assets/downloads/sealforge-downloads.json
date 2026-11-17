@@ -6,24 +6,24 @@
   ],
   "files": {
     "sealforge-corporate-identity.zip": {
-      "bytes": 5732187,
+      "bytes": 5731998,
       "files": 180,
-      "sha256": "0b2b204f64bae9bd7e3866edf10f782575e71a9ad3619e42f2b639fbe521e23c"
+      "sha256": "483b858e92d0b3e90a913c09d13bce9ff1fcc9fd323f0eca8fbe3199ffa3db0e"
     },
     "sealforge-stationery.zip": {
-      "bytes": 4804593,
+      "bytes": 4804402,
       "files": 151,
-      "sha256": "d54dc7fd7ae1604fbf65850731416106714dcbcaa3010eaa21a9f6c1f106c0ef"
+      "sha256": "37ca15ad459fcc39cbdbd8de37fb07cec2d2a05a5145178ccd30817f66b4bb76"
     },
     "sealforge-digital-kit.zip": {
-      "bytes": 1807238,
+      "bytes": 1807245,
       "files": 38,
-      "sha256": "e39edc0ed8277e9873baec1e331a27da71e5620a50015eb7d35ff9aa0fc5dbb7"
+      "sha256": "80cf4884b0b75146a7487aae6d2b5dc2fb2401e5b8624fa3db5408c5430dcb60"
     },
     "sealforge-editable-sources.zip": {
-      "bytes": 3512238,
+      "bytes": 3512047,
       "files": 116,
-      "sha256": "8b3a283b26e076b5af4674957b91d185d4a89ef0ece638b293a35806f35cac1b"
+      "sha256": "c70883b4d916fb0797f3912163e77cf87fe806330a9ea0c0600246726d4433e8"
     },
     "sealforge-brand-kit.zip": {
       "bytes": 3456278,

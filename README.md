@@ -30,15 +30,21 @@ English HTML is the source. Turkish pages are generated, not runtime-replaced
 strings. The private `sealforge-branding` repository owns the strict catalogs
 under `tools/branding/locales/tr/`, the shared language script and generation
 tools; those sources are also in the deliberately public editable-source ZIP.
-After editing English content, update the Turkish catalog and run
-`python tools/branding/cove.py --site /path/to/sealforge-site` from that source
-repository. Missing translations stop generation. Keep commands, API fields and
-`{{tokens}}` unchanged. Both supplied font files contain Turkish glyphs.
+After editing English content, update the Turkish catalog and regenerate the
+site pages without rebuilding brand downloads:
+
+```bash
+python -c 'import sys; from pathlib import Path; sys.path.insert(0, "tools/branding"); import localize; localize.site(Path("/path/to/sealforge-site"))'
+```
+
+Run this from the branding repository. Missing translations stop generation.
+Keep commands, API fields and `{{tokens}}` unchanged. Both supplied font files
+contain Turkish glyphs.
 
 ## Source accuracy and access
 
 The product copy is checked against the source at
-`b63fdf27dce10999c2071dcb0ec55a4bf778ab1e` in the SealForge product repository,
+`3b3d4139c60583293b69f0391ebf40dbd6bf47a6` on the SealForge feature branch,
 including its architecture, API, development and operations documentation and
 the corresponding implementation. A current source check is required when
 changing a behavior, supported format, API field or operating instruction.
@@ -49,9 +55,10 @@ website and its issue tracker are separate from product-source access. Do not
 turn a license statement into a claim that an anonymous clone, installer or
 product download is available.
 
-The application UI is still being finalized. The maintained pages contain no
-outdated interface previews or invented product screenshots. Website browser
-checks do not start the application or access a database, signing token or worker.
+The homepage screenshots use compiled components from the same feature commit
+with fictional in-memory data; see `assets/screenshots/README.md`. They do not
+demonstrate real signing or hardware. Website browser checks do not start the
+application or access a database, signing token or worker.
 
 ## Identity assets
 
@@ -88,6 +95,8 @@ CHROMIUM_PATH=/path/to/chrome \
 python tools/test-local.py --evidence /path/to/evidence
 # Same environment, focused negotiation/switching check:
 python tools/test-local.py --evidence /path/to/language-evidence --test tests/language.test.cjs
+# Screenshot, copy and heading-alignment checks:
+python tools/test-local.py --evidence /path/to/finalization-evidence --test tests/finalization.test.cjs
 ```
 
 The helper chooses an available loopback port, serves this repository, runs the
