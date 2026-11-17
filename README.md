@@ -120,7 +120,7 @@ JSON evidence, not screenshots.
 To verify the real public deployment without local asset interception:
 
 ```bash
-SITE_URL=https://semihkiroglu.github.io/sealforge-site/ \
+SITE_URL=https://getsealforge.com/ \
 SITE_EVIDENCE=/path/to/live-evidence \
 NODE_PATH=/path/to/playwright/node_modules \
 CHROMIUM_PATH=/path/to/chrome \
@@ -146,21 +146,16 @@ belongs on the company page, not a personal profile.
 
 ## Custom domain
 
-The target public address is `https://getsealforge.com/`. GitHub Pages still
-serves the current `github.io` address until the domain is switched.
-
-Before adding a root `CNAME` file or enabling the custom domain in repository
-settings, point DNS at GitHub Pages:
+The site is published at `https://getsealforge.com/`; the root `CNAME` file
+sets the custom domain. DNS points the apex at GitHub Pages:
 
 - Apex `getsealforge.com`: A records `185.199.108.153`, `185.199.109.153`,
   `185.199.110.153`, `185.199.111.153` (and the matching AAAA records if you
   use IPv6).
 - `www`: CNAME to `semihkiroglu.github.io`.
 
-Then add `CNAME` containing `getsealforge.com`, enable **Enforce HTTPS**, and
-verify that the old `github.io` address redirects to the custom domain. Do not
-enable the domain while DNS still points elsewhere: the old address will
-redirect to an unreachable host.
+After DNS changes, keep **Enforce HTTPS** enabled and verify that the old
+`github.io` address redirects to the custom domain.
 
 ## Publication
 
@@ -171,6 +166,5 @@ remote commit, require a successful Pages deployment for that exact SHA, then
 compare public HTML/assets/downloads with committed bytes and run the HTTPS
 browser matrix. An older successful deployment does not verify a new push.
 
-The canonical origin is `https://semihkiroglu.github.io/sealforge-site/`. If a
-custom domain is introduced, update page canonical/OG URLs, social metadata and
-the email-signature image URL together.
+The canonical origin is `https://getsealforge.com/`. Keep page canonical/OG
+URLs, social metadata and the email-signature image URL on that domain.

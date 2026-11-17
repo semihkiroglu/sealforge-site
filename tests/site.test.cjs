@@ -27,7 +27,7 @@ fs.mkdirSync(output, { recursive: true });
      for (const language of ['en', 'tr']) for (const [file, sections] of Object.entries(pages)) for (const width of [320, 390, 768, 1440, 1920]) for (const theme of ['dark', 'light']) {
        const prefix = language === 'tr' ? 'tr/' : '';
        const context = await browser.newContext({ locale: language === 'tr' ? 'tr-TR' : 'en-US', viewport: { width, height: 1000 }, reducedMotion: 'reduce' });
-      if (!live) await context.route('https://semihkiroglu.github.io/sealforge-site/assets/brand/email-logo.png', route => route.fulfill({ path: path.join(repo, 'assets/brand/email-logo.png'), contentType: 'image/png' }));
+      if (!live) await context.route('https://getsealforge.com/assets/brand/email-logo.png', route => route.fulfill({ path: path.join(repo, 'assets/brand/email-logo.png'), contentType: 'image/png' }));
       await context.addInitScript(theme => { if (window.top === window) localStorage.setItem('sealforge.theme', theme); }, theme);
       const page = await context.newPage(), errors = [];
       page.on('pageerror', e => errors.push(e.message));

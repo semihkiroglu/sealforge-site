@@ -6,14 +6,14 @@
   ],
   "files": {
     "sealforge-corporate-identity.zip": {
-      "bytes": 3915461,
+      "bytes": 3914467,
       "files": 119,
-      "sha256": "d8c3be5b049ddd7fe32e4fbdd6955fe5015732a472e3fdb498f3b8f8f302a173"
+      "sha256": "50a7690b7731eb04c0229a881594694b700c5280202ff3f5e1db27a3d74b769f"
     },
     "sealforge-stationery.zip": {
-      "bytes": 2739325,
+      "bytes": 2738329,
       "files": 74,
-      "sha256": "0cc4fdc47a6bb5245f361bf9f1045e357ea2c2e638580c0421b83e9066609c00"
+      "sha256": "052ab8a1b0e7f5e19cb379b84e2cf578774e40a57e3cc262ca8107f6dd1c72ce"
     },
     "sealforge-digital-kit.zip": {
       "bytes": 466966,
@@ -21,25 +21,25 @@
       "sha256": "a1b74565cf3446e9f25c4072ed8b01db2c7fd3c7080d0afaa240c87115e87e62"
     },
     "sealforge-brand-kit.zip": {
-      "bytes": 2172015,
+      "bytes": 2170986,
       "files": 76,
-      "sha256": "8995022df828740f8c9eb661bb9a45b429042f13bc85ec5ead7fc937e87531cd"
+      "sha256": "93cae6805f936d56bd51ad9f63e5d843080fc8f57fe61d8e59efcb76fb1ee07b"
     },
     "sealforge-brand-guidelines.pdf": {
       "bytes": 527503,
-      "sha256": "24b13501e5d69992bf8c203c055e7d070e58fa31db66484bd637545e2176ed54"
+      "sha256": "215f83a6e331253f97eed8bf9b3fbcebb79602f92f0c164ac7c8562f6bc8c1ee"
     },
     "sealforge-letterhead.pdf": {
-      "bytes": 82006,
-      "sha256": "8b17082a6c1105cf463c807911e338bffab32fca7da7b86e6f0e3fbc2b79fd6f"
+      "bytes": 81341,
+      "sha256": "59b166da7322506e8398b7db6f7320dbbae1912b7475ebfb58a186970643002e"
     },
     "sealforge-brand-guidelines-tr.pdf": {
       "bytes": 555590,
-      "sha256": "2b6cb78a00b34166aebcdc1a27b727a89abd5e53feb77b778db7570b1630b6de"
+      "sha256": "3557d6c9b7fc21f4633996ab8bbc69f4c6ac2a8d15ac4300c088900ab98825b7"
     },
     "sealforge-letterhead-tr.pdf": {
-      "bytes": 80840,
-      "sha256": "88bc2350d3b58f82236301654b1efd8a5d6cc32a710aae02802dd6baa98a1e94"
+      "bytes": 80166,
+      "sha256": "31f8584ce11e14cfd8eb019a5177702c383ff15fad8e3f832d8ef671b44e6b86"
     }
   }
 }
