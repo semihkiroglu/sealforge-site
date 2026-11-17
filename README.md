@@ -133,8 +133,8 @@ node tests/site.test.cjs
 
 ## Contact
 
-- General: `hello@getsealforge.com`
-- Security reports: `security@getsealforge.com`
+- General: `hello [at] getsealforge [dot] com`
+- Security reports: `security [at] getsealforge [dot] com`
 
 The published footer builds these links with JavaScript from encoded data, so
 the raw HTML contains no plain `mailto` address. Report a vulnerability
