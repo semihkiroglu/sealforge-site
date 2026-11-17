@@ -29,7 +29,7 @@ Manual preference is carried through links when storage is blocked.
 English HTML is the source. Turkish pages are generated, not runtime-replaced
 strings. The private `sealforge-branding` repository owns the strict catalogs
 under `tools/branding/locales/tr/`, the shared language script and generation
-tools; those sources are also in the deliberately public editable-source ZIP.
+tools.
 After editing English content, update the Turkish catalog and regenerate the
 site pages without rebuilding brand downloads:
 
@@ -69,9 +69,10 @@ body copy. Logo lettering is outlined. Do not independently redraw, recolor or
 regenerate the website copies.
 
 `assets/downloads/sealforge-downloads.json` is the current download catalogue.
-The artwork, complete corporate set, stationery, digital kit and editable-source
-ZIPs, brand-guide PDF and letterhead PDF retain their published addresses. They
-are identity materials, not application source or installation packages.
+The artwork, complete corporate set, stationery and digital ZIPs, brand-guide PDF
+and letterhead PDF contain approved identity materials, not production sources.
+The retired editable-source archive must not be republished. Its historical
+copies in the public repository and previously downloaded files remain accessible.
 Every ZIP includes the relevant English and Turkish outputs. Existing English
 PDF links stay valid; Turkish adds `sealforge-brand-guidelines-tr.pdf` and
 `sealforge-letterhead-tr.pdf`. Turkish pages link to their localized PDFs,

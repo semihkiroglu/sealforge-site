@@ -6,41 +6,36 @@
   ],
   "files": {
     "sealforge-corporate-identity.zip": {
-      "bytes": 5731998,
-      "files": 180,
-      "sha256": "483b858e92d0b3e90a913c09d13bce9ff1fcc9fd323f0eca8fbe3199ffa3db0e"
+      "bytes": 4494420,
+      "files": 126,
+      "sha256": "ebd0fb0ac668fd7c93c8ca0cc313eef58e8e41f288ca6ae2168e490db644d43f"
     },
     "sealforge-stationery.zip": {
-      "bytes": 4804402,
-      "files": 151,
-      "sha256": "37ca15ad459fcc39cbdbd8de37fb07cec2d2a05a5145178ccd30817f66b4bb76"
+      "bytes": 4182602,
+      "files": 114,
+      "sha256": "db4a38ab49b435e79ac58da92876c2a0a5aad07e1aa82be86674f6900029122d"
     },
     "sealforge-digital-kit.zip": {
-      "bytes": 1807245,
-      "files": 38,
-      "sha256": "80cf4884b0b75146a7487aae6d2b5dc2fb2401e5b8624fa3db5408c5430dcb60"
-    },
-    "sealforge-editable-sources.zip": {
-      "bytes": 3512047,
-      "files": 116,
-      "sha256": "c70883b4d916fb0797f3912163e77cf87fe806330a9ea0c0600246726d4433e8"
+      "bytes": 1391598,
+      "files": 32,
+      "sha256": "ff52ee201f0652e32c2da7051c93c10be5aa28adbe9f230d4f37256e4e827a18"
     },
     "sealforge-brand-kit.zip": {
-      "bytes": 3456278,
-      "files": 107,
-      "sha256": "652a098cf9ff458a2c29e8890f34cebe3a0c4e21bb3254cb86189a68d426533f"
+      "bytes": 2921402,
+      "files": 91,
+      "sha256": "b8e47afee7518672affc9a3f3560bb7828ea9dc54cf322c74f13845d1fc77436"
     },
     "sealforge-brand-guidelines.pdf": {
-      "bytes": 535111,
-      "sha256": "d1a7a5fcd08e5fa8b411d54bf6ca908038d17bc3b26bfa3ca75892c3d2a0b8b7"
+      "bytes": 530708,
+      "sha256": "42f709e730c0d0384d90d3cdb1a7c9775569f4d1d41761dcf54db9d3854d8ac3"
     },
     "sealforge-letterhead.pdf": {
       "bytes": 82006,
       "sha256": "2ee5d85e4700e0dc93f45efb2d22672a14b36af0f7695a90c379a5bbf16954c1"
     },
     "sealforge-brand-guidelines-tr.pdf": {
-      "bytes": 568763,
-      "sha256": "6bdc6ad60f812b884b92a71414c1f1f67d29ea513049e0f9ed4e03dc5669e7cc"
+      "bytes": 554571,
+      "sha256": "8563862386c4064c1b7b0451a260d4641967553fb40cc7e05298eb4f90747302"
     },
     "sealforge-letterhead-tr.pdf": {
       "bytes": 80840,

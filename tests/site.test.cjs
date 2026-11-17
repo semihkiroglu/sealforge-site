@@ -80,7 +80,7 @@ fs.mkdirSync(output, { recursive: true });
       const ratios = d.pairs.map(([a,b]) => contrast(a,b)); assert(ratios.every(r => r >= 4.5), JSON.stringify(ratios));
       if (file === 'index.html') { assert(d.text.trim().split(/\s+/).length < 430); assert(!/PostgreSQL|PKCS#11|Apache-2\.0/.test(d.text), 'Keep technical and licensing depth off the overview'); }
        if (file === 'development.html') assert(/Apache-2\.0/.test(d.text) && /access.required|access.restricted|private|erişim|özeldir/i.test(d.text));
-      if (file === 'usage.html') assert(/Signing Permissions/.test(d.text) && /MFA/.test(d.text));
+       if (file === 'usage.html') assert((language === 'tr' ? /İmzalama İzinleri/ : /Signing Permissions/).test(d.text) && /MFA/.test(d.text));
        await page.locator('#theme-toggle').click(); assert.equal(await page.getAttribute('html', 'data-theme'), theme === 'dark' ? 'light' : 'dark');
        assert.equal(await page.locator('#theme-toggle').getAttribute('aria-label'), language === 'tr' ? (theme === 'dark' ? 'Koyu temaya geç' : 'Açık temaya geç') : `Switch to ${theme} theme`);
       assert.deepEqual(errors, []);
@@ -107,7 +107,7 @@ fs.mkdirSync(output, { recursive: true });
     }
     const catalogue = JSON.parse(fs.readFileSync(path.join(repo, 'assets/downloads/sealforge-downloads.json')));
     for (const [name, info] of Object.entries(catalogue.files)) { const r = await probe.request.get(base + 'assets/downloads/' + name); assert.equal(r.status(), 200); const data = await r.body(); assert.equal(data.length, info.bytes); assert.equal(crypto.createHash('sha256').update(data).digest('hex'), info.sha256); }
-    for (const retired of ['assets/css/style.css', 'concepts/', 'concepts/round-11/', 'assets/downloads/sealforge-brand-kit-workshop.zip']) assert.equal((await probe.request.get(base + retired)).status(), 404, retired);
+    for (const retired of ['assets/css/style.css', 'concepts/', 'concepts/round-11/', 'assets/downloads/sealforge-brand-kit-workshop.zip', 'assets/downloads/sealforge-editable-sources.zip']) assert.equal((await probe.request.get(base + retired)).status(), 404, retired);
     await probe.close(); report.checkedLocalLinks = links.size; report.persistence = true; report.noJavaScript = true; report.blockedStorage = true; report.downloads = Object.keys(catalogue.files).length;
      assert.equal(report.cases.length, Object.keys(pages).length * 2 * 5 * 2);
     fs.writeFileSync(path.join(output, 'site-report.json'), JSON.stringify(report, null, 2));

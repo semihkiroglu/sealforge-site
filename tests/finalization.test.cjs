@@ -34,7 +34,7 @@ const base = (process.env.SITE_URL || 'http://127.0.0.1:4173/').replace(/\/?$/, 
           check(`${language}/details: security headings are aligned`, tops.length === 2 && Math.abs(tops[0] - tops[1]) <= 1);
         }
         if (file === 'usage.html') {
-          check(`${language}/usage: current Sign button label`, await page.locator('#sign strong').evaluateAll(items => items.some(i => /\bSign\b/.test(i.textContent) && !/Start Signing/.test(i.textContent))));
+          check(`${language}/usage: current Sign button label`, (await page.locator('#sign strong').allTextContents()).includes(language === 'tr' ? 'İmzala' : 'Sign'));
         }
         await page.close();
       }
