@@ -21,6 +21,7 @@ const base = (process.env.SITE_URL || 'http://127.0.0.1:4173/').replace(/\/?$/, 
       const page = await context.newPage();
       await page.goto(base + 'details.html#security', { waitUntil: 'networkidle' });
       assert.equal(await page.getAttribute('html', 'lang'), 'tr');
+      await page.locator('.language-switch > summary').click();
       await page.locator('.language-switch a[lang="en"]').click();
       await page.waitForLoadState('networkidle');
       assert.equal(await page.getAttribute('html', 'lang'), 'en');
@@ -36,6 +37,7 @@ const base = (process.env.SITE_URL || 'http://127.0.0.1:4173/').replace(/\/?$/, 
     const page = await nojs.newPage();
     await page.goto(base + 'tr/index.html');
     assert.equal(await page.getAttribute('html', 'lang'), 'tr');
+    await page.locator('.language-switch > summary').click();
     await page.locator('.language-switch a[lang="en"]').click();
     assert.equal(await page.getAttribute('html', 'lang'), 'en');
     await nojs.close();

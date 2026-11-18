@@ -56,6 +56,7 @@ fs.mkdirSync(output, { recursive: true });
            nav: [...document.querySelectorAll('.nav a')].map(a => new URL(a.href).pathname.split('/').pop()),
            active: [...document.querySelectorAll('.nav a[aria-current="page"]')].map(a => new URL(a.href).pathname.split('/').pop()),
           navFits: [...document.querySelectorAll('.nav a')].every(a => { const r = a.getBoundingClientRect(); return r.width > 0 && r.x >= 0 && r.right <= innerWidth; }),
+          menu: { burger: getComputedStyle(document.querySelector('.nav-toggle-label')).display !== 'none', nav: document.querySelector('.nav').getBoundingClientRect().width > 0 },
           brand: { text: word.textContent, family: getComputedStyle(word).fontFamily, size: parseFloat(getComputedStyle(word).fontSize), weight: getComputedStyle(word).fontWeight, sources: visible.map(i => i.getAttribute('src')), boxes: visible.map(i => ({ width: i.getBoundingClientRect().width, height: i.getBoundingClientRect().height })) },
           fonts: [...document.fonts].filter(f => f.status === 'loaded').map(f => f.family),
           ids: [...document.querySelectorAll('[id]')].map(e => e.id),
@@ -68,7 +69,21 @@ fs.mkdirSync(output, { recursive: true });
       assert.deepEqual(d.nav, navigation, `${file}: four distinct primary destinations`);
       assert.deepEqual(d.active, file === 'brand.html' ? [] : [file]);
        assert.equal(d.theme, theme); assert.equal(d.lang, language); assert.equal(d.h1, 1);
-      assert.equal(d.overflow, 0, `${file}/${width}/${theme}`); assert(d.headerOverflow <= 1 && d.navFits, `${file}: header must fit`);
+      assert.equal(d.overflow, 0, `${file}/${width}/${theme}`); assert(d.headerOverflow <= 1, `${file}: header must fit`);
+      const collapsed = width <= 900;
+      assert.equal(d.menu.burger, collapsed, `${file}/${width}: burger belongs to the compact header`);
+      assert.equal(d.menu.nav, !collapsed, `${file}/${width}: primary menu visibility`);
+      if (collapsed) {
+        await page.locator('.nav-toggle-label').click();
+        const open = await page.evaluate(() => { const nav = document.querySelector('.nav'); return { visible: getComputedStyle(nav).display !== 'none', fits: [...nav.querySelectorAll('a')].every(a => { const r = a.getBoundingClientRect(); return r.width > 0 && r.x >= 0 && r.right <= innerWidth; }), overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth }; });
+        assert(open.visible && open.fits && open.overflow === 0, `${file}/${width}: expanded menu must stay inside the viewport`);
+        await page.locator('.nav-toggle-label').click();
+        assert.equal(await page.isChecked('.nav-toggle'), false, `${file}/${width}: burger closes the menu`);
+      } else assert(d.navFits, `${file}: header must fit`);
+      await page.locator('.language-switch > summary').click();
+      const languageFits = await page.evaluate(() => { const links = [...document.querySelectorAll('.language-menu a')]; return links.every(a => { const r = a.getBoundingClientRect(); return r.width > 0 && r.x >= 0 && r.right <= innerWidth; }) && document.documentElement.scrollWidth === document.documentElement.clientWidth; });
+      assert(languageFits, `${file}/${width}: language menu must stay inside the viewport`);
+      await page.locator('.language-switch > summary').click();
       assert(sections.every(id => d.ids.includes(id)), `${file}: required content sections`);
       assert.equal(d.ids.length, new Set(d.ids).size); assert.deepEqual(d.deadAnchors, []);
       assert.equal(d.brand.text, 'SealForge'); assert(d.brand.family.includes('Manrope')); assert.equal(d.brand.weight, '600'); assert(d.brand.size <= 20);
@@ -92,6 +107,8 @@ fs.mkdirSync(output, { recursive: true });
     await page.reload(); assert.equal(await page.getAttribute('html', 'data-theme'), 'light'); await context.close();
     const nojs = await browser.newContext({ javaScriptEnabled: false });
      for (const prefix of ['', 'tr/']) for (const file of Object.keys(pages)) { const p = await nojs.newPage(); assert.equal((await p.goto(base + prefix + file)).status(), 200); assert((await p.locator('h1').innerText()).trim()); assert.equal(await p.locator('.nav a').count(), navigation.length); assert.equal(await p.locator('#theme-toggle').isVisible(), false); assert.equal(await p.getAttribute('html', 'lang'), prefix ? 'tr' : 'en'); await p.close(); }
+    const mobile = await nojs.newPage(); await mobile.setViewportSize({ width: 390, height: 800 }); await mobile.goto(base + 'index.html');
+    assert.equal(await mobile.locator('.nav').isVisible(), false); await mobile.locator('.nav-toggle-label').click(); assert.equal(await mobile.locator('.nav').isVisible(), true); await mobile.close();
     await nojs.close();
     const blocked = await browser.newContext(); await blocked.addInitScript(() => Object.defineProperty(window, 'localStorage', { get() { throw new DOMException('Blocked', 'SecurityError'); } }));
     const p = await blocked.newPage(); await p.goto(base + 'index.html'); await p.locator('#theme-toggle').click(); assert.equal(await p.getAttribute('html', 'data-theme'), 'light'); await blocked.close();

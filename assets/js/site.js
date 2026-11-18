@@ -13,4 +13,18 @@
   toggle.addEventListener('click', () => applyTheme(root.dataset.theme === 'light' ? 'dark' : 'light'));
   applyTheme(root.dataset.theme === 'light' ? 'light' : 'dark');
   toggle.hidden = false;
+  /* Header disclosures work without JavaScript; this only closes them on outside click or Escape. */
+  const menus = [...document.querySelectorAll('.site-header details')];
+  const navToggle = document.querySelector('.nav-toggle');
+  menus.forEach(menu => menu.addEventListener('toggle', () => { if (menu.open) { menus.forEach(other => { if (other !== menu) other.open = false; }); navToggle.checked = false; } }));
+  navToggle.addEventListener('change', () => { if (navToggle.checked) menus.forEach(menu => { menu.open = false; }); });
+  document.addEventListener('click', event => {
+    if (!event.target.closest('.site-header details')) menus.forEach(menu => { menu.open = false; });
+    if (!event.target.closest('.nav-menu')) navToggle.checked = false;
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    menus.forEach(menu => { if (menu.open) { menu.open = false; menu.querySelector('summary').focus(); } });
+    if (navToggle.checked) { navToggle.checked = false; navToggle.focus(); }
+  });
 })();
