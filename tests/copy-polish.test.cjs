@@ -34,8 +34,8 @@ const menus = {
           check(`${language}/details: Docker install placeholder`, /Docker/i.test(await page.locator('#deployment').innerText()));
         }
         if (file === 'development.html' || file === 'usage.html') {
-          const section = file === 'development.html' ? '#contribute' : '#start';
-          const gap = await page.locator(`${section} h2 + .integration-flow`).evaluate(list => list.getBoundingClientRect().top - list.previousElementSibling.getBoundingClientRect().bottom);
+          const list = file === 'development.html' ? '#contribute h2 + .integration-flow' : '#start h3 + .integration-flow';
+          const gap = await page.locator(list).evaluate(items => items.getBoundingClientRect().top - items.previousElementSibling.getBoundingClientRect().bottom);
           check(`${language}/${file}: first list clears its heading`, gap >= 16);
         }
         if (file === 'brand.html') {

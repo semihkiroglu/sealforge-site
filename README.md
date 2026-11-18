@@ -46,7 +46,7 @@ regenerate the Turkish pages without rebuilding brand downloads:
 python -c 'import sys; from pathlib import Path; sys.path.insert(0, "tools/branding"); import localize; localize.site(Path("/path/to/site"))'
 ```
 
-Run this from the branding repository. Missing translations stop generation.
+Run this from the brand tooling checkout. Missing translations stop generation.
 Keep commands, API fields and `{{tokens}}` unchanged. Both supplied font files
 contain Turkish glyphs.
 
