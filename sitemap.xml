@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://getsealforge.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getsealforge.com/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://getsealforge.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getsealforge.com/"/>
+  </url>
+  <url>
+    <loc>https://getsealforge.com/usage.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getsealforge.com/usage.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://getsealforge.com/tr/usage.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getsealforge.com/usage.html"/>
+  </url>
+  <url>
+    <loc>https://getsealforge.com/details.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getsealforge.com/details.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://getsealforge.com/tr/details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getsealforge.com/details.html"/>
+  </url>
+  <url>
+    <loc>https://getsealforge.com/development.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getsealforge.com/development.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://getsealforge.com/tr/development.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getsealforge.com/development.html"/>
+  </url>
+  <url>
+    <loc>https://getsealforge.com/brand.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getsealforge.com/brand.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://getsealforge.com/tr/brand.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getsealforge.com/brand.html"/>
+  </url>
+  <url>
+    <loc>https://getsealforge.com/tr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getsealforge.com/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://getsealforge.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getsealforge.com/"/>
+  </url>
+  <url>
+    <loc>https://getsealforge.com/tr/usage.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getsealforge.com/usage.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://getsealforge.com/tr/usage.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getsealforge.com/usage.html"/>
+  </url>
+  <url>
+    <loc>https://getsealforge.com/tr/details.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getsealforge.com/details.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://getsealforge.com/tr/details.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getsealforge.com/details.html"/>
+  </url>
+  <url>
+    <loc>https://getsealforge.com/tr/development.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getsealforge.com/development.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://getsealforge.com/tr/development.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getsealforge.com/development.html"/>
+  </url>
+  <url>
+    <loc>https://getsealforge.com/tr/brand.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getsealforge.com/brand.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://getsealforge.com/tr/brand.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getsealforge.com/brand.html"/>
+  </url>
+</urlset>

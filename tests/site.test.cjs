@@ -124,6 +124,17 @@ fs.mkdirSync(output, { recursive: true });
     const catalogue = JSON.parse(fs.readFileSync(path.join(repo, 'assets/downloads/sealforge-downloads.json')));
     for (const [name, info] of Object.entries(catalogue.files)) { const r = await probe.request.get(base + 'assets/downloads/' + name); assert.equal(r.status(), 200); const data = await r.body(); assert.equal(data.length, info.bytes); assert.equal(crypto.createHash('sha256').update(data).digest('hex'), info.sha256); }
     for (const retired of ['assets/css/style.css', 'concepts/', 'concepts/round-11/', 'assets/downloads/sealforge-brand-kit-workshop.zip', 'assets/downloads/sealforge-editable-sources.zip']) assert.equal((await probe.request.get(base + retired)).status(), 404, retired);
+    const sitemap = fs.readFileSync(path.join(repo, 'sitemap.xml'), 'utf8');
+    const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+    assert.equal(locs.length, 10, 'sitemap lists every English and Turkish page');
+    for (const loc of locs) {
+      const rel = loc.replace('https://getsealforge.com/', '');
+      const file = rel === '' ? 'index.html' : rel.endsWith('/') ? rel + 'index.html' : rel;
+      const res = await probe.request.get(base + file);
+      assert.equal(res.status(), 200, loc);
+      assert((await res.text()).includes(`rel="canonical" href="${loc}"`), `${loc}: canonical must match the sitemap`);
+    }
+    assert(fs.readFileSync(path.join(repo, 'robots.txt'), 'utf8').includes('Sitemap: https://getsealforge.com/sitemap.xml'));
     await probe.close(); report.checkedLocalLinks = links.size; report.persistence = true; report.noJavaScript = true; report.blockedStorage = true; report.downloads = Object.keys(catalogue.files).length;
      assert.equal(report.cases.length, Object.keys(pages).length * 2 * 5 * 2);
     fs.writeFileSync(path.join(output, 'site-report.json'), JSON.stringify(report, null, 2));
